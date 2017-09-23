@@ -1,8 +1,9 @@
-alias sts='cd ~/.svr_backup; sh backup.sh'
+# -----------------------------------------NGINX
 alias svrs='sudo service start nginx'
 alias svrss='sudo service stop nginx'
 alias svrrs='sudo service restart nginx'
 alias svrrl='sudo service reload nginx'
+# -----------------------------------------PM2
 alias pms='pm2 start'
 alias pmss='pm2 stop'
 alias pmr='pm2 restart'
