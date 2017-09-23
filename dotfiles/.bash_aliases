@@ -1,5 +1,7 @@
 #------------------------------------------------- SHARED
 alias s='sudo'
+alias basha='cat ~/.bash_aliases'
+alias bashaa='cat ~/.bash_aliases_server'
 
 #----------------FUNCTIONS 
 #function EV () {
