@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Paths 
+REPO='/home/kd/repos/.server-tools-new'
+BA='/home/kd/.bash_aliases'
+BASERVER='/home/kd/.bash_aliases_server'
+TM='/home/kd/.tmux.conf'
+ZH='/home/kd/.zshrc'
+HOME='/home/kd'
+
+# Funcs 
+function GITPULL () {
+  cd $REPO && \
+  git pull && \
+  yes | cp -f $REPO/dotfiles/$1 $2 && \
+  echo "|Pull|>--- $REPO ---> $2 ---<||"
+  
+}
+
+function GITPUSH () {
+  yes | cp -f $1 $REPO/dotfiles && \
+  cd $REPO && \
+  git add . && \
+  git commit -m "pushed $1 " && \
+  git push && \
+  echo "|Push|>--- $1 ---> $REPO/dotfiles ---<||"
+}
+
+# Main 
+clear
+echo '||===================|'
+echo '||---GIT PULL/PUSH---|'
+echo '||===================|'
+echo '||-----[1] PULL------|'
+echo '||-----[2] PUSH------|'
+echo '||===================|'
+
+read localorrepo
+
+if  [ $localorrepo == "1" ]; then
+  clear
+  echo '||===========================|'
+  echo '||------GIT PULL/PUSH--------|'
+  echo '||===========================|'
+  echo '||------[1] Bash Aliases-----|'
+  echo '||------[2] Tmux Conf--------|'
+  echo '||------[2] Zshrc------------|'  
+  echo '||===========================|'
+  read file
+
+  if [ $file == "1" ]; then
+    GITPUSH $BA
+    GITPUSH $BASERVER    
+  elif [ $file == "2" ]; then
+    GITPUSH $TM
+  elif [ $file == "3" ]; then
+    GITPUSH $ZH
+  fi
+
+  exit 1
+elif [ "$localorrepo" == "2" ]; then
+  clear
+  echo '||===========================|'
+  echo '||------GIT PULL/PUSH--------|'
+  echo '||===========================|'
+  echo '||------[1] Bash Aliases-----|'
+  echo '||------[2] Tmux Conf--------|'
+  echo '||------[2] Zshrc------------|'  
+  echo '||===========================|'
+  read file
+
+  if [ $file == "1" ]; then
+    GITPULL '.bash_aliases' $HOME
+    GITPULL '.bash_aliases_server' $HOME    
+  elif [ $file == "2" ]; then
+    GITPULL '.tmux.conf' $HOME
+  elif [ $file == "3" ]; then
+    GITPULL .'zshrc' $HOME
+  fi
+
+  exit 1
+else
+  echo "whooops"
+  exit 1
+fi
+
+
