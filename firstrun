@@ -11,6 +11,8 @@ yes cp | dotfiles/.bash_aliases_server /home/kd
 sudo apt-get install ngnix
 sudo utw allow 'HTTP Nginx'
 
+git clone https://github.com/rupa/z.git
+
 sudo apt-get install zsh 
 yes | sudo cp dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
