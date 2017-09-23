@@ -87,3 +87,4 @@ source $ZSH/oh-my-zsh.sh
 source /home/kd/.bash_aliases
 source /home/kd/.bash_aliases_server
 
+source /home/kd/z/z.sh
