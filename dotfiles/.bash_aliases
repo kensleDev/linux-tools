@@ -66,3 +66,9 @@ alias tmls='tmux list'
 
 # ---------------------------------Utilities
 
+alias rpid='ps -A | grep' 
+alias dlpics='wget -nd -H -p -A jpg,jpeg,png,gif -e robots=off'
+alias tmu='unset TMUX; tmux'
+alias updatesubs='git submodule foreach git pull origin master'
+alias ip='ifconfig eth0'
+
