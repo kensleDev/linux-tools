@@ -1,0 +1,16 @@
+sudo apt-get update 
+sudo apt-get install software-properties-common
+clear
+
+sudo apt-get install tmux 
+yes | sudo cp dotfiles/.tmux.conf /home/kd
+
+yes cp | dotfiles/.bash_aliases /home/kd
+yes cp | dotfiles/.bash_aliases_server /home/kd
+
+sudo apt-get install ngnix
+sudo utw allow 'HTTP Nginx'
+
+sudo apt-get install zsh 
+yes | sudo cp dofiles/.zshrc /home/kd
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
