@@ -30,3 +30,8 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 Plugin 'shougo/unite.vim'
+Plugin 'flazz/vim-colorschemes'
+
+
+
+colorscheme onedark

@@ -34,6 +34,7 @@ echo '||---GIT PULL/PUSH---|'
 echo '||===================|'
 echo '||-----[1] PUSH------|'
 echo '||-----[2] PULL------|'
+echo '||-----[2] SHOW------|'
 echo '||===================|'
 
 read localorrepo
@@ -45,8 +46,8 @@ if  [ $localorrepo == "1" ]; then
   echo '||===========================|'
   echo '||------[1] Bash Aliases-----|'
   echo '||------[2] Tmux Conf--------|'
-  echo '||------[3] Zshrc------------|' 
-  echo '||------[4] Vimrc------------|'  
+  echo '||------[3] Zshrc------------|'
+  echo '||------[4] Vimrc------------|'
   echo '||===========================|'
   read file
 
@@ -86,9 +87,7 @@ elif [ "$localorrepo" == "2" ]; then
   fi
 
   exit 1
+
 else
-  echo "whooops"
-  exit 1
+  echo "Whoops"
 fi
-
-
