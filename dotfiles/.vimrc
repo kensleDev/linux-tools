@@ -29,9 +29,23 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-Plugin 'shougo/unite.vim'
+" Looks
+
 Plugin 'flazz/vim-colorschemes'
+Plugin 'bling/vim-airline'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'godlygeek/tabular'
 
 
+" Syntax
 
-colorscheme onedark
+Plugin 'ap/vim-css-color'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/html5.vim'
+Plugin 'Sass'
+Plugin 'posva/vim-vue'
+
+
+" Utils
+
+Plugin 'shougo/unite.vim'
