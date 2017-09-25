@@ -2,24 +2,38 @@ sudo apt-get update
 sudo apt-get install software-properties-common
 clear
 
+# tmux 
 sudo apt-get install tmux 
 yes | sudo cp dotfiles/.tmux.conf /home/kd
 
+# bash aliases
 yes cp | dotfiles/.bash_aliases /home/kd
 yes cp | dotfiles/.bash_aliases_server /home/kd
 
+# nginx 
 sudo apt-get install ngnix
 sudo utw allow 'HTTP Nginx'
 
+# node 
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo apt-get install -y build-essential
+
+# pm2 
+npm install pm2@latest -g
+
+# vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 yes | cp -f dotfiles/.vimrc ~/
 
+# z
 git clone https://github.com/rupa/z.git
 
+# permissions
 sudo chmod -R 777 /var/www
 sudo chown -R kd /var/www
 
-
+# zsh 
 sudo apt-get install zsh 
 yes | sudo cp dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
