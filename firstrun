@@ -11,6 +11,9 @@ yes cp | dotfiles/.bash_aliases_server /home/kd
 sudo apt-get install ngnix
 sudo utw allow 'HTTP Nginx'
 
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+yes | cp -f dotfiles/.vimrc ~/
+
 git clone https://github.com/rupa/z.git
 
 sudo apt-get install zsh 
