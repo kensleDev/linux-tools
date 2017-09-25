@@ -82,7 +82,7 @@ elif [ "$localorrepo" == "2" ]; then
   elif [ $file == "3" ]; then
     GITPULL .'zshrc' $HOME
   elif [ $file == "4" ]; then
-    GITPULL $VM
+    GITPULL '.vimrc' $HOME
   fi
 
   exit 1
