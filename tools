@@ -6,6 +6,7 @@ BA='/home/kd/.bash_aliases'
 BASERVER='/home/kd/.bash_aliases_server'
 TM='/home/kd/.tmux.conf'
 ZH='/home/kd/.zshrc'
+VM='/home/kd/.vimrc'
 HOME='/home/kd'
 
 # Funcs 
@@ -44,7 +45,8 @@ if  [ $localorrepo == "1" ]; then
   echo '||===========================|'
   echo '||------[1] Bash Aliases-----|'
   echo '||------[2] Tmux Conf--------|'
-  echo '||------[2] Zshrc------------|'  
+  echo '||------[3] Zshrc------------|' 
+  echo '||------[4] Vimrc------------|'  
   echo '||===========================|'
   read file
 
@@ -55,6 +57,8 @@ if  [ $localorrepo == "1" ]; then
     GITPUSH $TM
   elif [ $file == "3" ]; then
     GITPUSH $ZH
+  elif [ $file == "4" ]; then
+    GITPUSH $VM
   fi
 
   exit 1
@@ -65,7 +69,8 @@ elif [ "$localorrepo" == "2" ]; then
   echo '||===========================|'
   echo '||------[1] Bash Aliases-----|'
   echo '||------[2] Tmux Conf--------|'
-  echo '||------[2] Zshrc------------|'  
+  echo '||------[3] Zshrc------------|'  
+  echo '||------[4] Vimrc------------|'  
   echo '||===========================|'
   read file
 
@@ -76,6 +81,8 @@ elif [ "$localorrepo" == "2" ]; then
     GITPULL '.tmux.conf' $HOME
   elif [ $file == "3" ]; then
     GITPULL .'zshrc' $HOME
+  elif [ $file == "4" ]; then
+    GITPULL $VM
   fi
 
   exit 1
