@@ -16,6 +16,10 @@ yes | cp -f dotfiles/.vimrc ~/
 
 git clone https://github.com/rupa/z.git
 
+sudo chmod -R 777 /var/www
+sudo chown -R kd /var/www
+
+
 sudo apt-get install zsh 
 yes | sudo cp dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

@@ -88,6 +88,15 @@ elif [ "$localorrepo" == "2" ]; then
 
   exit 1
 
-else
-  echo "Whoops"
+elif [ "$localorrepo" == "3" ]; then
+  if [ $file == "1" ]; then
+    sudo nano $BASERVER
+  elif [ $file == "2" ]; then 
+    sudo nano $TM
+  elif [ $file == "3" ]; then
+    sudo nano $ZH
+  elif [ $file == "4" ]; then
+    sudo nano $VM
+  fi
+
 fi
