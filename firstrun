@@ -38,6 +38,7 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 yes | cp -f dotfiles/.vimrc ~/
 
 # z
+cd /home/kd
 git clone https://github.com/rupa/z.git
 
 # permissions
@@ -45,6 +46,6 @@ sudo chmod -R 777 /var/www
 sudo chown -R kd /var/www
 
 # zsh 
-sudo apt-get install zsh 
-yes | sudo cp dofiles/.zshrc /home/kd
+sudo apt-get install zsh -y 
+yes | sudo cp -f dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
