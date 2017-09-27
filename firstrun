@@ -11,7 +11,7 @@ yes cp | dotfiles/.bash_aliases /home/kd
 yes cp | dotfiles/.bash_aliases_server /home/kd
 
 # nginx 
-sudo apt-get install ngnix
+sudo apt-get install nginx
 sudo utw allow 'HTTP Nginx'
 
 # node 
