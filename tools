@@ -4,6 +4,8 @@
 REPO='/home/kd/repos/.server-tools-new'
 BA='/home/kd/.bash_aliases'
 BASERVER='/home/kd/.bash_aliases_server'
+BACLIENT='/home/kd/.bash_aliases_client'
+
 TM='/home/kd/.tmux.conf'
 ZH='/home/kd/.zshrc'
 VM='/home/kd/.vimrc'
@@ -15,7 +17,6 @@ function GITPULL () {
   git pull && \
   yes | cp -f $REPO/dotfiles/$1 $2 && \
   echo "|Pull|>--- $REPO ---> $2 ---<||"
-  
 }
 
 function GITPUSH () {
@@ -28,13 +29,15 @@ function GITPUSH () {
 }
 
 # Main 
+
 clear
 echo '||===================|'
 echo '||---GIT PULL/PUSH---|'
 echo '||===================|'
 echo '||-----[1] PUSH------|'
 echo '||-----[2] PULL------|'
-echo '||-----[2] SHOW------|'
+echo '||-----[3] SHOW------|'
+echo '||-----[4] FIRSTRUN--|'
 echo '||===================|'
 
 read localorrepo
@@ -99,4 +102,13 @@ elif [ "$localorrepo" == "3" ]; then
     sudo nano $VM
   fi
 
+elif [ "$localorrepo" == "4" ]; then
+  sudo bash firstrun
+  GITPULL '.bash_aliases' $HOME
+  GITPULL '.bash_aliases_server' $HOME    
+  GITPULL '.tmux.conf' $HOME
+  GITPULL .'zshrc' $HOME
+  GITPULL '.vimrc' $HOME
+
+  exit 1
 fi
