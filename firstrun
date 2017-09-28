@@ -21,6 +21,7 @@ sudo apt-get install -y build-essential
 
 # pm2 
 sudo npm install pm2@latest -g
+npm install --global trash-cli
 
 # mongo
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
