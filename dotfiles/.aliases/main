@@ -14,7 +14,7 @@ alias bashaa='cat ~/.bash_aliases_server'
 
 #------DIRS------#
 HOME="/home/kd"
-BA='.bash_aliases'
+BA='.aliases/main'
 TM='.tmux.conf'
 ZH='.zshrc'
 NG='/etc/ngnix/sites_avalible.jquinandy.pro'
@@ -22,7 +22,10 @@ NG='/etc/ngnix/sites_avalible.jquinandy.pro'
 alias public='cd /var/www'
 #-----------------EDIT DOTFILES
 
-#  alias dfba='$EV $HOME/$BA'
+  alias dfa1='$EN $HOME/.aliases/main'
+  alias dfa2='$EN $HOME/.aliases/server'
+  alias dfad='$EN $HOME/.aliases/docker'
+
 #  alias dftm='$EV $HOME/$TM'
 #  alias dfzh='$EV $HOME/$ZH'
 #  alias dfng='$EV $NG'

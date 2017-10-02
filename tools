@@ -1,18 +1,20 @@
 #!/bin/bash
 
-# Paths 
+# Paths
 REPO='/home/kd/repos/.server-tools-new'
-BA='/home/kd/.bash_aliases'
-BASERVER='/home/kd/.bash_aliases_server'
-BACLIENT='/home/kd/.bash_aliases_client'
+BA_M='/home/kd/.aliases/main'
+BA_S='/home/kd/.aliases/server'
+BA_D='/home/kd/.aliases/docker'
+
+ALIASES='/home/kd/.aliases'
 
 TM='/home/kd/.tmux.conf'
 ZH='/home/kd/.zshrc'
 VM='/home/kd/.vimrc'
 HOME='/home/kd'
 
-# Funcs 
-function GITPULL () {
+# Funcs
+fuction GITPULL () {
   cd $REPO && \
   git pull && \
   yes | cp -f $REPO/dotfiles/$1 $2 && \
@@ -28,7 +30,7 @@ function GITPUSH () {
   echo "|Push|>--- $1 ---> $REPO/dotfiles ---<||"
 }
 
-# Main 
+# Main
 
 clear
 echo '||===================|'
@@ -55,9 +57,8 @@ if  [ $localorrepo == "1" ]; then
   read file
 
   if [ $file == "1" ]; then
-    GITPUSH $BA
-    GITPUSH $BASERVER    
-  elif [ $file == "2" ]; then
+    GITPUSH $ALIASES
+  elif $file == "2" ]; then
     GITPUSH $TM
   elif [ $file == "3" ]; then
     GITPUSH $ZH
@@ -73,14 +74,13 @@ elif [ "$localorrepo" == "2" ]; then
   echo '||===========================|'
   echo '||------[1] Bash Aliases-----|'
   echo '||------[2] Tmux Conf--------|'
-  echo '||------[3] Zshrc------------|'  
-  echo '||------[4] Vimrc------------|'  
+  echo '||------[3] Zshrc------------|'
+  echo '||------[4] Vimrc------------|'
   echo '||===========================|'
   read file
 
   if [ $file == "1" ]; then
-    GITPULL '.bash_aliases' $HOME
-    GITPULL '.bash_aliases_server' $HOME    
+    GITPULL $ALIASES $HOME
   elif [ $file == "2" ]; then
     GITPULL '.tmux.conf' $HOME
   elif [ $file == "3" ]; then
@@ -93,8 +93,8 @@ elif [ "$localorrepo" == "2" ]; then
 
 elif [ "$localorrepo" == "3" ]; then
   if [ $file == "1" ]; then
-    sudo nano $BASERVER
-  elif [ $file == "2" ]; then 
+    sudo nano $BA_S
+  elif [ $file == "2" ]; then
     sudo nano $TM
   elif [ $file == "3" ]; then
     sudo nano $ZH
@@ -105,7 +105,7 @@ elif [ "$localorrepo" == "3" ]; then
 elif [ "$localorrepo" == "4" ]; then
   sudo bash firstrun
   GITPULL '.bash_aliases' $HOME
-  GITPULL '.bash_aliases_server' $HOME    
+  GITPULL '.bash_aliases_server' $HOME
   GITPULL '.tmux.conf' $HOME
   GITPULL .'zshrc' $HOME
   GITPULL '.vimrc' $HOME

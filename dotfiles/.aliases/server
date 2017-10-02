@@ -12,3 +12,10 @@ alias pmll='pm2 prettylist'
 alias pl='pm2 logs'
 alias pmd='pm2 delete'
 alias port='lsof -i :'
+#-----
+alias dl='docker ps '
+alias dss='docker stop'
+alias dr='docker rm'
+alias dri='docker rmi'
+alias dc='docker-compose'
+#---
