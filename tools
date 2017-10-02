@@ -33,81 +33,99 @@ function GITPUSH () {
 # Main
 
 clear
-echo '||===================|'
-echo '||---GIT PULL/PUSH---|'
-echo '||===================|'
-echo '||-----[1] PUSH------|'
-echo '||-----[2] PULL------|'
-echo '||-----[3] SHOW------|'
-echo '||-----[4] FIRSTRUN--|'
-echo '||===================|'
+echo '||======================|'
+echo '||---Kensle Dev Tools---|'
+echo '||======================|'
+echo '||-----[1] Git----------|'
+echo '||-----[2] FirstRun-----|'
+echo '||======================|'
 
 read localorrepo
 
 if  [ $localorrepo == "1" ]; then
+  
   clear
-  echo '||===========================|'
-  echo '||------GIT PULL/PUSH--------|'
-  echo '||===========================|'
-  echo '||------[1] Bash Aliases-----|'
-  echo '||------[2] Tmux Conf--------|'
-  echo '||------[3] Zshrc------------|'
-  echo '||------[4] Vimrc------------|'
-  echo '||===========================|'
-  read file
+  echo '||================================|'
+  echo '||-----[1] Push to remote---------|'
+  echo '||-----[2] Pull from remote-------|'
+  echo '||================================|'
+  read git
+  
+  if [ "$git" == "1" ]; then
 
-  if [ $file == "1" ]; then
-    GITPUSH $ALIASES
-  elif $file == "2" ]; then
-    GITPUSH $TM
-  elif [ $file == "3" ]; then
-    GITPUSH $ZH
-  elif [ $file == "4" ]; then
-    GITPUSH $VM
+    clear
+    echo '||===========================|'
+    echo '||---------GIT PUSH----------|'
+    echo '||===========================|'
+    echo '||------[1] Bash Aliases-----|'
+    echo '||------[2] Tmux Conf--------|'
+    echo '||------[3] Zshrc------------|'
+    echo '||------[4] Vimrc------------|'
+    echo '||===========================|'
+    read file
+
+    if [ $file == "1" ]; then
+      GITPUSH $ALIASES
+    elif $file == "2" ]; then
+      GITPUSH $TM
+    elif [ $file == "3" ]; then
+      GITPUSH $ZH
+    elif [ $file == "4" ]; then
+      GITPUSH $VM
+    fi
+
+    exit 1
+  elif [ "$git" == "2" ]; then
+    clear
+    echo '||===========================|'
+    echo '||---------GIT PULL----------|'
+    echo '||===========================|'
+    echo '||------[1] Bash Aliases-----|'
+    echo '||------[2] Tmux Conf--------|'
+    echo '||------[3] Zshrc------------|'
+    echo '||------[4] Vimrc------------|'
+    echo '||===========================|'
+    read file
+
+    if [ $file == "1" ]; then
+      GITPULL '.aliases' $HOME
+    elif [ $file == "2" ]; then
+      GITPULL '.tmux.conf' $HOME
+    elif [ $file == "3" ]; then
+      GITPULL .'zshrc' $HOME
+    elif [ $file == "4" ]; then
+      GITPULL '.vimrc' $HOME
+    fi
+
+    exit 1
   fi
-
-  exit 1
+  
 elif [ "$localorrepo" == "2" ]; then
+
   clear
-  echo '||===========================|'
-  echo '||------GIT PULL/PUSH--------|'
-  echo '||===========================|'
-  echo '||------[1] Bash Aliases-----|'
-  echo '||------[2] Tmux Conf--------|'
-  echo '||------[3] Zshrc------------|'
-  echo '||------[4] Vimrc------------|'
-  echo '||===========================|'
-  read file
-
-  if [ $file == "1" ]; then
+  echo '||==========================|'
+  echo '||-----[1] VPS--------------|'
+  echo '||-----[2] VPS DOCKER-------|'
+  echo '||==========================|'
+  read vps
+  
+  elif [ "$vps" == "1" ]; then
+  
+    sudo bash firstrun
     GITPULL '.aliases' $HOME
-  elif [ $file == "2" ]; then
     GITPULL '.tmux.conf' $HOME
-  elif [ $file == "3" ]; then
     GITPULL .'zshrc' $HOME
-  elif [ $file == "4" ]; then
     GITPULL '.vimrc' $HOME
+
+    exit 1  
+  elif [ "$vps" == "1" ]; then
+    sudo bash firstDocker
+    GITPULL '.aliases' $HOME
+    GITPULL '.tmux.conf' $HOME
+    GITPULL .'zshrc' $HOME
+    GITPULL '.vimrc' $HOME
+
+    exit 1
   fi
 
-  exit 1
-
-elif [ "$localorrepo" == "3" ]; then
-  if [ $file == "1" ]; then
-    sudo nano $BA_S
-  elif [ $file == "2" ]; then
-    sudo nano $TM
-  elif [ $file == "3" ]; then
-    sudo nano $ZH
-  elif [ $file == "4" ]; then
-    sudo nano $VM
-  fi
-
-elif [ "$localorrepo" == "4" ]; then
-  sudo bash firstrun
-  GITPULL '.aliases' $HOME
-  GITPULL '.tmux.conf' $HOME
-  GITPULL .'zshrc' $HOME
-  GITPULL '.vimrc' $HOME
-
-  exit 1
 fi
