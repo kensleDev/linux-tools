@@ -97,7 +97,7 @@ if  [ $localorrepo == "1" ]; then
 
     exit 1
   fi
-  
+
 elif [ "$localorrepo" == "2" ]; then
 
   clear
@@ -106,18 +106,18 @@ elif [ "$localorrepo" == "2" ]; then
   echo '||-----[2] VPS DOCKER-------|'
   echo '||==========================|'
   read vps
-  
+
   elif [ "$vps" == "1" ]; then
-  
-    sudo bash firstrun
+
+    sudo bash ./scripts/firstrun
     GITPULL '.aliases' $HOME
     GITPULL '.tmux.conf' $HOME
     GITPULL .'zshrc' $HOME
     GITPULL '.vimrc' $HOME
 
-    exit 1  
-  elif [ "$vps" == "1" ]; then
-    sudo bash firstDocker
+    exit 1
+  elif [ "$vps" == "2" ]; then
+    sudo bash ./scripts/firstDocker
     GITPULL '.aliases' $HOME
     GITPULL '.tmux.conf' $HOME
     GITPULL .'zshrc' $HOME
