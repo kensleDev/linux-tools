@@ -80,7 +80,7 @@ elif [ "$localorrepo" == "2" ]; then
   read file
 
   if [ $file == "1" ]; then
-    GITPULL $ALIASES $HOME
+    GITPULL '.aliases' $HOME
   elif [ $file == "2" ]; then
     GITPULL '.tmux.conf' $HOME
   elif [ $file == "3" ]; then
@@ -104,8 +104,7 @@ elif [ "$localorrepo" == "3" ]; then
 
 elif [ "$localorrepo" == "4" ]; then
   sudo bash firstrun
-  GITPULL '.bash_aliases' $HOME
-  GITPULL '.bash_aliases_server' $HOME
+  GITPULL '.aliases' $HOME
   GITPULL '.tmux.conf' $HOME
   GITPULL .'zshrc' $HOME
   GITPULL '.vimrc' $HOME
