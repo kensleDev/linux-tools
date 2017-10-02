@@ -6,15 +6,13 @@ BA_M='/home/kd/.aliases/main'
 BA_S='/home/kd/.aliases/server'
 BA_D='/home/kd/.aliases/docker'
 
-ALIASES='/home/kd/.aliases'
-
 TM='/home/kd/.tmux.conf'
 ZH='/home/kd/.zshrc'
 VM='/home/kd/.vimrc'
 HOME='/home/kd'
 
 # Funcs
-fuction GITPULL () {
+function GITPULL () {
   cd $REPO && \
   git pull && \
   yes | cp -f $REPO/dotfiles/$1 $2 && \
