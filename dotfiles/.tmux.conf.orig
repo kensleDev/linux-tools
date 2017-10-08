@@ -4,7 +4,7 @@ unbind C-b
 set -g prefix `
 bind-key ` send-prefix
 
-
+<<<<<<< HEAD
 bind 1 select-pane -L
 bind 2 select-pane -U
 bind 3 select-pane -U \; select-pane -L;

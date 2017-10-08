@@ -84,7 +84,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /home/kd/.bash_aliases
-source /home/kd/.bash_aliases_server
+source /home/kd/.aliases/main
+source /home/kd/.aliases/server
+source /home/kd/.aliases/docker
 
-source /home/kd/z/z.sh
