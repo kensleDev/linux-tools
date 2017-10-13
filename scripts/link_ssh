@@ -1,0 +1,29 @@
+#!/bin/bash
+
+echo "eden[1] dnt[2]"
+read SERVER
+clear
+
+if [ "$SERVER" == 1 ]; then
+  IP="151.80.141.108"
+else
+  IP="54.36.99.98"
+fi
+
+echo "enter remote dir"
+read REMOTE_DIR
+clear
+
+echo "enter local dir"
+read LOCAL_DIR
+
+if [ ! -d $LOCAL_DIR ]; then
+  mkdir $LOCAL_DIR
+fi
+
+ssh kd@$IP "mkdir $REMOTE_DIR"
+
+
+sshfs -o allow_other kd@$IP:$REMOTE_DIR $LOCAL_DIR
+
+

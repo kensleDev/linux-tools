@@ -15,12 +15,12 @@ HOME='/home/kd'
 function GITPULL () {
   cd $REPO && \
   git pull && \
-  yes | cp -f $REPO/dotfiles/$1 $2 && \
+  yes | cp -r $REPO/dotfiles/$1 $2 && \
   echo "|Pull|>--- $REPO ---> $2 ---<||"
 }
 
 function GITPUSH () {
-  yes | cp -f $1 $REPO/dotfiles && \
+  yes | cp -r $1 $REPO/dotfiles && \
   cd $REPO && \
   git add . && \
   git commit -m "pushed $1 " && \
@@ -36,19 +36,20 @@ echo '||---Kensle Dev Tools---|'
 echo '||======================|'
 echo '||-----[1] Git----------|'
 echo '||-----[2] FirstRun-----|'
+echo '||-----[3] Link SSH-----|'
 echo '||======================|'
 
-read localorrepo
+read MENU
 
-if  [ $localorrepo == "1" ]; then
-  
+if  [ $MENU == "1" ]; then
+
   clear
   echo '||================================|'
   echo '||-----[1] Push to remote---------|'
   echo '||-----[2] Pull from remote-------|'
   echo '||================================|'
   read git
-  
+
   if [ "$git" == "1" ]; then
 
     clear
@@ -96,9 +97,11 @@ if  [ $localorrepo == "1" ]; then
     fi
 
     exit 1
+
+
   fi
 
-elif [ "$localorrepo" == "2" ]; then
+elif [ "$MENU" == "2" ]; then
 
   clear
   echo '||==========================|'
@@ -126,4 +129,7 @@ elif [ "$localorrepo" == "2" ]; then
     exit 1
   fi
 
+elif [ "$MENU" == "3" ]; then
+  echo "33333"
+  exit 1
 fi

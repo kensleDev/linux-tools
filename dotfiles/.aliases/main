@@ -2,6 +2,8 @@
 alias s='sudo'
 alias basha='cat ~/.bash_aliases'
 alias bashaa='cat ~/.bash_aliases_server'
+alias cb='xsel --clipboard'
+alias rr='cd /home/kd/repos'
 
 #----------------FUNCTIONS 
 #function EV () {
@@ -75,3 +77,11 @@ alias tmu='unset TMUX; tmux'
 alias updatesubs='git submodule foreach git pull origin master'
 alias ip='ifconfig eth0'
 
+
+alias s1='ssh -R 52698:localhost:52698 kd@151.80.141.108'
+alias s2='ssh -R 52698:localhost:52698 kd@54.36.99.98'
+
+alias npmb='npm run build'
+alias npmd='npm run dev'
+alias npmid='npm i -D'
+alias npmig='sudo npm i -F'
