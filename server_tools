@@ -65,7 +65,7 @@ if  [ $MENU == "1" ]; then
 
     if [ $file == "1" ]; then
       GITPUSH $ALIASES
-    elif $file == "2" ]; then
+    elif [ $file == "2" ]; then
       GITPUSH $TM
     elif [ $file == "3" ]; then
       GITPUSH $ZH
@@ -110,7 +110,7 @@ elif [ "$MENU" == "2" ]; then
   echo '||==========================|'
   read vps
 
-  elif [ "$vps" == "1" ]; then
+  if [ "$vps" == "1" ]; then
 
     sudo bash ./scripts/firstrun
     GITPULL '.aliases' $HOME
@@ -123,13 +123,12 @@ elif [ "$MENU" == "2" ]; then
     sudo bash ./scripts/firstDocker
     GITPULL '.aliases' $HOME
     GITPULL '.tmux.conf' $HOME
-    GITPULL .'zshrc' $HOME
+    GITPULL '.zshrc' $HOME
     GITPULL '.vimrc' $HOME
 
     exit 1
   fi
 
 elif [ "$MENU" == "3" ]; then
-  echo "33333"
-  exit 1
+  bash scripts/link-ssh
 fi

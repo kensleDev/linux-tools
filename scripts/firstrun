@@ -48,5 +48,5 @@ sudo chown -R kd /var/www
 
 # zsh 
 sudo apt-get install zsh -y 
-yes | sudo cp -f dofiles/.zshrc /home/kd
+yes | sudo cp -f dotfiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
