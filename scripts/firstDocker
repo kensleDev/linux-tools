@@ -33,8 +33,10 @@ sudo add-apt-repository \
    
 sudo apt-get update
 sudo apt-get install docker-ce=17.09.0
+sudo apt-get install docker-compose
 
 # zsh 
 sudo apt-get install zsh -y 
 yes | sudo cp -f dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+

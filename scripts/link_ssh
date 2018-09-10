@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "eden[1] dnt[2]"
+echo "[1] Dev Server"
 read SERVER
 clear
 
 if [ "$SERVER" == 1 ]; then
-  IP="151.80.141.108"
+  IP="51.75.27.107"
 else
   IP="54.36.99.98"
 fi
