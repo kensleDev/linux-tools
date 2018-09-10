@@ -1,3 +1,5 @@
+declare -a INSTALLED_ARRAY
+
 sudo apt-get update 
 sudo apt-get install software-properties-common
 clear
@@ -5,16 +7,19 @@ clear
 # tmux 
 sudo apt-get install tmux 
 yes | sudo cp dotfiles/.tmux.conf /home/kd
+INSTALLED_ARRAY+=('tmux')
 
 # bash aliases
 yes cp | dotfiles/.aliases ~/
+INSTALLED_ARRAY+=('Bash Aliases')
 
 # vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 yes | cp -f dotfiles/.vimrc ~/
+INSTALLED_ARRAY+=('Vim Settings')
+
 
 # docker
-
 sudo apt-get remove docker docker-engine docker.io
 sudo apt-get update
 sudo apt-get install \
@@ -35,8 +40,21 @@ sudo apt-get update
 sudo apt-get install docker-ce=17.09.0
 sudo apt-get install docker-compose
 
+INSTALLED_ARRAY+=('Docker')
+INSTALLED_ARRAY+=('Docker Compose')
+
 # zsh 
 sudo apt-get install zsh -y 
 yes | sudo cp -f dofiles/.zshrc /home/kd
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+INSTALLED_ARRAY+=('ZSH')
+
+
+# Print Apps and settings
+echo ""
+echo "The following apps and settings were attempted to be installed"
+for i in "${INSTALLED_ARRAY[@]}"
+do
+   echo "$i"
+done
 
