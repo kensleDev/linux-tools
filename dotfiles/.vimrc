@@ -1,51 +1,55 @@
-set nocompatible              " be iMproved, required
+set hidden
+map <S-x> :bn<CR>
+map <S-z> :bp<CR>
+
+" ----------------------------------------------------------------
+" Start Plugins
+:set nocompatible
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" ----------------------------------------------------------------
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+Plugin 'tomasiser/vim-code-dark'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" All of your Plugins must be added before the following line
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ap/vim-buftabline'
+Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
+" ----------------------------------------------------------------
+" Finish Plugins
 call vundle#end()            " required
 filetype plugin indent on    " required
+" ----------------------------------------------------------------
 
-" Looks
 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'bling/vim-airline'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'godlygeek/tabular'
+" Global
 
+" Theme
+set t_Co=256
+set t_ut=
+colorscheme codedark
+let g:airline_theme = 'codedark'
 
 " Syntax
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-Plugin 'ap/vim-css-color'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/html5.vim'
-Plugin 'Sass'
-Plugin 'posva/vim-vue'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
+" Nerdtree
+map <C-l> :NERDTreeToggle<CR>
 
-" Utils
-
-Plugin 'shougo/unite.vim'
+" Control P
+map <C-o> :CtrlPBuffer<CR>
