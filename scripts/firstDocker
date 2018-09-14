@@ -18,6 +18,10 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 yes | cp -f dotfiles/.vimrc ~/
 INSTALLED_ARRAY+=('Vim Settings')
 
+# nvm 
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+INSTALLED_ARRAY+=('NVM')
+
 
 # docker
 sudo apt-get remove docker docker-engine docker.io
