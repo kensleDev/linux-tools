@@ -89,4 +89,4 @@ source /home/kd/.aliases/main
 source /home/kd/.aliases/server
 source /home/kd/.aliases/docker
 
-source /home/kd/.nvm
+source /home/kd/.nvm/nvm.sh
