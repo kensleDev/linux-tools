@@ -1,6 +1,8 @@
 set hidden
 map <S-x> :bn<CR>
 map <S-z> :bp<CR>
+map <S-c> swap-pane -s 0 -t 1
+
 
 " ----------------------------------------------------------------
 " Start Plugins
@@ -22,6 +24,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ap/vim-buftabline'
 Plugin 'xolox/vim-session'
 Plugin 'xolox/vim-misc'
+Plugin 'posva/vim-vue'
 " ----------------------------------------------------------------
 " Finish Plugins
 call vundle#end()            " required
@@ -47,6 +50,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" vim vue
+let g:vue_disable_pre_processors = 1
 
 " Nerdtree
 map <C-l> :NERDTreeToggle<CR>
