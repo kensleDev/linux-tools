@@ -23,18 +23,18 @@ function GITPULL () {
 }
 
 function GITPUSH () {
-	GP_DIR=$HOME
-
-	if [ ! -z $2 ]; then
-		GP_DIR=$2
-	fi
-
-  yes | cp -r $GP_DIR/$1 $DOTFILES && \
+	# $1 = file | $2 = sourceDir
+  yes | cp -r $2/$1 $DOTFILES && \
   cd $REPO && \
-  git add . && \
-  git commit -m "pushed $1 " && \
-  git push && \
-  echo "|Push|>--- $GP_DIR/$1 ---> $REPO/dotfiles ---<||"
+	git checkout -b autoPush
+  git add -A && \
+  git commit -m ":arrow_up: pushed $1 " && \
+	git checkout master
+	# git pull origin master
+	git merge autoPush
+	git push origin master && \
+	echo ""
+  echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
 }
 
 # Main
@@ -55,30 +55,26 @@ function PRINT_DIR () {
 function GIT_PUSH_PULL () {
   DIRLIST=(`ls -a ${DOTFILES}`)
 	unset DIRLIST[1]
-	
-	echo ${DIRLIST[2]}
+
 	PRINT_DIR "$DOTFILES" 
 
-	# put the file names into an array	
-  # DIRLIST_ARR=()
-  # INDEX=0
-	# for file in "${DIRLIST[@]}"; do
-  #  	if [ $INDEX != 0 ]; then 
-	# 		DIRLIST_ARR+=("$file")
-	# 	fi
-  #   let INDEX=${INDEX}+1
-	# done
-	#
   read -p "Choose a dot file: " FILE_CHOICE
 	FILE_CHOICE=$FILE_CHOICE+1	
 
 	read -p "Push[1] Pull[2]: " GIT_CHOICE	
 
 	if [ "$GIT_CHOICE" == "1" ]; then
-		echo ${DIRLIST[$FILE_CHOICE]}
-	  GITPUSH ${DIRLIST[$FILE_CHOICE]} 	
+	  if [ ! -z $2 ]; then 
+			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
+		else
+			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
+		fi 
 	elif [ "$GIT_CHOICE" == "2" ]; then
-		GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
+		if [ ! -z $2 ]; then 
+			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
+		else
+			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
+		fi 
   else
 		echo "enter a valid option"
 	fi
