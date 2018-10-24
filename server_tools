@@ -26,7 +26,7 @@ function GITPUSH () {
 	# $1 = file | $2 = sourceDir
   yes | cp -r $2/$1 $DOTFILES && \
   cd $REPO && \
-	git checkout -b autoPush
+	git checkout autoPush
   git add -A && \
   git commit -m ":arrow_up: pushed $1 " && \
 	git push
