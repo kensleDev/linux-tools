@@ -29,12 +29,12 @@ function GITPUSH () {
 		GP_DIR=$2
 	fi
 
-  yes | cp -r $HOME/$1 $DOTFILES && \
+  yes | cp -r $GP_DIR/$1 $DOTFILES && \
   cd $REPO && \
   git add . && \
   git commit -m "pushed $1 " && \
   git push && \
-  echo "|Push|>--- $1 ---> $REPO/dotfiles ---<||"
+  echo "|Push|>--- $GP_DIR/$1 ---> $REPO/dotfiles ---<||"
 }
 
 # Main
