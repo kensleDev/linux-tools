@@ -85,3 +85,9 @@ alias npmb='npm run build'
 alias npmd='npm run dev'
 alias npmid='npm i -D'
 alias npmig='sudo npm i -F'
+
+alias genTags='sh /usr/local/bin/ctags'
+
+alias gf='git ls-files --exclude-standard --others --cached | fzf'
+alias f='fzf'
+# alias vim='vim -u ~/.vim/vimrc/.vimrc'

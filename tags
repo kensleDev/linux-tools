@@ -30,18 +30,19 @@
 After	dotfiles/mongodb.service	/^After=network.target$/;"	k	section:Unit
 Cursor movement	docs/vim.md	/^## Cursor movement$/;"	s
 Cut and paste	docs/vim.md	/^## Cut and paste$/;"	s
+DIRLIST_ARR=	server_tools	/^	DIRLIST_ARR=()$/;"	f
 Description	dotfiles/mongodb.service	/^Description=High-performance, schema-free document-oriented database$/;"	k	section:Unit
 Editing	docs/vim.md	/^## Editing$/;"	s
 ExecStart	dotfiles/mongodb.service	/^ExecStart=\/usr\/bin\/mongod --quiet --config \/etc\/mongod.conf$/;"	k	section:Service
 Exiting	docs/vim.md	/^## Exiting$/;"	s
 GITPULL	server_tools	/^function GITPULL () {$/;"	f
 GITPUSH	server_tools	/^function GITPUSH () {$/;"	f
+GIT_PUSH_PULL	server_tools	/^function GIT_PUSH_PULL () {$/;"	f
 Global	docs/vim.md	/^## Global$/;"	s
-I	dotfiles/.tmux.conf	/^setw -g window-status-current-format " #F#I:#W#F "$/;"	k
-I	dotfiles/.tmux.conf	/^setw -g window-status-format " #F#I:#W#F "$/;"	k
 Insert mode - inserting/appending text	docs/vim.md	/^## Insert mode - inserting\/appending text$/;"	s
 Install	dotfiles/mongodb.service	/^[Install]$/;"	s
 Marking text (visual mode)	docs/vim.md	/^## Marking text (visual mode)$/;"	s
+PRINT_DIR	server_tools	/^function PRINT_DIR () {$/;"	f
 Search and replace	docs/vim.md	/^## Search and replace$/;"	s
 Search in multiple files	docs/vim.md	/^## Search in multiple files$/;"	s
 Service	dotfiles/mongodb.service	/^[Service]$/;"	s

@@ -1,26 +1,35 @@
 #!/bin/bash
 
 # Paths
-REPO='/home/kd/repos/.server-tools-new'
-BA_M='/home/kd/.aliases/main'
-BA_S='/home/kd/.aliases/server'
-BA_D='/home/kd/.aliases/docker'
+REPO=/home/$USER/repos/.server-tools-new
+DOTFILES=$REPO/dotfiles
+HOME=/home/$USER
 
-TM='/home/kd/.tmux.conf'
-ZH='/home/kd/.zshrc'
-VM='/home/kd/.vimrc'
-HOME='/home/kd'
+BA_M='$HOME/.aliases/main'
+BA_S='$HOME/.aliases/server'
+BA_D='$HOME/.aliases/docker'
+
+ALIASES='$HOME/.aliases'
+TM='$HOME/.tmux.conf'
+ZH='$HOME/.zshrc'
+VM='$HOME/.vim/vimrc'
 
 # Funcs
 function GITPULL () {
   cd $REPO && \
   git pull && \
-  yes | cp -r $REPO/dotfiles/$1 $2 && \
+  yes | cp -r $DOTFILES/$1 $2 && \
   echo "|Pull|>--- $REPO ---> $2 ---<||"
 }
 
 function GITPUSH () {
-  yes | cp -r $1 $REPO/dotfiles && \
+	GP_DIR=$HOME
+
+	if [ ! -z $2 ]; then
+		GP_DIR=$2
+	fi
+
+  yes | cp -r $HOME/$1 $DOTFILES && \
   cd $REPO && \
   git add . && \
   git commit -m "pushed $1 " && \
@@ -29,6 +38,53 @@ function GITPUSH () {
 }
 
 # Main
+function PRINT_DIR () {
+  dflist=(`ls -a ${1}`)
+	unset dflist[1]
+
+  INDEX=0
+	for file in "${dflist[@]}"; do
+   	if [ $INDEX != 0 ]; then 
+			echo "$INDEX $file"
+		fi
+    let INDEX=${INDEX}+1
+	done
+
+}
+
+function GIT_PUSH_PULL () {
+	PRINT_DIR "$DOTFILES" 
+  DIRLIST=(`ls -a ${DOTFILES}`)
+	unset DIRLIST[1]
+	
+	DIRLIST_ARR=()
+  INDEX=0
+	for file in "${DIRLIST[@]}"; do
+   	if [ $INDEX != 0 ]; then 
+			DIRLIST_ARR+=("$file")
+		fi
+    let INDEX=${INDEX}+1
+	done
+
+	read -p "Choose a dot file: " FILE_CHOICE
+	FILE_CHOICE=$FILE_CHOICE-1	
+
+	read -p "Push[1] Pull[2]: " GIT_CHOICE	
+
+  echo "${DIRLIST_ARR[$FILE_CHOICE]}"
+	
+
+	if [ "$GIT_CHOICE" == "1" ]; then
+	  GITPUSH ${DIRLIST_ARR[$FILE_CHOICE]} 	
+	elif [ "$GIT_CHOICE" == "2" ]; then
+		GITPULL ${DIRLIST_ARR[$FILE_CHOICE]} $HOME
+  else
+		echo "enter a valid option"
+	fi
+
+
+}
+
 
 clear
 echo '||======================|'
@@ -38,10 +94,12 @@ echo '||-----[1] Git----------|'
 echo '||-----[2] FirstRun-----|'
 echo '||-----[3] Link SSH-----|'
 echo '||-----[4] Gen SSH------|'
+echo '||-----[5] NEW GIT------|'
 echo '||======================|'
 
 read MENU
-
+echo ''
+echo ''
 if  [ $MENU == "1" ]; then
 
   clear
@@ -139,4 +197,7 @@ elif [ "$MENU" == "4" ]; then
   echo "run ssh-keygen"
   echo ""
   echo ssh-copy-id username@remote_host
+
+elif [ "$MENU" == "5" ]; then
+	GIT_PUSH_PULL $DOTFILES
 fi
