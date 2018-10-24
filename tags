@@ -30,7 +30,7 @@
 After	dotfiles/mongodb.service	/^After=network.target$/;"	k	section:Unit
 Cursor movement	docs/vim.md	/^## Cursor movement$/;"	s
 Cut and paste	docs/vim.md	/^## Cut and paste$/;"	s
-DIRLIST_ARR=	server_tools	/^	DIRLIST_ARR=()$/;"	f
+DIRLIST_ARR=	server_tools	/^  DIRLIST_ARR=()$/;"	f
 Description	dotfiles/mongodb.service	/^Description=High-performance, schema-free document-oriented database$/;"	k	section:Unit
 Editing	docs/vim.md	/^## Editing$/;"	s
 ExecStart	dotfiles/mongodb.service	/^ExecStart=\/usr\/bin\/mongod --quiet --config \/etc\/mongod.conf$/;"	k	section:Service
