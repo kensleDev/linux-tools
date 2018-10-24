@@ -28,12 +28,15 @@ function GITPUSH () {
   cd $REPO && \
 	git checkout autoPush
   git add -A && \
-  git commit -m ":arrow_up: pushed $1 " && \
+
+	read -p "Commit Message: " COMMIT_MESSAGE
+  git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
 	git push
 	git checkout master
 	# git pull origin master
-	git merge autoPush
-	git push origin master && \
+  git merge autoPush
+	git push
+	# git push origin master && \
 	echo ""
   echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
 }
