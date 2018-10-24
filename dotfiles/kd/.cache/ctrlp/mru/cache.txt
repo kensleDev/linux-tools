@@ -1,0 +1,10 @@
+/home/kd/repos/vue-test/src/modules/auth/pages/login.page.vue
+/home/kd/repos/vue-test/src/modules/ui/styles/lib/flatUi.sass
+/home/kd/repos/vue-test/src/modules/navigation/components/modal.component.vue
+/home/kd/repos/vue-test/src/modules/navigation/navigation.store.js
+/home/kd/repos/vue-test/src/App.vue
+/home/kd/repos/vue-test/src/modules/auth/auth.store.js
+/home/kd/repos/vue-test/src/modules/auth/pages/signup.page.vue
+/home/kd/.vim/config/funcs.vim
+/home/kd/repos/.server-tools-new/docs/vim.md
+/home/kd/.zshrc

@@ -56,27 +56,28 @@ function GIT_PUSH_PULL () {
   DIRLIST=(`ls -a ${DOTFILES}`)
 	unset DIRLIST[1]
 	
+	echo ${DIRLIST[2]}
 	PRINT_DIR "$DOTFILES" 
 
 	# put the file names into an array	
-  DIRLIST_ARR=()
-  INDEX=0
-	for file in "${DIRLIST[@]}"; do
-   	if [ $INDEX != 0 ]; then 
-			DIRLIST_ARR+=("$file")
-		fi
-    let INDEX=${INDEX}+1
-	done
-	echo "${DIRLIST[1]}"
-	read -p "Choose a dot file: " FILE_CHOICE
-	FILE_CHOICE=$FILE_CHOICE-1	
+  # DIRLIST_ARR=()
+  # INDEX=0
+	# for file in "${DIRLIST[@]}"; do
+  #  	if [ $INDEX != 0 ]; then 
+	# 		DIRLIST_ARR+=("$file")
+	# 	fi
+  #   let INDEX=${INDEX}+1
+	# done
+	#
+  read -p "Choose a dot file: " FILE_CHOICE
+	FILE_CHOICE=$FILE_CHOICE+1	
 
 	read -p "Push[1] Pull[2]: " GIT_CHOICE	
 
 	if [ "$GIT_CHOICE" == "1" ]; then
-	  GITPUSH ${DIRLIST_ARR[$FILE_CHOICE]} 	
+	  GITPUSH ${DIRLIST[$FILE_CHOICE]} 	
 	elif [ "$GIT_CHOICE" == "2" ]; then
-		GITPULL ${DIRLIST_ARR[$FILE_CHOICE]} $HOME
+		GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
   else
 		echo "enter a valid option"
 	fi
