@@ -75,6 +75,7 @@ function GIT_PUSH_PULL () {
 	read -p "Push[1] Pull[2]: " GIT_CHOICE	
 
 	if [ "$GIT_CHOICE" == "1" ]; then
+		echo ${DIRLIST[$FILE_CHOICE]}
 	  GITPUSH ${DIRLIST[$FILE_CHOICE]} 	
 	elif [ "$GIT_CHOICE" == "2" ]; then
 		GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
