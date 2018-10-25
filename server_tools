@@ -26,16 +26,16 @@ function GITPUSH () {
 	# $1 = file | $2 = sourceDir
   yes | cp -r $2/$1 $DOTFILES && \
   cd $REPO && \
-	git checkout autoPush
+#	git checkout autoPush
   git add -A 
 
 	read -p "Commit Message: " COMMIT_MESSAGE
   git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
 	git push
-	git checkout master
+#	git checkout master
 	# git pull origin master
-  git merge autoPush --no-ff
-	git push
+#  git merge autoPush --no-ff
+#	git push
 	# git push origin master && \
 	echo ""
   echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
