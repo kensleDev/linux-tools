@@ -7,19 +7,6 @@
 !_TAG_PROGRAM_VERSION	0.0.0	/8791bb4/
 <C-l>	dotfiles/.vimrc	/^map <C-l> :NERDTreeToggle<CR>$/;"	m
 <C-o>	dotfiles/.vimrc	/^map <C-o> :CtrlPBuffer<CR>$/;"	m
-<Plug>BufTabLine.Go(-1)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(-1) :exe 'b'.get(buftabline#user_buffers(),-1,'')$/;"	m
-<Plug>BufTabLine.Go(1)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(1) :exe 'b'.get(buftabline#user_buffers(),0,'')$/;"	m
-<Plug>BufTabLine.Go(10)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(10) :exe 'b'.get(buftabline#user_buffers(),9,'')$/;"	m
-<Plug>BufTabLine.Go(2)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(2) :exe 'b'.get(buftabline#user_buffers(),1,'')$/;"	m
-<Plug>BufTabLine.Go(3)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(3) :exe 'b'.get(buftabline#user_buffers(),2,'')$/;"	m
-<Plug>BufTabLine.Go(4)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(4) :exe 'b'.get(buftabline#user_buffers(),3,'')$/;"	m
-<Plug>BufTabLine.Go(5)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(5) :exe 'b'.get(buftabline#user_buffers(),4,'')$/;"	m
-<Plug>BufTabLine.Go(6)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(6) :exe 'b'.get(buftabline#user_buffers(),5,'')$/;"	m
-<Plug>BufTabLine.Go(7)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(7) :exe 'b'.get(buftabline#user_buffers(),6,'')$/;"	m
-<Plug>BufTabLine.Go(8)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(8) :exe 'b'.get(buftabline#user_buffers(),7,'')$/;"	m
-<Plug>BufTabLine.Go(9)	dotfiles/s.vim	/^noremap <silent> <Plug>BufTabLine.Go(9) :exe 'b'.get(buftabline#user_buffers(),8,'')$/;"	m
-<Plug>NetrwBrowseX	dotfiles/s.vim	/^nnoremap <silent> <Plug>NetrwBrowseX :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_g/;"	m
-<Plug>NetrwBrowseXVis	dotfiles/s.vim	/^vnoremap <silent> <Plug>NetrwBrowseXVis :call netrw#BrowseXVis()$/;"	m
 <S-c>	dotfiles/.vimrc	/^map <S-c> swap-pane -s 0 -t 1$/;"	m
 <S-x>	dotfiles/.vimrc	/^map <S-x> :bn<CR>$/;"	m
 <S-z>	dotfiles/.vimrc	/^map <S-z> :bp<CR>$/;"	m
@@ -34,18 +21,13 @@ Description	dotfiles/mongodb.service	/^Description=High-performance, schema-free
 Editing	docs/vim.md	/^## Editing$/;"	s
 ExecStart	dotfiles/mongodb.service	/^ExecStart=\/usr\/bin\/mongod --quiet --config \/etc\/mongod.conf$/;"	k	section:Service
 Exiting	docs/vim.md	/^## Exiting$/;"	s
-GITPULL	server_tools	/^function GITPULL () {$/;"	f
-GITPUSH	server_tools	/^function GITPUSH () {$/;"	f
-GIT_PUSH_PULL	server_tools	/^function GIT_PUSH_PULL () {$/;"	f
 Global	docs/vim.md	/^## Global$/;"	s
 Insert mode - inserting/appending text	docs/vim.md	/^## Insert mode - inserting\/appending text$/;"	s
 Install	dotfiles/mongodb.service	/^[Install]$/;"	s
 Marking text (visual mode)	docs/vim.md	/^## Marking text (visual mode)$/;"	s
-PRINT_DIR	server_tools	/^function PRINT_DIR () {$/;"	f
 Search and replace	docs/vim.md	/^## Search and replace$/;"	s
 Search in multiple files	docs/vim.md	/^## Search in multiple files$/;"	s
 Service	dotfiles/mongodb.service	/^[Service]$/;"	s
-SessionLoad	dotfiles/s.vim	/^let SessionLoad = 1$/;"	v
 Tabs	docs/vim.md	/^## Tabs$/;"	s
 Unit	dotfiles/mongodb.service	/^[Unit]$/;"	s
 User	dotfiles/mongodb.service	/^User=mongodb$/;"	k	section:Service
@@ -53,9 +35,6 @@ Vim Cheatsheet	docs/vim.md	/^# Vim Cheatsheet$/;"	c
 Visual commands	docs/vim.md	/^## Visual commands$/;"	s
 WantedBy	dotfiles/mongodb.service	/^WantedBy=multi-user.target$/;"	k	section:Install
 Working with multiple files	docs/vim.md	/^## Working with multiple files$/;"	s
-\x16\f	dotfiles/s.vim	/^map  :NERDTreeToggle$/;"	m
-\x16\x0E	dotfiles/s.vim	/^nnoremap  :bnext$/;"	m
-\x16\x10	dotfiles/s.vim	/^nnoremap <silent>  :CtrlP$/;"	m
 g:NERDTreeQuitOnOpen	dotfiles/.vimrc	/^let g:NERDTreeQuitOnOpen = 1$/;"	v
 g:airline_theme	dotfiles/.vimrc	/^let g:airline_theme = 'codedark'$/;"	v
 g:syntastic_always_populate_loc_list	dotfiles/.vimrc	/^let g:syntastic_always_populate_loc_list = 1$/;"	v
@@ -63,9 +42,3 @@ g:syntastic_auto_loc_list	dotfiles/.vimrc	/^let g:syntastic_auto_loc_list = 1$/;
 g:syntastic_check_on_open	dotfiles/.vimrc	/^let g:syntastic_check_on_open = 1$/;"	v
 g:syntastic_check_on_wq	dotfiles/.vimrc	/^let g:syntastic_check_on_wq = 0$/;"	v
 g:vue_disable_pre_processors	dotfiles/.vimrc	/^let g:vue_disable_pre_processors = 1$/;"	v
-gx	dotfiles/s.vim	/^nmap gx <Plug>NetrwBrowseX$/;"	m
-gx	dotfiles/s.vim	/^vmap gx <Plug>NetrwBrowseXVis$/;"	m
-s:cpo_save	dotfiles/s.vim	/^let s:cpo_save=&cpo$/;"	v
-s:so_save	dotfiles/s.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
-s:sx	dotfiles/s.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
-s:wipebuf	dotfiles/s.vim	/^  let s:wipebuf = bufnr('%')$/;"	v

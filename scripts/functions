@@ -1,0 +1,98 @@
+#!/bin/bash
+
+# Paths
+REPO=/home/$USER/repos/server-tools
+DOTFILES=$REPO/dotfiles
+HOME=/home/$USER
+
+BA_M='$HOME/.aliases/main'
+BA_S='$HOME/.aliases/server'
+BA_D='$HOME/.aliases/docker'
+
+ALIASES='$HOME/.aliases'
+
+# Funcs
+function GITPULL () {
+  cd $REPO && \
+  git pull && \
+  yes | cp -r $DOTFILES/$1 $2 && \
+  echo "|Pull|>--- $REPO ---> $2 ---<||"
+}
+
+function GITPUSH () {
+	# $1 = file | $2 = sourceDir
+  yes | cp -r $2/$1 $DOTFILES && \
+  cd $REPO && \
+#	git checkout autoPush
+  git add -A 
+
+	read -p "Commit Message: " COMMIT_MESSAGE
+  git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
+	git push
+#	git checkout master
+	# git pull origin master
+#  git merge autoPush --no-ff
+#	git push
+	# git push origin master && \
+	echo ""
+  echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
+}
+
+# Main
+function PRINT_DIR () {
+  dflist=(`ls -a ${1}`)
+	unset dflist[1]
+
+  INDEX=0
+	for file in "${dflist[@]}"; do
+   	if [ $INDEX != 0 ]; then 
+			echo "$INDEX $file"
+		fi
+    let INDEX=${INDEX}+1
+	done
+}
+
+function PRINT_MENU () {
+	MENU_ARR=( "$@" )
+
+  INDEX=0
+	for file in "${MENU_ARR[@]}"; do
+		echo "$INDEX $file"
+    let INDEX=${INDEX}+1
+	done
+}
+
+function MENU_TITLE () {
+  echo ""
+  echo "#============================"
+  echo "# ${1}" 
+  echo "#============================"
+  echo ""
+}
+
+
+function GIT_PUSH_PULL () {
+  DIRLIST=(`ls -a ${DOTFILES}`)
+	unset DIRLIST[1]
+
+	PRINT_DIR "$DOTFILES" 
+
+  read -p "Choose a dot file: " FILE_CHOICE
+	FILE_CHOICE=$FILE_CHOICE+1	
+
+	read -p "Push[1] Pull[2]: " GIT_CHOICE	
+
+	if [ "$GIT_CHOICE" == "1" ]; then
+	  if [ ! -z $2 ]; then 
+			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
+		else
+			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
+		fi 
+	elif [ "$GIT_CHOICE" == "2" ]; then
+		if [ ! -z $2 ]; then 
+			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
+		else
+			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
+		fi 
+  fi
+}

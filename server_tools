@@ -1,204 +1,83 @@
 #!/bin/bash
 
-# Paths
-REPO=/home/$USER/repos/.server-tools-new
-DOTFILES=$REPO/dotfiles
-HOME=/home/$USER
+source ./scripts/functions
 
-BA_M='$HOME/.aliases/main'
-BA_S='$HOME/.aliases/server'
-BA_D='$HOME/.aliases/docker'
+MAIN_MENU=("Git" "FirstRun" "Link SSH" "Gen SSH")
+PRINT_MENU "${MAIN_MENU[@]}"
+read -p "What will it be?: " MENU_CHOICE
 
-ALIASES='$HOME/.aliases'
-TM='$HOME/.tmux.conf'
-ZH='$HOME/.zshrc'
-VM='$HOME/.vim/vimrc'
+if  [ $MENU_CHOICE == "1" ]; then
 
-# Funcs
-function GITPULL () {
-  cd $REPO && \
-  git pull && \
-  yes | cp -r $DOTFILES/$1 $2 && \
-  echo "|Pull|>--- $REPO ---> $2 ---<||"
-}
+	GIT_PUSH_PULL $DOTFILES
 
-function GITPUSH () {
-	# $1 = file | $2 = sourceDir
-  yes | cp -r $2/$1 $DOTFILES && \
-  cd $REPO && \
-#	git checkout autoPush
-  git add -A 
-
-	read -p "Commit Message: " COMMIT_MESSAGE
-  git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
-	git push
-#	git checkout master
-	# git pull origin master
-#  git merge autoPush --no-ff
-#	git push
-	# git push origin master && \
+elif [ "$MENU_CHOICE" == "2" ]; then
+	echo ""			
+	read -p "[1]VPS | [2]Docker_VPS: " VPS_CHOICE
 	echo ""
-  echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
-}
 
-# Main
-function PRINT_DIR () {
-  dflist=(`ls -a ${1}`)
-	unset dflist[1]
-
-  INDEX=0
-	for file in "${dflist[@]}"; do
-   	if [ $INDEX != 0 ]; then 
-			echo "$INDEX $file"
-		fi
-    let INDEX=${INDEX}+1
-	done
-
-}
-
-function GIT_PUSH_PULL () {
-  DIRLIST=(`ls -a ${DOTFILES}`)
-	unset DIRLIST[1]
-
-	PRINT_DIR "$DOTFILES" 
-
-  read -p "Choose a dot file: " FILE_CHOICE
-	FILE_CHOICE=$FILE_CHOICE+1	
-
-	read -p "Push[1] Pull[2]: " GIT_CHOICE	
-
-	if [ "$GIT_CHOICE" == "1" ]; then
-	  if [ ! -z $2 ]; then 
-			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
-		else
-			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
-		fi 
-	elif [ "$GIT_CHOICE" == "2" ]; then
-		if [ ! -z $2 ]; then 
-			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
-		else
-			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
-		fi 
-  else
-		echo "enter a valid option"
-	fi
-
-
-}
-
-
-clear
-echo '||======================|'
-echo '||---Kensle Dev Tools---|'
-echo '||======================|'
-echo '||-----[1] Git----------|'
-echo '||-----[2] FirstRun-----|'
-echo '||-----[3] Link SSH-----|'
-echo '||-----[4] Gen SSH------|'
-echo '||-----[5] NEW GIT------|'
-echo '||======================|'
-
-read MENU
-echo ''
-echo ''
-if  [ $MENU == "1" ]; then
-
-  clear
-  echo '||================================|'
-  echo '||-----[1] Push to remote---------|'
-  echo '||-----[2] Pull from remote-------|'
-  echo '||================================|'
-  read git
-
-  if [ "$git" == "1" ]; then
-
-    clear
-    echo '||===========================|'
-    echo '||---------GIT PUSH----------|'
-    echo '||===========================|'
-    echo '||------[1] Bash Aliases-----|'
-    echo '||------[2] Tmux Conf--------|'
-    echo '||------[3] Zshrc------------|'
-    echo '||------[4] Vimrc------------|'
-    echo '||===========================|'
-    read file
-
-    if [ $file == "1" ]; then
-      GITPUSH $ALIASES
-    elif [ $file == "2" ]; then
-      GITPUSH $TM
-    elif [ $file == "3" ]; then
-      GITPUSH $ZH
-    elif [ $file == "4" ]; then
-      GITPUSH $VM
-    fi
-
-    exit 1
-  elif [ "$git" == "2" ]; then
-    clear
-    echo '||===========================|'
-    echo '||---------GIT PULL----------|'
-    echo '||===========================|'
-    echo '||------[1] Bash Aliases-----|'
-    echo '||------[2] Tmux Conf--------|'
-    echo '||------[3] Zshrc------------|'
-    echo '||------[4] Vimrc------------|'
-    echo '||===========================|'
-    read file
-
-    if [ $file == "1" ]; then
-      GITPULL '.aliases' $HOME
-    elif [ $file == "2" ]; then
-      GITPULL '.tmux.conf' $HOME
-    elif [ $file == "3" ]; then
-      GITPULL .'zshrc' $HOME
-    elif [ $file == "4" ]; then
-      GITPULL '.vimrc' $HOME
-    fi
-
-    exit 1
-
-
-  fi
-
-elif [ "$MENU" == "2" ]; then
-
-  clear
-  echo '||==========================|'
-  echo '||-----[1] VPS--------------|'
-  echo '||-----[2] VPS DOCKER-------|'
-  echo '||==========================|'
-  read vps
-
-  if [ "$vps" == "1" ]; then
-
+  if [ "$VPS_CHOICE" == "1" ]; then
     sudo bash ./scripts/firstrun
-    GITPULL '.aliases' $HOME
-    GITPULL '.tmux.conf' $HOME
-    GITPULL .'zshrc' $HOME
-    GITPULL '.vimrc' $HOME
-
-    exit 1
-  elif [ "$vps" == "2" ]; then
+  elif [ "$VPS_CHOICE" == "2" ]; then
     sudo bash ./scripts/firstDocker
-    GITPULL '.aliases' $HOME
-    GITPULL '.tmux.conf' $HOME
-    GITPULL '.zshrc' $HOME
-    GITPULL '.vimrc' $HOME
-
-    exit 1
   fi
 
-elif [ "$MENU" == "3" ]; then
+elif [ "$MENU_CHOICE" == "3" ]; then
   bash scripts/link-ssh
-  
-elif [ "$MENU" == "4" ]; then
+
+elif [ "$MENU_CHOICE" == "4" ]; then
   echo "To link SSH"
   echo ""
   echo "run ssh-keygen"
   echo ""
   echo ssh-copy-id username@remote_host
-
-elif [ "$MENU" == "5" ]; then
-	GIT_PUSH_PULL $DOTFILES
 fi
+# --------------------------------------------------------------
+# clear
+# echo '||======================|'
+# echo '||---Kensle Dev Tools---|'
+# echo '||======================|'
+# echo '||-----[1] Git----------|'
+# echo '||-----[2] FirstRun-----|'
+# echo '||-----[3] Link SSH-----|'
+# echo '||-----[4] Gen SSH------|'
+# echo '||======================|'
+#
+# read MENU
+# echo ''
+# echo ''
+# if  [ $MENU == "1" ]; then
+#
+# 	GIT_PUSH_PULL $DOTFILES
+#
+# elif [ "$MENU" == "2" ]; then
+#
+#   clear
+#   echo '||==========================|'
+#   echo '||-----[1] VPS--------------|'
+#   echo '||-----[2] VPS DOCKER-------|'
+#   echo '||==========================|'
+#   read vps
+#
+#   if [ "$vps" == "1" ]; then
+#
+#     sudo bash ./scripts/firstrun
+#
+#   elif [ "$vps" == "2" ]; then
+#
+#     sudo bash ./scripts/firstDocker
+#
+#   fi
+#
+# elif [ "$MENU" == "3" ]; then
+#   bash scripts/link-ssh
+#
+# elif [ "$MENU" == "4" ]; then
+#   echo "To link SSH"
+#   echo ""
+#   echo "run ssh-keygen"
+#   echo ""
+#   echo ssh-copy-id username@remote_host
+#
+# elif [ "$MENU" == "5" ]; then
+# 	GIT_PUSH_PULL $DOTFILES
+# fi
