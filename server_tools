@@ -27,14 +27,14 @@ function GITPUSH () {
   yes | cp -r $2/$1 $DOTFILES && \
   cd $REPO && \
 	git checkout autoPush
-  git add -A && \
+  git add -A 
 
 	read -p "Commit Message: " COMMIT_MESSAGE
   git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
 	git push
 	git checkout master
 	# git pull origin master
-  git merge autoPush
+  git merge autoPush --no-ff
 	git push
 	# git push origin master && \
 	echo ""
