@@ -60,6 +60,7 @@ function PRINT_MENU () {
 		echo "$INDEX $file"
     let INDEX=${INDEX}+1
 	done
+  echo ""
 }
 
 function MENU_TITLE () {
@@ -72,10 +73,12 @@ function MENU_TITLE () {
 
 
 function GIT_PUSH_PULL () {
-  DIRLIST=(`ls -a ${DOTFILES}`)
+  read -p "Chose a dir" DIR_CHOICE 
+  DIRLIST=(`ls -a ${DIR_CHOICE}`)
 	unset DIRLIST[1]
-
-	PRINT_DIR "$DOTFILES" 
+  
+  MENU_TITLE "Dotfiles"
+	PRINT_DIR "$DIR_CHOICE" 
 
   read -p "Choose a dot file: " FILE_CHOICE
 	FILE_CHOICE=$FILE_CHOICE+1	
