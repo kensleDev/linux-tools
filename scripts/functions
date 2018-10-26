@@ -99,3 +99,14 @@ function GIT_PUSH_PULL () {
 		fi 
   fi
 }
+
+function GIT_P_REPO () {
+  read -p "Repo dir" REPO_DIR
+  read -p "Commit Message" COMMIT_MESSAGE
+  
+  cd $REPO_DIR
+  git add -A
+  git commit -m "$COMMIT_MESSAGE"
+  git pus
+
+}
