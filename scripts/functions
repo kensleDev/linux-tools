@@ -105,13 +105,13 @@ function GIT_PUSH () {
   git commit -m "$COMMIT_MESSAGE"
   git push
 
-  echo "|Push|>--- ${pwd} ---> Cloud ---<||"
+  echo "|Push|>--- "$(readlink -f "$0")" ---> Cloud ---<||"
 }
 
 function GITPULL () {
   git pull && 
   #yes | cp -r $DOTFILES/$1 $2 && \
-  echo "|Pull|>--- Cloud ---> ${pwd} ---<||"
+  echo "|Pull|>--- Cloud ---> "$(readlink -f "$0")" ---<||"
 }
 
 
