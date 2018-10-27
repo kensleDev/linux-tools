@@ -3,12 +3,13 @@
 source ./scripts/functions
 
 MAIN_MENU=("Git" "FirstRun" "Link SSH" "Gen SSH")
-PRINT_MENU "${MAIN_MENU[@]}"
+PRINT_MENU  "MainMenu" "${MAIN_MENU[@]}"
 read -p "What will it be?: " MENU_CHOICE
 
 if  [ $MENU_CHOICE == "1" ]; then
 
-	GIT_PUSH_PULL $DOTFILES
+#	GIT_PUSH_PULL $DOTFILES
+  GI
 
 elif [ "$MENU_CHOICE" == "2" ]; then
 	echo ""			

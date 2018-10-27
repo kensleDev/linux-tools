@@ -1,112 +1,170 @@
 #!/bin/bash
 
 # Paths
-REPO=/home/$USER/repos/server-tools
-DOTFILES=$REPO/dotfiles
+
 HOME=/home/$USER
+REPO=$HOME/repos/server-tools
+DOTFILES=$REPO/dotfiles
 
-BA_M='$HOME/.aliases/main'
-BA_S='$HOME/.aliases/server'
-BA_D='$HOME/.aliases/docker'
-
-ALIASES='$HOME/.aliases'
 
 # Funcs
-function GITPULL () {
-  cd $REPO && \
-  git pull && \
-  yes | cp -r $DOTFILES/$1 $2 && \
-  echo "|Pull|>--- $REPO ---> $2 ---<||"
+
+# --------------------------------------- MENU FUNCS
+
+  function PRINT_DIR () {
+    # API | $1 = DIR "
+
+    dflist=(`ls -a ${1}`)
+    unset dflist[1]
+
+    INDEX=0
+    for file in "${dflist[@]}"; do
+      if [ $INDEX != 0 ]; then 
+        echo "$INDEX $file"
+      fi
+      let INDEX=${INDEX}+1
+    done
+
+  }
+
+  function PRINT_MENU () {
+    # API | $1 = Menu , $2 = Menu Array 
+
+    clear
+    
+    MENU_TITLE $1
+    MENU_ARR=( "$@" )
+    unset MENU_ARR[0]
+
+    INDEX=1
+    for file in "${MENU_ARR[@]}"; do
+      echo "$INDEX $file"
+      let INDEX=${INDEX}+1
+    done
+    echo ""
+
+  }
+
+  function MENU_TITLE () {
+
+    echo ""
+    echo "#============================"
+    echo "# ${1}" 
+    echo "#============================"
+    echo ""
+
+  }
+
+
+# --------------------------------------- GIT FUNCS
+
+function GI() {
+  # API | $1 = repo dir
+
+  MENU_ARR=("Push" "Pull")
+  PRINT_MENU "GitCommand" "${MENU_ARR[@]}"
+
+  if [ ! -z "$1" ]; then 
+    read -p "Repo Dir: " DIR_CHOICE
+  else
+    DIR_CHOICE="$(readlink -f "$0")"
+  fi 
+ 
+  read -p "Choice: " MENU_CHOICE
+  GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE 
+ 
 }
 
-function GITPUSH () {
-	# $1 = file | $2 = sourceDir
-  yes | cp -r $2/$1 $DOTFILES && \
-  cd $REPO && \
-#	git checkout autoPush
-  git add -A 
+function GIT_WRAPPER () {
+  # API | $1 Menu Choice, $2 DIR
+  # Check if the dir is a repo and execute command
 
-	read -p "Commit Message: " COMMIT_MESSAGE
-  git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
-	git push
-#	git checkout master
-	# git pull origin master
-#  git merge autoPush --no-ff
-#	git push
-	# git push origin master && \
-	echo ""
-  echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
-}
+  DIR_CHOICE=$2
 
-# Main
-function PRINT_DIR () {
-  dflist=(`ls -a ${1}`)
-	unset dflist[1]
+  cd $DIR_CHOICE
 
-  INDEX=0
-	for file in "${dflist[@]}"; do
-   	if [ $INDEX != 0 ]; then 
-			echo "$INDEX $file"
-		fi
-    let INDEX=${INDEX}+1
-	done
-}
+  if [ -d ".git" ]; then
 
-function PRINT_MENU () {
-	MENU_ARR=( "$@" )
+    if [ $1 == 1 ]; then
+      GIT_PUSH
+    elif [$1 == 2];then
+      GIT_PULL
+    fi
 
-  INDEX=0
-	for file in "${MENU_ARR[@]}"; do
-		echo "$INDEX $file"
-    let INDEX=${INDEX}+1
-	done
-  echo ""
-}
-
-function MENU_TITLE () {
-  echo ""
-  echo "#============================"
-  echo "# ${1}" 
-  echo "#============================"
-  echo ""
-}
-
-
-function GIT_PUSH_PULL () {
-  read -p "Chose a dir" DIR_CHOICE 
-  DIRLIST=(`ls -a ${DIR_CHOICE}`)
-	unset DIRLIST[1]
-  
-  MENU_TITLE "Dotfiles"
-	PRINT_DIR "$DIR_CHOICE" 
-
-  read -p "Choose a dot file: " FILE_CHOICE
-	FILE_CHOICE=$FILE_CHOICE+1	
-
-	read -p "Push[1] Pull[2]: " GIT_CHOICE	
-
-	if [ "$GIT_CHOICE" == "1" ]; then
-	  if [ ! -z $2 ]; then 
-			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
-		else
-			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
-		fi 
-	elif [ "$GIT_CHOICE" == "2" ]; then
-		if [ ! -z $2 ]; then 
-			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
-		else
-			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
-		fi 
+  else 
+    echo "This is not a git repo"
   fi
+
 }
 
-function GIT_P_REPO () {
-  read -p "Repo dir" REPO_DIR
+function GIT_PUSH () {
+
   read -p "Commit Message" COMMIT_MESSAGE
   
-  cd $REPO_DIR
   git add -A
   git commit -m "$COMMIT_MESSAGE"
-  git pus
+  git push
 
+  echo "|Push|>--- ${pwd} ---> Cloud ---<||"
 }
+
+function GITPULL () {
+  git pull && 
+  #yes | cp -r $DOTFILES/$1 $2 && \
+  echo "|Pull|>--- Cloud ---> ${pwd} ---<||"
+}
+
+
+#
+# function GIT_PUSH_PULL () {
+# #  read -p "Chose a dir" DIR_CHOICE 
+# #  DIR_CHOICE=$(pwd)
+# #  echo "$DIR_CHOICE"
+#
+#   DIRLIST=(`ls -a ${DIR_CHOICE}`)
+# 	unset DIRLIST[1]
+#
+#   MENU_TITLE "Dotfiles"
+# 	PRINT_DIR "$DIR_CHOICE" 
+#
+#   read -p "Choose a dot file: " FILE_CHOICE
+# 	FILE_CHOICE=$FILE_CHOICE+1	
+#
+# 	read -p "Push[1] Pull[2]: " GIT_CHOICE	
+#
+# 	if [ "$GIT_CHOICE" == "1" ]; then
+# 	  if [ ! -z $2 ]; then 
+# 			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
+# 		else
+# 			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
+# 		fi 
+# 	elif [ "$GIT_CHOICE" == "2" ]; then
+# 		if [ ! -z $2 ]; then 
+# 			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
+# 		else
+# 			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
+# 		fi 
+#   fi
+# }
+#
+#
+# function GITPUSH () {
+# 	# $1 = file | $2 = sourceDir
+#   yes | cp -r $2/$1 $DOTFILES && \
+#   cd $REPO && \
+# #	git checkout autoPush
+#   git add -A 
+#
+# 	read -p "Commit Message: " COMMIT_MESSAGE
+#   git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
+# 	git push
+# #	git checkout master
+# 	# git pull origin master
+# #  git merge autoPush --no-ff
+# #	git push
+# 	# git push origin master && \
+# 	echo ""
+#   echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
+# }
+#
+#
