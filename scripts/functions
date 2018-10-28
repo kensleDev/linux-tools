@@ -67,9 +67,9 @@ function GI() {
   if [ ! -z "$1" ]; then 
     read -p "Repo Dir: " DIR_CHOICE
   else
-    DIR_CHOICE="$(readlink -f "$0")"
+    DIR_CHOICE="$(pwd)"
   fi 
- 
+  
   read -p "Choice: " MENU_CHOICE
   GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE 
  
@@ -99,7 +99,7 @@ function GIT_WRAPPER () {
 
 function GIT_PUSH () {
 
-  read -p "Commit Message" COMMIT_MESSAGE
+  read -p "Commit Message: " COMMIT_MESSAGE
   
   git add -A
   git commit -m "$COMMIT_MESSAGE"
@@ -109,62 +109,26 @@ function GIT_PUSH () {
 }
 
 function GITPULL () {
+
   git pull && 
-  #yes | cp -r $DOTFILES/$1 $2 && \
   echo "|Pull|>--- Cloud ---> "$(readlink -f "$0")" ---<||"
+
 }
 
 
-#
-# function GIT_PUSH_PULL () {
-# #  read -p "Chose a dir" DIR_CHOICE 
-# #  DIR_CHOICE=$(pwd)
-# #  echo "$DIR_CHOICE"
-#
-#   DIRLIST=(`ls -a ${DIR_CHOICE}`)
-# 	unset DIRLIST[1]
-#
-#   MENU_TITLE "Dotfiles"
-# 	PRINT_DIR "$DIR_CHOICE" 
-#
-#   read -p "Choose a dot file: " FILE_CHOICE
-# 	FILE_CHOICE=$FILE_CHOICE+1	
-#
-# 	read -p "Push[1] Pull[2]: " GIT_CHOICE	
-#
-# 	if [ "$GIT_CHOICE" == "1" ]; then
-# 	  if [ ! -z $2 ]; then 
-# 			GITPUSH ${DIRLIST[$FILE_CHOICE]} $2 	
-# 		else
-# 			GITPUSH ${DIRLIST[$FILE_CHOICE]} $HOME	
-# 		fi 
-# 	elif [ "$GIT_CHOICE" == "2" ]; then
-# 		if [ ! -z $2 ]; then 
-# 			GITPULL ${DIRLIST[$FILE_CHOICE]} $2
-# 		else
-# 			GITPULL ${DIRLIST[$FILE_CHOICE]} $HOME
-# 		fi 
-#   fi
-# }
-#
-#
-# function GITPUSH () {
-# 	# $1 = file | $2 = sourceDir
-#   yes | cp -r $2/$1 $DOTFILES && \
-#   cd $REPO && \
-# #	git checkout autoPush
-#   git add -A 
-#
-# 	read -p "Commit Message: " COMMIT_MESSAGE
-#   git commit -m ":arrow_up: pushed $1 | $COMMIT_MESSAGE" && \
-# 	git push
-# #	git checkout master
-# 	# git pull origin master
-# #  git merge autoPush --no-ff
-# #	git push
-# 	# git push origin master && \
-# 	echo ""
-#   echo "|Push|>--- $2/$1 ---> $REPO/dotfiles ---> Cloud ---<||"
-# }
-#
-#
+# --------------------------------------- GENERAL FUNCS
+
+  function SERVER_INIT () {
+
+    MENU_ARR=("VPS" "DockerVPS")
+    PRINT_MENU "ServerInit" "${MENU_ARR[@]}"
+
+    read -p "Choice: " VPS_CHOICE
+
+    if [ "$VPS_CHOICE" == "1" ]; then
+      sudo bash ./scripts/firstrun
+    elif [ "$VPS_CHOICE" == "2" ]; then
+      sudo bash ./scripts/firstDocker
+    fi
+
+  }
