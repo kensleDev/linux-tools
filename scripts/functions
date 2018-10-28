@@ -58,64 +58,64 @@ DOTFILES=$REPO/dotfiles
 
 # --------------------------------------- GIT FUNCS
 
-function GI() {
-  # API | $1 = repo dir
+  function GI() {
+    # API | $1 = repo dir
 
-  MENU_ARR=("Push" "Pull")
-  PRINT_MENU "GitCommand" "${MENU_ARR[@]}"
+    MENU_ARR=("Push" "Pull")
+    PRINT_MENU "GitCommand" "${MENU_ARR[@]}"
 
-  if [ ! -z "$1" ]; then 
-    read -p "Repo Dir: " DIR_CHOICE
-  else
-    DIR_CHOICE="$(pwd)"
-  fi 
-  
-  read -p "Choice: " MENU_CHOICE
-  GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE 
- 
-}
+    if [ ! -z "$1" ]; then 
+      read -p "Repo Dir: " DIR_CHOICE
+    else
+      DIR_CHOICE="$(pwd)"
+    fi 
+    
+    read -p "Choice: " MENU_CHOICE
+    GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE 
+   
+  }
 
-function GIT_WRAPPER () {
-  # API | $1 Menu Choice, $2 DIR
-  # Check if the dir is a repo and execute command
+  function GIT_WRAPPER () {
+    # API | $1 Menu Choice, $2 DIR
+    # Check if the dir is a repo and execute command
 
-  DIR_CHOICE=$2
+    DIR_CHOICE=$2
 
-  cd $DIR_CHOICE
+    cd $DIR_CHOICE
 
-  if [ -d ".git" ]; then
+    if [ -d ".git" ]; then
 
-    if [ $1 == 1 ]; then
-      GIT_PUSH
-    elif [$1 == 2];then
-      GIT_PULL
+      if [ $1 == 1 ]; then
+        GIT_PUSH
+      elif [$1 == 2];then
+        GIT_PULL
+      fi
+
+    else 
+      echo "This is not a git repo"
     fi
 
-  else 
-    echo "This is not a git repo"
-  fi
+  }
 
-}
+  function GIT_PUSH () {
 
-function GIT_PUSH () {
+    read -p "Commit Message: " COMMIT_MESSAGE
+    
+    git add -A
+    git commit -m "$COMMIT_MESSAGE"
+    git push
 
-  read -p "Commit Message: " COMMIT_MESSAGE
-  
-  git add -A
-  git commit -m "$COMMIT_MESSAGE"
-  git push
+    echo ""
+    echo "|Push|>--- "$(pwd)" ---> Cloud ---<||"
+  }
 
-  echo ""
-  echo "|Push|>--- "$(readlink -f "$0")" ---> Cloud ---<||"
-}
+  function GITPULL () {
 
-function GITPULL () {
+    git pull && 
+    echo ""
+    echo "|Pull|>--- Cloud ---> "$(pwd)" ---<||"
 
-  git pull && 
-  echo ""
-  echo "|Pull|>--- Cloud ---> "$(readlink -f "$0")" ---<||"
-
-}
+  }
 
 
 # --------------------------------------- GENERAL FUNCS
@@ -131,6 +131,33 @@ function GITPULL () {
       sudo bash ./scripts/firstrun
     elif [ "$VPS_CHOICE" == "2" ]; then
       sudo bash ./scripts/firstDocker
+    fi
+
+  }
+
+  function GENERATE_SSH_KEY () {
+    ssh-keygen
+
+    echo ""
+    echo "To copy ssh to server"
+    echo "ssh-copy-id username@remote_host"
+  }
+
+
+
+# --------------------------------------- SUB MENUS
+
+  function SSH_MENU () {
+    
+    MENU_ARR=("Generate ssh key" "link ssh dir")
+    PRINT_MENU "SshMenu" "${MENU_ARR[@]}"
+
+    read -p "Choice: " SSH_CHOICE
+
+    if [ "$VPS_CHOICE" == "1" ]; then
+      GENERATE_SSH_KEY 
+    elif [ "$VPS_CHOICE" == "2" ]; then
+      bash $REPO/scripts/link_ssh
     fi
 
   }

@@ -2,7 +2,7 @@
 
 source ./scripts/functions
 
-MAIN_MENU=("Git" "FirstRun" "Link SSH" "Gen SSH")
+MAIN_MENU=("Git" "FirstRun" "SSH_Tools")
 PRINT_MENU  "MainMenu" "${MAIN_MENU[@]}"
 read -p "What will it be?: " MENU_CHOICE
 
@@ -17,15 +17,7 @@ elif [ "$MENU_CHOICE" == "2" ]; then
 
 elif [ "$MENU_CHOICE" == "3" ]; then
 
-  bash scripts/link-ssh
-
-elif [ "$MENU_CHOICE" == "4" ]; then
-
-  echo "To link SSH"
-  echo ""
-  echo "run ssh-keygen"
-  echo ""
-  echo ssh-copy-id username@remote_host
+  SSH_MENU
 
 fi
 
