@@ -105,12 +105,14 @@ function GIT_PUSH () {
   git commit -m "$COMMIT_MESSAGE"
   git push
 
+  echo ""
   echo "|Push|>--- "$(readlink -f "$0")" ---> Cloud ---<||"
 }
 
 function GITPULL () {
 
   git pull && 
+  echo ""
   echo "|Pull|>--- Cloud ---> "$(readlink -f "$0")" ---<||"
 
 }
