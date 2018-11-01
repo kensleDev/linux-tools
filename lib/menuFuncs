@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# --------------------------------------- MENU FUNCS
+
+  function PRINT_DIR () {
+    # API | $1 = DIR "
+
+    dflist=(`ls -a ${1}`)
+    unset dflist[1]
+
+    INDEX=0
+    for file in "${dflist[@]}"; do
+      if [ $INDEX != 0 ]; then 
+        echo "$INDEX $file"
+      fi
+      let INDEX=${INDEX}+1
+    done
+
+  }
+
+  function PRINT_MENU () {
+    # API | $1 = Menu , $2 = Menu Array 
+
+    clear
+    
+    MENU_TITLE $1
+    MENU_ARR=( "$@" )
+    unset MENU_ARR[0]
+
+    INDEX=1
+    for file in "${MENU_ARR[@]}"; do
+      echo "$INDEX $file"
+      let INDEX=${INDEX}+1
+    done
+    echo ""
+
+  }
+
+  function MENU_TITLE () {
+
+    echo ""
+    echo "#============================"
+    echo "# ${1}" 
+    echo "#============================"
+    echo ""
+
+  }
+
+

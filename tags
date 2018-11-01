@@ -21,10 +21,20 @@ Description	dotfiles/mongodb.service	/^Description=High-performance, schema-free
 Editing	docs/vim.md	/^## Editing$/;"	s
 ExecStart	dotfiles/mongodb.service	/^ExecStart=\/usr\/bin\/mongod --quiet --config \/etc\/mongod.conf$/;"	k	section:Service
 Exiting	docs/vim.md	/^## Exiting$/;"	s
+GENERATE_SSH_KEY	lib/functions	/^  function GENERATE_SSH_KEY () {$/;"	f
+GI	lib/functions	/^  function GI() {$/;"	f
+GITPULL	lib/functions	/^  function GITPULL () {$/;"	f
+GIT_PUSH	lib/functions	/^  function GIT_PUSH () {$/;"	f
+GIT_WRAPPER	lib/functions	/^  function GIT_WRAPPER () {$/;"	f
 Global	docs/vim.md	/^## Global$/;"	s
+INSTALLER	lib/functions	/^  function INSTALLER () {$/;"	f
 Insert mode - inserting/appending text	docs/vim.md	/^## Insert mode - inserting\/appending text$/;"	s
 Install	dotfiles/mongodb.service	/^[Install]$/;"	s
+MENU_TITLE	lib/menuFuncs	/^  function MENU_TITLE () {$/;"	f
 Marking text (visual mode)	docs/vim.md	/^## Marking text (visual mode)$/;"	s
+PRINT_DIR	lib/menuFuncs	/^  function PRINT_DIR () {$/;"	f
+PRINT_MENU	lib/menuFuncs	/^  function PRINT_MENU () {$/;"	f
+SSH_MENU	lib/functions	/^  function SSH_MENU () {$/;"	f
 Search and replace	docs/vim.md	/^## Search and replace$/;"	s
 Search in multiple files	docs/vim.md	/^## Search in multiple files$/;"	s
 Service	dotfiles/mongodb.service	/^[Service]$/;"	s

@@ -1,0 +1,190 @@
+source ../lib/functions
+
+# ------------------------------------------------------ MAIN
+
+  clear
+  CURRENT_DIR=($pwd)
+
+  cd $HOME
+
+  INSTALL_LOG=()
+  
+  MENU_TITLE "Installer"
+  MENU_ARR=("fonts" "zsh" "fzf" "tmux" "aliases" "node" "docker" "vim")
+
+  echo ""
+  echo "Apps to install (y/n)"
+  echo ""
+
+  for file in "${MENU_ARR[@]}"; do
+    read -p "$file: " ${file}
+  done
+
+# ------------------------------------------------------ INSTALLS
+
+  if [ "$tmux" == "y" ]; then
+
+    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
+    yes | sudo cp $DOTFILES/.tmux.conf $HOME
+
+    INSTALL_LOG+=("tmux")
+  fi
+
+  if [ "$aliases" == "y" ]; then 
+
+    yes cp | $DOTFILES/.bash_aliases $HOME
+
+    INSTALL_LOG+=("aliases")
+  fi
+
+  if [ "$node" == "y" ]; then 
+
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash &&
+    nvm install node &&    
+    npm i -g nodemon
+
+    INSTALL_LOG+=("node")
+  fi 
+
+  if [ "$vim" == "y"]; then
+
+    sudo apt-get update
+    sudo apt-get install vim
+    cd ~/.vim && git clone git@bitbucket.org:kensledev/vimrc.git
+
+    rm ~/.vimrc
+    touch ~/.vimrc
+    echo "source ~/.vim/vimrc/index"
+
+    INSTALL_LOG+=("vim")
+
+  fi
+
+  if [ "$fzf" == "y" ]; then 
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+
+    INSTALL_LOG+=("fzf")
+
+  fi
+
+  if [ "$docker" == "y" ]; then 
+
+    # docker
+    sudo apt-get remove docker docker-engine docker.io
+    sudo apt-get update
+    sudo apt-get install -y \
+        apt-transport-https \
+        ca-certificates \
+        curl \
+        software-properties-common
+        
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo apt-key fingerprint 0EBFCD88
+
+    sudo add-apt-repository \
+       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+       $(lsb_release -cs) \
+       stable"
+       
+    sudo apt-get update
+    sudo apt-get install -y docker-ce=17.09.0
+    sudo apt-get install -y docker-compose
+
+  fi
+
+  if [ "$fonts" == "y"]; then  
+    
+    sudo apt-get install fontconfig
+    mkdir ~/.fonts
+
+  fi
+
+  if [ "$zsh" == "y" ]; then 
+
+    sudo apt-get install zsh -y 
+    yes | sudo cp -f $DOTFILES/.zshrc $HOME
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    INSTALL_LOG+=("zsh")
+  fi
+
+
+# --------------------------------------------------------------------------- END
+
+  clear
+  if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
+
+    echo "No Apps installed"
+
+  else
+
+    MENU_TITLE "Installed Apps"
+
+    for file in "${INSTALL_LOG[@]}"; do
+      echo "Installed: $file "
+    done
+
+  fi   
+
+  cd $CURRENT_DIR
+
+# ----------------------------------------------------------------------------------------- 
+# sudo apt-get update 
+# sudo apt-get install software-properties-common
+# clear
+#
+# # tmux 
+# sudo apt-get install tmux 
+# yes | sudo cp $DOTFILES/.tmux.conf /home/kd
+#
+# # bash aliases
+# yes cp | $DOTFILES/.bash_aliases /home/kd
+# yes cp | $DOTFILES/.bash_aliases_server /home/kd
+#
+# # nginx 
+# sudo apt-get install nginx
+# sudo utw allow 'HTTP Nginx'
+#
+# # node 
+# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# sudo apt-get install -y nodejs
+# sudo apt-get install -y build-essential
+#
+# # pm2 
+# sudo npm install pm2@latest -g
+# npm install --global trash-cli
+#
+# # mongo
+# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+# echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+# sudo apt-get update
+# sudo apt-get install -y mongodb-org
+# yes | sudo cp -f  $DOTFILES/mongodb.service /etc/systemd/system
+# sudo systemctl start mongodb
+# sudo systemctl status mongodb
+# sudo systemctl enable mongodb
+# sudo ufw allow 27017
+#
+# # vim
+# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+# yes | cp -f $DOTFILES/.vimrc ~/
+#
+# # z
+# cd /home/kd
+# git clone https://github.com/rupa/z.git
+#
+# # permissions
+# sudo chmod -R 777 /var/www
+# sudo chown -R kd /var/www
+#
+# # zsh 
+# sudo apt-get install zsh -y 
+# yes | sudo cp -f $DOTFILES/.zshrc /home/kd
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#
+#
+#
+#
