@@ -5,15 +5,6 @@ alias bashaa='cat ~/.bash_aliases_server'
 alias cb='xsel --clipboard'
 alias rr='cd /home/kd/repos'
 
-#----------------FUNCTIONS 
-#function EV () {
-#  sudo vim $1
-#}
-
-#function EN () {
-# sudo nano $1
-#}
-
 #------DIRS------#
 HOME="/home/kd"
 BA='.aliases/main'
@@ -22,15 +13,6 @@ ZH='.zshrc'
 NG='/etc/ngnix/sites_avalible.jquinandy.pro'
 
 alias public='cd /var/www'
-#-----------------EDIT DOTFILES
-
-  alias dfa1='$EN $HOME/.aliases/main'
-  alias dfa2='$EN $HOME/.aliases/server'
-  alias dfad='$EN $HOME/.aliases/docker'
-
-#  alias dftm='$EV $HOME/$TM'
-#  alias dfzh='$EV $HOME/$ZH'
-#  alias dfng='$EV $NG'
 
 # ------------------------------ Apt get 
 
@@ -91,3 +73,5 @@ alias genTags='sh /usr/local/bin/ctags'
 alias gf='git ls-files --exclude-standard --others --cached | fzf'
 alias f='fzf'
 # alias vim='vim -u ~/.vim/vimrc/.vimrc'
+
+alias st=' cd /home/kd/repos/server-tools ; bash server_tools'

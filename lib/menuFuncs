@@ -20,8 +20,6 @@
 
   function PRINT_MENU () {
     # API | $1 = Menu , $2 = Menu Array 
-
-    clear
     
     MENU_TITLE $1
     MENU_ARR=( "$@" )

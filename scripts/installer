@@ -1,4 +1,6 @@
-source ../lib/functions
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+source "$DIR/../lib/functions"
+
 
 # ------------------------------------------------------ MAIN
 
@@ -22,6 +24,18 @@ source ../lib/functions
 
 # ------------------------------------------------------ INSTALLS
 
+  if [ "$zsh" == "y" ]; then 
+
+    sudo apt-get install zsh -y 
+    yes | sudo cp -f $DOTFILES/.zshrc $HOME
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+
+    INSTALL_LOG+=("zsh")
+  fi
+
+
   if [ "$tmux" == "y" ]; then
 
     sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
@@ -31,8 +45,8 @@ source ../lib/functions
   fi
 
   if [ "$aliases" == "y" ]; then 
-
-    yes cp | $DOTFILES/.bash_aliases $HOME
+    echo "$DOTFILES"
+    cp $DOTFILES/.bash_aliases $HOME
 
     INSTALL_LOG+=("aliases")
   fi
@@ -46,7 +60,7 @@ source ../lib/functions
     INSTALL_LOG+=("node")
   fi 
 
-  if [ "$vim" == "y"]; then
+  if [ "$vim" == "y" ]; then
 
     sudo apt-get update
     sudo apt-get install vim
@@ -93,36 +107,24 @@ source ../lib/functions
 
   fi
 
-  if [ "$fonts" == "y"]; then  
+  if [ "$fonts" == "y" ]; then  
     
     sudo apt-get install fontconfig
     mkdir ~/.fonts
 
   fi
 
-  if [ "$zsh" == "y" ]; then 
-
-    sudo apt-get install zsh -y 
-    yes | sudo cp -f $DOTFILES/.zshrc $HOME
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-    INSTALL_LOG+=("zsh")
-  fi
-
-
 # --------------------------------------------------------------------------- END
-
-  clear
+  
   if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
-
+    echo ""
     echo "No Apps installed"
 
   else
 
     MENU_TITLE "Installed Apps"
 
+    echo ""
     for file in "${INSTALL_LOG[@]}"; do
       echo "Installed: $file "
     done
