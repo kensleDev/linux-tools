@@ -27,10 +27,11 @@ source "$DIR/../lib/functions"
   if [ "$zsh" == "y" ]; then 
 
     sudo apt-get install zsh -y 
-    yes | sudo cp -f $DOTFILES/.zshrc $HOME
     git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+
+    cp -f $DOTFILES/.zshrc $HOME
 
     INSTALL_LOG+=("zsh")
   fi
@@ -39,14 +40,14 @@ source "$DIR/../lib/functions"
   if [ "$tmux" == "y" ]; then
 
     sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
-    yes | sudo cp $DOTFILES/.tmux.conf $HOME
+    cp $DOTFILES/.tmux.conf $HOME
 
     INSTALL_LOG+=("tmux")
   fi
 
   if [ "$aliases" == "y" ]; then 
     echo "$DOTFILES"
-    cp $DOTFILES/.bash_aliases $HOME
+    cp -r $DOTFILES/.bash_aliases $HOME
 
     INSTALL_LOG+=("aliases")
   fi
