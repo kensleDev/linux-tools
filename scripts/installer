@@ -25,25 +25,13 @@ source "$DIR/../lib/functions"
 # ------------------------------------------------------ INSTALLS
 
   if [ "$zsh" == "y" ]; then 
-
-    sudo apt-get install zsh -y 
-
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
-
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-
-    cp -f $DOTFILES/.zshrc $HOME
-
-    INSTALL_LOG+=("zsh")
+    ZSH
+    FZF
   fi
 
 
   if [ "$tmux" == "y" ]; then
-
-    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
-    cp $DOTFILES/.tmux.conf $HOME
-
-    INSTALL_LOG+=("tmux")
+    TMUX
   fi
 
   if [ "$aliases" == "y" ]; then 
@@ -74,14 +62,6 @@ source "$DIR/../lib/functions"
     echo "source ~/.vim/vimrc/index"
 
     INSTALL_LOG+=("vim")
-
-  fi
-
-  if [ "$fzf" == "y" ]; then 
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-
-    INSTALL_LOG+=("fzf")
 
   fi
 
@@ -117,7 +97,7 @@ source "$DIR/../lib/functions"
 
   fi
 
-# --------------------------------------------------------------------------- END
+# --------------------------------------------------------------------------- DISPLAY LOG
   
   if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
     echo ""
@@ -136,60 +116,38 @@ source "$DIR/../lib/functions"
 
   cd $CURRENT_DIR
 
-# ----------------------------------------------------------------------------------------- 
-# sudo apt-get update 
-# sudo apt-get install software-properties-common
-# clear
-#
-# # tmux 
-# sudo apt-get install tmux 
-# yes | sudo cp $DOTFILES/.tmux.conf /home/kd
-#
-# # bash aliases
-# yes cp | $DOTFILES/.bash_aliases /home/kd
-# yes cp | $DOTFILES/.bash_aliases_server /home/kd
-#
-# # nginx 
-# sudo apt-get install nginx
-# sudo utw allow 'HTTP Nginx'
-#
-# # node 
-# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-# sudo apt-get install -y nodejs
-# sudo apt-get install -y build-essential
-#
-# # pm2 
-# sudo npm install pm2@latest -g
-# npm install --global trash-cli
-#
-# # mongo
-# sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
-# echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
-# sudo apt-get update
-# sudo apt-get install -y mongodb-org
-# yes | sudo cp -f  $DOTFILES/mongodb.service /etc/systemd/system
-# sudo systemctl start mongodb
-# sudo systemctl status mongodb
-# sudo systemctl enable mongodb
-# sudo ufw allow 27017
-#
-# # vim
-# git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-# yes | cp -f $DOTFILES/.vimrc ~/
-#
-# # z
-# cd /home/kd
-# git clone https://github.com/rupa/z.git
-#
-# # permissions
-# sudo chmod -R 777 /var/www
-# sudo chown -R kd /var/www
-#
-# # zsh 
-# sudo apt-get install zsh -y 
-# yes | sudo cp -f $DOTFILES/.zshrc /home/kd
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-#
-#
-#
-#
+# ------------------------------------------------------ FUNCS
+
+  function FZF () {
+ 
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+
+    INSTALL_LOG+=("fzf")
+
+  }
+
+  function ZSH () {
+
+    sudo apt-get install zsh -y 
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+    cp -f $DOTFILES/.zshrc $HOME
+
+    INSTALL_LOG+=("zsh")
+ 
+  }
+
+  function TMUX () {
+    
+    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
+    cp $DOTFILES/.tmux.conf $HOME
+
+    INSTALL_LOG+=("tmux")
+
+  }
+
+
