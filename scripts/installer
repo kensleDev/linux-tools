@@ -46,8 +46,9 @@ source "$DIR/../lib/functions"
   fi
 
   if [ "$aliases" == "y" ]; then 
+
     echo "$DOTFILES"
-    cp -r $DOTFILES/.bash_aliases $HOME
+    cp -r $DOTFILES/aliases $HOME
 
     INSTALL_LOG+=("aliases")
   fi
