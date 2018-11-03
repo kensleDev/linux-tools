@@ -99,7 +99,7 @@
   function TMUX () {
     
     sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
-    cp $DOTFILES/.tmux.conf $HOME
+    cp -f $DOTFILES/.tmux.conf $HOME
 
     INSTALL_LOG+=("tmux")
 
@@ -148,14 +148,3 @@
 
 # ----
 
-
-function SERVER_INIT () {
-  APP_INSTALLS "zsh"
-  APP_INSTALLS "fzf"
-  APP_INSTALLS "nvm" 
-  APP_INSTALLS "aliases"
-  APP_INSTALLS "tmux"
-  APP_INSTALLS "vim"
- 
-  DISPLAY_LOG
-}

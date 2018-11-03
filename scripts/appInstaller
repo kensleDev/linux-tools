@@ -19,7 +19,7 @@ cd $CURRENT_DIR
   
   function MULTI_MENU () {
     # customize with your own.
-    options=("zsh" "fzf" "nvm" "aliases" "tmux" "vim" "docker")
+    options=("$@")
 
     menu() {
         echo "Avaliable options:"
@@ -29,12 +29,12 @@ cd $CURRENT_DIR
         [[ "$msg" ]] && echo "$msg"; :
     }
     
-    MENU_TITLE "App Installer"
+    MENU_TITLE $1
     prompt="Check an option (again to uncheck, ENTER when done): "
     while menu && read -rp "$prompt" num && [[ "$num" ]]; do
         clear
 
-        MENU_TITLE "App Installer"
+        MENU_TITLE $1
         [[ "$num" != *[![:digit:]]* ]] &&
         (( num > 0 && num <= ${#options[@]} )) ||
         { msg="Invalid option: $num"; continue; }
@@ -49,4 +49,7 @@ cd $CURRENT_DIR
     echo "$msg"
   }
 
-  MULTI_MENU && DISPLAY_LOG
+  MENU_OPTS=("zsh" "fzf" "nvm" "aliases" "tmux" "vim" "docker")
+
+  MULTI_MENU "App_Installer" "${MENU_OPTS[@]}" 
+
