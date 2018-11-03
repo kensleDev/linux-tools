@@ -98,7 +98,7 @@ source /home/kd/.nvm/nvm.sh
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
-source ~/repos/server-tools/lib/functions
+#source ~/repos/server-tools/lib/functions
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
