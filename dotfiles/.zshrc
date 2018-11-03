@@ -55,12 +55,9 @@ DISABLE_AUTO_TITLE=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-source $ZSH/oh-my-zsh.sh
-
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 plugins=( git zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting)
 
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -100,3 +97,12 @@ source /home/kd/.nvm/nvm.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+source ~/repos/server-tools/lib/functions
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
