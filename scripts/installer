@@ -1,8 +1,7 @@
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 source "$DIR/../lib/functions"
 
-
-# ------------------------------------------------------ MAIN
+# ------------------------------------------------------ INIT
 
   clear
   CURRENT_DIR=($pwd)
@@ -10,6 +9,44 @@ source "$DIR/../lib/functions"
   cd $HOME
 
   INSTALL_LOG=()
+
+# ------------------------------------------------------ FUNCS
+
+  function FZF () {
+ 
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+
+    INSTALL_LOG+=("fzf")
+
+  }
+
+  function ZSH () {
+
+    sudo apt-get install zsh -y 
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+    cp -f $DOTFILES/.zshrc $HOME
+
+    INSTALL_LOG+=("zsh")
+ 
+  }
+
+  function TMUX () {
+    
+    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
+    cp $DOTFILES/.tmux.conf $HOME
+
+    INSTALL_LOG+=("tmux")
+
+  }
+
+
+
+# ------------------------------------------------------ MENU
   
   MENU_TITLE "Installer"
   MENU_ARR=("fonts" "zsh" "fzf" "tmux" "aliases" "node" "docker" "vim")
@@ -22,7 +59,7 @@ source "$DIR/../lib/functions"
     read -p "$file: " ${file}
   done
 
-# ------------------------------------------------------ INSTALLS
+# ------------------------------------------------------ MENU RESULTS
 
   if [ "$zsh" == "y" ]; then 
     ZSH
@@ -115,39 +152,4 @@ source "$DIR/../lib/functions"
   fi   
 
   cd $CURRENT_DIR
-
-# ------------------------------------------------------ FUNCS
-
-  function FZF () {
- 
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-
-    INSTALL_LOG+=("fzf")
-
-  }
-
-  function ZSH () {
-
-    sudo apt-get install zsh -y 
-
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
-
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-    cp -f $DOTFILES/.zshrc $HOME
-
-    INSTALL_LOG+=("zsh")
- 
-  }
-
-  function TMUX () {
-    
-    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
-    cp $DOTFILES/.tmux.conf $HOME
-
-    INSTALL_LOG+=("tmux")
-
-  }
-
 
