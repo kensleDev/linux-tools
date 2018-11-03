@@ -2,7 +2,7 @@
 
 source ./lib/functions
 
-MAIN_MENU=("Git" "SSH_Tools" "Installer")
+MAIN_MENU=("Git" "SSH_Tools" "Installer" )
 PRINT_MENU  "MainMenu" "${MAIN_MENU[@]}"
 read -p "What will it be?: " MENU_CHOICE
 
@@ -17,7 +17,7 @@ elif [ "$MENU_CHOICE" == "2" ]; then
 
 elif [ "$MENU_CHOICE" == "3" ]; then
 
-  bash ./scripts/installer
+  bash ./scripts/appInstaller
 
 fi
 

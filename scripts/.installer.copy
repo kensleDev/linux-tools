@@ -60,8 +60,8 @@ source "$DIR/../lib/functions"
      
     sudo apt-get install fontconfig
     mkdir ~/.fonts
-
    
+    INSTALL_LOG+=("fonts")
   }
 
 
@@ -76,6 +76,19 @@ source "$DIR/../lib/functions"
 
   }
 
+  function VIM () {
+
+    sudo apt-get update
+    sudo apt-get install vim
+    cd ~/.vim && git clone git@bitbucket.org:kensledev/vimrc.git
+
+    rm ~/.vimrc
+    touch ~/.vimrc
+    echo "source ~/.vim/vimrc/index"
+
+    INSTALL_LOG+=("vim")
+
+  }
 
 # ------------------------------------------------------ MENU
   
@@ -97,6 +110,7 @@ source "$DIR/../lib/functions"
     ZSH
     FZF
     NVM
+    FONTS
   fi
 
   if [ "$tmux" == "y" ]; then
@@ -104,17 +118,7 @@ source "$DIR/../lib/functions"
   fi
 
   if [ "$vim" == "y" ]; then
-
-    sudo apt-get update
-    sudo apt-get install vim
-    cd ~/.vim && git clone git@bitbucket.org:kensledev/vimrc.git
-
-    rm ~/.vimrc
-    touch ~/.vimrc
-    echo "source ~/.vim/vimrc/index"
-
-    INSTALL_LOG+=("vim")
-
+    VIM
   fi
 
   if [ "$docker" == "y" ]; then 

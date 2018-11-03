@@ -28,9 +28,11 @@ GIT_PUSH	lib/functions	/^  function GIT_PUSH () {$/;"	f
 GIT_WRAPPER	lib/functions	/^  function GIT_WRAPPER () {$/;"	f
 Global	docs/vim.md	/^## Global$/;"	s
 INSTALLER	lib/functions	/^  function INSTALLER () {$/;"	f
+INSTALL_LOG=	scripts/appInstaller	/^  INSTALL_LOG=()$/;"	f
 Insert mode - inserting/appending text	docs/vim.md	/^## Insert mode - inserting\/appending text$/;"	s
 Install	dotfiles/mongodb.service	/^[Install]$/;"	s
 MENU_TITLE	lib/menuFuncs	/^  function MENU_TITLE () {$/;"	f
+MULTI_MENU	scripts/appInstaller	/^  function MULTI_MENU () {$/;"	f
 Marking text (visual mode)	docs/vim.md	/^## Marking text (visual mode)$/;"	s
 PRINT_DIR	lib/menuFuncs	/^  function PRINT_DIR () {$/;"	f
 PRINT_MENU	lib/menuFuncs	/^  function PRINT_MENU () {$/;"	f
@@ -52,3 +54,4 @@ g:syntastic_auto_loc_list	dotfiles/.vimrc	/^let g:syntastic_auto_loc_list = 1$/;
 g:syntastic_check_on_open	dotfiles/.vimrc	/^let g:syntastic_check_on_open = 1$/;"	v
 g:syntastic_check_on_wq	dotfiles/.vimrc	/^let g:syntastic_check_on_wq = 0$/;"	v
 g:vue_disable_pre_processors	dotfiles/.vimrc	/^let g:vue_disable_pre_processors = 1$/;"	v
+menu	scripts/appInstaller	/^    menu() {$/;"	f
