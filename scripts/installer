@@ -12,14 +12,16 @@ source "$DIR/../lib/functions"
 
 # ------------------------------------------------------ FUNCS
 
-  function FZF () {
- 
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
+  # INIT
 
-    INSTALL_LOG+=("fzf")
+  function ALIASES () {
+    
+    cp -r $DOTFILES/.aliases $HOME
+
+    INSTALL_LOG+=("aliases")
 
   }
+
 
   function ZSH () {
 
@@ -35,6 +37,36 @@ source "$DIR/../lib/functions"
  
   }
 
+  function FZF () {
+ 
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install
+
+    INSTALL_LOG+=("fzf")
+
+  }
+
+  function NVM () {
+
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash &&
+    nvm install node &&    
+    npm i -g nodemon
+
+    INSTALL_LOG+=("node")
+ 
+  }
+
+  function FONTS () {
+     
+    sudo apt-get install fontconfig
+    mkdir ~/.fonts
+
+   
+  }
+
+
+  #  
+
   function TMUX () {
     
     sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
@@ -45,11 +77,10 @@ source "$DIR/../lib/functions"
   }
 
 
-
 # ------------------------------------------------------ MENU
   
   MENU_TITLE "Installer"
-  MENU_ARR=("fonts" "zsh" "fzf" "tmux" "aliases" "node" "docker" "vim")
+  MENU_ARR=("zsh&aliases&fzf&nvm" "tmux" "node" "docker" "vim")
 
   echo ""
   echo "Apps to install (y/n)"
@@ -62,31 +93,15 @@ source "$DIR/../lib/functions"
 # ------------------------------------------------------ MENU RESULTS
 
   if [ "$zsh" == "y" ]; then 
+    ALIASES
     ZSH
     FZF
+    NVM
   fi
-
 
   if [ "$tmux" == "y" ]; then
     TMUX
   fi
-
-  if [ "$aliases" == "y" ]; then 
-
-    echo "$DOTFILES"
-    cp -r $DOTFILES/.aliases $HOME
-
-    INSTALL_LOG+=("aliases")
-  fi
-
-  if [ "$node" == "y" ]; then 
-
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash &&
-    nvm install node &&    
-    npm i -g nodemon
-
-    INSTALL_LOG+=("node")
-  fi 
 
   if [ "$vim" == "y" ]; then
 
@@ -124,13 +139,6 @@ source "$DIR/../lib/functions"
     sudo apt-get update
     sudo apt-get install -y docker-ce=17.09.0
     sudo apt-get install -y docker-compose
-
-  fi
-
-  if [ "$fonts" == "y" ]; then  
-    
-    sudo apt-get install fontconfig
-    mkdir ~/.fonts
 
   fi
 
