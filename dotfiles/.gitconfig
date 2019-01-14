@@ -1,5 +1,5 @@
+[alias]
+	ac = !git add -A && git commit -m
 [user]
-	email = kensledev@gmail.com
-	name = kensledev
-[push]
-	default = simple
+	email = julianiaquinandi@gmail.com
+	name = kensleDev
