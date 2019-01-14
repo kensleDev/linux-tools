@@ -3,3 +3,5 @@
 [user]
 	email = julianiaquinandi@gmail.com
 	name = kensleDev
+[push]
+	default = simple
