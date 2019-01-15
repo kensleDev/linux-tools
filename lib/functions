@@ -3,7 +3,7 @@
 # Paths
 
 HOME=/home/$USER
-REPO=$HOME/repos/server-tools
+REPO=$HOME/repos/linux-tools
 DOTFILES=$REPO/dotfiles
 
 
