@@ -1,7 +1,9 @@
-[alias]
-	ac = !git add -A && git commit -m
 [user]
 	email = julianiaquinandi@gmail.com
 	name = kensleDev
-[push]
-	default = simple
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --wait --diff  "
+[core]
+	editor = code --wait
