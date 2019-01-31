@@ -4,6 +4,8 @@ alias basha='cat ~/.bash_aliases'
 alias bashaa='cat ~/.bash_aliases_server'
 alias cb='xsel --clipboard'
 alias rr='cd /home/kd/repos'
+alias zs='source ~/.zshrc'
+alias ba='nano ~/.aliases/main'
 
 #------DIRS------#
 HOME="/home/kd"
@@ -51,6 +53,32 @@ alias tmks='tmux kill-session -t'
 alias tmsc='tmux a -t sysconfig'
 alias tmls='tmux list'
 
+
+
+# ---------------------------------docker
+
+
+function dk() { docker "$1" "$2" }
+function dc() { docker-compose $1 $2 }
+
+dktop() {
+  docker stats --format "table {{.Container}}\t{{.Name}}\t{{.CPUPerI}} {{.MemPerI}}\t{{.NetIO}}\t{{.BlockIO}}"
+}
+
+dklg() {
+  docker logs -f `docker ps | grep $1 | awk '{print $1}'`
+}
+
+dki() {
+  docker ps | grep $1
+}
+
+dkid() {
+  docker ps | grep $1 | awk '{print $1}'
+}
+
+
+
 # ---------------------------------Utilities
 
 alias rpid='ps -A | grep' 
@@ -75,3 +103,5 @@ alias f='fzf'
 # alias vim='vim -u ~/.vim/vimrc/.vimrc'
 
 alias st=' cd /home/kd/repos/server-tools ; bash server_tools'
+
+

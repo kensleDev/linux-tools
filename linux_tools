@@ -16,6 +16,7 @@ elif [ "$MENU_CHOICE" == "2" ]; then
   SSH_MENU
 
 elif [ "$MENU_CHOICE" == "3" ]; then
+  sudo apt-get update
 
   bash ./scripts/appInstaller
 
