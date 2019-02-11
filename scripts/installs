@@ -1,10 +1,10 @@
 
 # ------------------------------------------------------ FUNCS
 
- 
+
   function APP_INSTALLS () {
-   
-    if [ $1 = "zsh" ]; then 
+
+    if [ $1 = "zsh" ]; then
       ZSH
     elif [ $1 = "fzf" ]; then
       FZF
@@ -13,18 +13,19 @@
     elif [ $1 = "aliases" ]; then
       ALIASES
     elif [ $1 = "tmux" ]; then
-      TMUX        
+      TMUX
     elif [ $1 = "vim" ]; then
       VIM
     elif [ $1 = "docker" ]; then
       DOCKER
     elif [ $1 = "azureFuncs" ]; then
       AZURE_FUNCTIONS
-    fi 
+    fi
+
   }
 
 
-  function DISPLAY_LOG () {  
+  function DISPLAY_LOG () {
 
     if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
       echo ""
@@ -39,17 +40,33 @@
         echo "Installed: $file "
       done
 
-    fi   
+    fi
 
-  }   
+  }
+
+
+  function DISPLAY_ALERT() {
+    if [ ${#ALERT_LOG[@]} -eq 0 ]; then
+      echo ""
+    else
+      echo ""
+      for file in "${ALERT_LOG[@]}"; do
+        echo "Installed: $file "
+      done
+
+    fi
+  }
 
   # -------------------------------------------------- APPS
-    
+
   function ALIASES () {
-    
+
     cp -r $DOTFILES/.aliases $HOME
 
     INSTALL_LOG+=("aliases")
+
+    DISPLAY_ALERT+=("sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"")
+    DISPLAY_ALERT+=("git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions")
 
   }
 
@@ -58,18 +75,22 @@
 
     sudo apt-get install zsh -y &&
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
 
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
 
-    cp -f $DOTFILES/.zshrc $HOME
+    # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+    # cp -f $DOTFILES/.zshrc $HOME
 
     INSTALL_LOG+=("zsh")
- 
+    CLEAN_UP_COMMANDS+=("sudo chsh")
+
+
   }
 
   function FZF () {
- 
+
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
 
@@ -79,28 +100,26 @@
 
   function NVM () {
 
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash &&
-    nvm install node &&    
-    npm i -g nodemon
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh
 
     INSTALL_LOG+=("node")
- 
+
   }
 
   function FONTS () {
-     
+
     sudo apt-get install fontconfig
     mkdir ~/.fonts
-   
+
     INSTALL_LOG+=("fonts")
   }
 
 
-  #  
+  #
 
   function TMUX () {
-    
-    sudo apt-get install tmux || FAILED_LOG+=("tmux") && 
+
+    sudo apt-get install tmux || FAILED_LOG+=("tmux") &&
     cp -f $DOTFILES/.tmux.conf $HOME
 
     INSTALL_LOG+=("tmux")
@@ -150,7 +169,7 @@
 
   function DOTNET () {
     wget http://ftp.us.debian.org/debian/pool/main/i/icu/libicu57_57.1-6+deb9u2_amd64.deb
-    sudo dpkg -i libicu57_57.1-6+deb9u2_amd64.deb 
+    sudo dpkg -i libicu57_57.1-6+deb9u2_amd64.deb
 
     wget http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu60_60.2-6ubuntu1_amd64.deb
     sudo dpkg -i libicu60_60.2-6ubuntu1_amd64.deb

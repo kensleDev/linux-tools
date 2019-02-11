@@ -4,7 +4,7 @@ source "$DIR/../lib/functions"
 source "$DIR/./installs"
 
 cd $CURRENT_DIR
- 
+
 # ------------------------------------------------------ INIT
 
   clear
@@ -16,19 +16,19 @@ cd $CURRENT_DIR
 
 
 # ------------------------------------------------------ MENU
-  
+
   function MULTI_MENU () {
     # customize with your own.
     options=("$@")
 
     menu() {
         echo "Avaliable options:"
-        for i in ${!options[@]}; do 
+        for i in ${!options[@]}; do
             printf "%3d%s) %s\n" $((i+1)) "${choices[i]:- }" "${options[i]}"
         done
         [[ "$msg" ]] && echo "$msg"; :
     }
-    
+
     MENU_TITLE $1
     prompt="Check an option (again to uncheck, ENTER when done): "
     while menu && read -rp "$prompt" num && [[ "$num" ]]; do
@@ -43,7 +43,7 @@ cd $CURRENT_DIR
     done
 
   #  printf "You selected"; msg=" nothing"
-    for i in ${!options[@]}; do 
+    for i in ${!options[@]}; do
         [[ "${choices[i]}" ]] && { APP_INSTALLS "${options[i]}"; }
     done
     echo "$msg"
@@ -51,5 +51,7 @@ cd $CURRENT_DIR
 
   MENU_OPTS=("zsh" "fzf" "nvm" "aliases" "tmux" "vim" "docker")
 
-  MULTI_MENU "App_Installer" "${MENU_OPTS[@]}" 
+  MULTI_MENU "App_Installer" "${MENU_OPTS[@]}"
+
+  DISPLAY_ALERT
 
