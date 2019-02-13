@@ -53,5 +53,7 @@ cd $CURRENT_DIR
 
   MULTI_MENU "App_Installer" "${MENU_OPTS[@]}"
 
+  DISPLAY_LOG
+
   DISPLAY_ALERT
 

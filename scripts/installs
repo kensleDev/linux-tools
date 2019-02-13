@@ -46,15 +46,21 @@
 
 
   function DISPLAY_ALERT() {
-    if [ ${#ALERT_LOG[@]} -eq 0 ]; then
+  
+    if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
       echo ""
+      echo "No Apps installed"
+
     else
+
+      MENU_TITLE "Alerts"
+
       echo ""
-      for file in "${ALERT_LOG[@]}"; do
+      for file in "${INSTALL_LOG[@]}"; do
         echo "Installed: $file "
       done
 
-    fi
+  
   }
 
   # -------------------------------------------------- APPS
@@ -65,9 +71,6 @@
 
     INSTALL_LOG+=("aliases")
 
-    DISPLAY_ALERT+=("sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"")
-    DISPLAY_ALERT+=("git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions")
-
   }
 
 
@@ -75,7 +78,7 @@
 
     sudo apt-get install zsh -y &&
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
+    # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh -l::g' | sed 's:chsh -s .*$::g')"
 
     # sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sed 's:env zsh::g' | sed 's:chsh -s .*$::g')"
 
@@ -84,7 +87,10 @@
     # cp -f $DOTFILES/.zshrc $HOME
 
     INSTALL_LOG+=("zsh")
-    CLEAN_UP_COMMANDS+=("sudo chsh")
+    ALERT_LOG+=('To install oh my zsh:  sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)" ')
+    DISPLAY_ALERT+=("zsh autosuggestions: git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions")
+
+    # CLEAN_UP_COMMANDS+=("sudo chsh")
 
 
   }
@@ -100,10 +106,10 @@
 
   function NVM () {
 
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh
+    wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
-    INSTALL_LOG+=("node")
-
+    INSTALL_LOG+=("NVM")
+    ALERT_LOG+=("Run node install {version} once zsh is in place")
   }
 
   function FONTS () {
@@ -115,7 +121,6 @@
   }
 
 
-  #
 
   function TMUX () {
 
@@ -165,6 +170,9 @@
 
     INSTALL_LOG+=("docker")
     INSTALL_LOG+=("docker compose")
+
+
+    DISPLAY_LOG
   }
 
   function DOTNET () {
