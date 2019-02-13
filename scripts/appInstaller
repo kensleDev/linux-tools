@@ -14,6 +14,7 @@ cd $CURRENT_DIR
 
   INSTALL_LOG=()
 
+  cp -f ~/repos/linux-tools/.gitconfig ~/
 
 # ------------------------------------------------------ MENU
 
