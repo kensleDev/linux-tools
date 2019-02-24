@@ -1,3 +1,6 @@
+
+setxkbmap gb
+
 #------------------------------------------------- SHARED
 alias s='sudo'
 alias basha='cat ~/.bash_aliases'
@@ -56,7 +59,7 @@ alias tmls='tmux list'
 
 
 # ---------------------------------docker
-
+function p() { pnpm $1 $2 }
 
 function dk() { docker "$1" "$2" }
 function dc() { docker-compose $1 $2 }
@@ -104,4 +107,38 @@ alias f='fzf'
 
 alias st=' cd /home/kd/repos/server-tools ; bash server_tools'
 
+# --------------------------------
 
+function clone() {
+  clear
+  echo "Enter repo name || url"
+  echo "------------------------"
+  read repo
+  clear
+
+  start=$(echo $repo | cut -c 1-4)
+
+  if [ "$start" = "http" ]; then
+    git clone $repo
+  else
+    git clone git@github.com:kensleDev/$repo
+  fi
+}
+
+function ac() {
+  clear
+  echo "---------------------------"
+  echo "Enter emoji (without :'s)"
+  echo "---------------------------"
+  read emoji
+  
+  clear
+  echo "---------------------------"
+  echo "Enter commit message"
+  echo "---------------------------"
+  read msg
+  clear
+  
+  git add -A
+  git commit -m ":$emoji: $msg"
+}
