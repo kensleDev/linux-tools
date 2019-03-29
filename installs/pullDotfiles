@@ -1,0 +1,13 @@
+HOME=/home/kd
+REPO=$HOME/repos/linux-tools
+DF=$REPO/dotfiles
+
+
+git pull
+
+cp -rf $DF/.zshrc $HOME 
+cp -rf $DF/.aliases $HOME
+cp -rf $DF/.tmux.conf $HOME
+cp -rf $DF/.gitconfig $HOME
+
+echo "Copied dotfiles"
