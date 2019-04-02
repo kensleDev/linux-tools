@@ -1,4 +1,4 @@
-HOME=/home/kd
+HOME=$1
 REPO=$HOME/repos/linux-tools
 DF=$REPO/dotfiles
 
