@@ -10,18 +10,18 @@ DISABLE_AUTO_TITLE=true
 
 
 plugins=( git zsh-history-substring-search )
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/kd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source /home/kd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 source /home/kd/.aliases/main
-source /home/kd/.aliases/server
-source /home/kd/.aliases/docker
+#source /home/kd/.aliases/server
+#source /home/kd/.aliases/docker
 
-source /home/kd/.nvm/nvm.sh
+#source /home/kd/.nvm/nvm.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
