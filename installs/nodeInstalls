@@ -1,0 +1,5 @@
+nvm install node
+
+npm i -g diff-so-fancy
+npm i -g tldr
+
