@@ -1,11 +1,13 @@
 source /home/kd/.aliases/main
 
+source ~/.nvm/nvm.sh
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
-
-# tabtab source for serverless package
+export FZF_DEFAULT_OPTS="--ansi --bind='ctrl-o:execute(code {})+abort'--preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+ 
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /home/kd/.nvm/versions/node/v10.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
