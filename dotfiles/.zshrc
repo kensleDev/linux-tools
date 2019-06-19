@@ -1,8 +1,9 @@
 export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source ~/.aliases/main
 
-[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
+source ~/.nvm/nvm.sh
 
 source $HOME/.oh-my-zsh/plugins/antigen.zsh
     
