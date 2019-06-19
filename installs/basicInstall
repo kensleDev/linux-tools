@@ -4,6 +4,8 @@ sudo apt-get install vim -y
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+sudo dpkg -i bat@0.11.0.deb
+sudo dkpg -i fd@7.3.0.deb
 
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
@@ -18,4 +20,6 @@ curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
 cp -rf ../dotfiles/.aliases ~/
 cp -rf ../dotfiles/.zshrc ~/
 cp -rf ../dotfiles/.vimrc ~/
+
+
 
