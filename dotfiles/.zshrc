@@ -1,25 +1,39 @@
-source /home/kd/.aliases/main
+export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 
-source ~/.nvm/nvm.sh
+source ~/.aliases/main
 
+[[ -s $HOME/.nvm/nvm.sh ]] && . $HOME/.nvm/nvm.sh  # This loads NVM
 
-source ~/.oh-my-zsh/plugins/antigen.zsh
-
-# Load the oh-my-zsh's library.
+source $HOME/antigen.zsh
+    
+# Load the oh-my-zsh's library
 antigen use oh-my-zsh
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle pip
-antigen bundle command-not-found
+antigen bundle <<EOBUNDLES
+    # Bundles from the default repo (robbyrussell's oh-my-zsh)
+    git
 
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
-# antigen bundle junegunn/fzf
+    # Syntax highlighting bundle.
+    zsh-users/zsh-syntax-highlighting
 
-# Load the theme.
+    # Fish-like auto suggestions
+    zsh-users/zsh-autosuggestions
+
+    # Extra zsh completions
+    zsh-users/zsh-completions
+
+    zsh-users/zsh-autosuggestions
+EOBUNDLES
+
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load the theme
 antigen theme robbyrussell
 
-# Tell Antigen that you're done.
+# Tell antigen that you're done
 antigen apply
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ 
+export FZF_DEFAULT_OPS="--extended"

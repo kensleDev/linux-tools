@@ -1,6 +1,15 @@
 
 # setxkbmap gb
 
+function pullDot() {
+  VAR=${2: ~/}    
+  cp -rf $1 $2  
+} 
+
+function pushDot() { 
+  cp -rf $1 ~/repos/linux-tools/dotfiles
+}
+
 #------------------------------------------------- SHARED
 alias s='sudo'
 alias basha='cat ~/.bash_aliases'
@@ -8,7 +17,7 @@ alias bashaa='cat ~/.bash_aliases_server'
 alias cb='xsel --clipboard'
 alias rr='cd /home/kd/repos'
 alias zs='source ~/.zshrc'
-alias ba='nano ~/.aliases/main'
+alias ba='vim ~/.aliases/main'
 
 #------DIRS------#
 HOME="/home/kd"
@@ -18,6 +27,11 @@ ZH='.zshrc'
 NG='/etc/ngnix/sites_avalible.jquinandy.pro'
 
 alias public='cd /var/www'
+
+alias vimrc='vim ~/.vimrc'
+alias tmuxrc='vim ~/.tmux.conf'
+alias zshrc='vim ~/.zshrc'
+
 
 # ------------------------------ Apt get 
 
