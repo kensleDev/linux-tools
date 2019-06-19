@@ -10,6 +10,23 @@ function pushDot() {
   cp -rf $1 ~/repos/linux-tools/dotfiles
 }
 
+function updateDot() {
+  
+  cwd=$(pwd)
+
+  cd ~/repos/linux-tools
+
+  git add -A
+
+  git commit -m "$1"
+
+  git push
+
+  cd $dir
+
+}
+
+
 #------------------------------------------------- SHARED
 alias s='sudo'
 alias basha='cat ~/.bash_aliases'
