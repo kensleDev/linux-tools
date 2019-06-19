@@ -1,8 +1,8 @@
-
+let mapleader = "\<Space>"
 
 " FZF
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>g :GFiles<CR>
+nnoremap <Leader>f :Files!<CR>
+nnoremap <Leader>g :GFiles!<CR>
 
 
 " TS
@@ -44,6 +44,12 @@ nmap <leader>p :CtrlP<cr>
 nmap <leader>bb :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
+
+
+" Zoom
+Plug 'troydm/zoomwintab.vim'
+
+nnoremap <Leader>z :ZoomWindowToggle<CR>
 
 
 Plug 'jeetsukumaran/vim-buffergator'
