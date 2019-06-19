@@ -1,74 +1,32 @@
-set hidden
-map <S-x> :bn<CR>
-map <S-z> :bp<CR>
-map <S-c> swap-pane -s 0 -t 1
+let mapleader = "\<Space>"
 
-:set expandtab
-:set tabstop=2  
-:retab
-:set shiftwidth=2
+nnoremap <Leader>f :Files<CR>
 
-let g:NERDTreeQuitOnOpen = 1
-
-" ----------------------------------------------------------------
-" Start Plugins
-:set nocompatible
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" ----------------------------------------------------------------
-
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-
-Plugin 'scrooloose/syntastic'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ap/vim-buftabline'
-Plugin 'xolox/vim-session'
-Plugin 'xolox/vim-misc'
-Plugin 'posva/vim-vue'
-Plugin 'terryma/vim-smooth-scroll'
-" ----------------------------------------------------------------
-" Finish Plugins
-call vundle#end()            " required
-filetype plugin indent on    " required
-" ----------------------------------------------------------------
+nnoremap <Leader>g :GFiles<CR>
 
 
-" Global
+" nnoremap <Leader>a :echo "Hey there ,"<CR>
 
-" Theme
-set t_Co=256
-set t_ut=
-colorscheme codedark
-let g:airline_theme = 'codedark'
 
-" Syntax
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Declare the list of plugins.
+Plug 'tpope/vim-sensible'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" Smooth Scrolling
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+Plug 'ryanoasis/vim-devicons'
 
-" vim vue
-let g:vue_disable_pre_processors = 1
+" Typescript
+Plug 'quramy/tsuquyomi'
+let g:tsuquyomi_completion_detail = 1
 
-" Nerdtree
-map <C-l> :NERDTreeToggle<CR>
+Plug 'leafgarland/typescript-vim'
+Plug 'jason0x43/vim-js-indent'
+Plug 'quramy/vim-dtsm'
+Plug 'mhartington/vim-typings'
 
-" Control P
-map <C-o> :CtrlPBuffer<CR>
+
+" List ends here. Plugins become visible to Vim after this call.
+call plug#end()
