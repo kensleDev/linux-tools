@@ -41,7 +41,7 @@ let g:ctrlp_working_path_mode = 'r'
 " Use a leader instead of the actual named binding
 nmap <leader>p :CtrlP<cr>
 " Easy bindings for its various modes
-nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>b :CtrlPBuffer<cr>
 nmap <leader>bm :CtrlPMixed<cr>
 nmap <leader>bs :CtrlPMRU<cr>
 
