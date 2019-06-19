@@ -1,6 +1,9 @@
 sudo apt-get update
 sudo apt-get install zsh -y 
-sudo apt-get install vim
+sudo apt-get install vim -y
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
@@ -10,13 +13,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/ba
   exit 1
 }
 
-
-# . pullDotfiles
-
 curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-
-~/.fzf/install
-
+cp -rf ../dotfiles/.aliases ~/
+cp -rf ../dotfiles/.zshrc ~/
+cp -rf ../dotfiles/.vimrc ~/
 
