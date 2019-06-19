@@ -7,9 +7,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 sudo dpkg -i bat@0.11.0.deb
 sudo dkpg -i fd@7.3.0.deb
 
-wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-
-
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
   echo "Could not install Oh My Zsh" >/dev/stderr
   exit 1
@@ -21,5 +18,6 @@ cp -rf ../dotfiles/.aliases ~/
 cp -rf ../dotfiles/.zshrc ~/
 cp -rf ../dotfiles/.vimrc ~/
 
+./nodeInstalls
 
 
