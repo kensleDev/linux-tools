@@ -1,6 +1,19 @@
 
 # setxkbmap gb
 
+
+
+function vim() {
+  nvim $1
+}
+
+
+function v() {
+  nvim $1
+}
+
+alias repos='cd /mnt/c/Dev/repos'
+
 function pullDot() {
   VAR=${2: ~/}    
   cp -rf $1 $2  
@@ -45,7 +58,8 @@ NG='/etc/ngnix/sites_avalible.jquinandy.pro'
 
 alias public='cd /var/www'
 
-alias vimrc='vim ~/.vimrc'
+alias vimrc='vim ~/.vim/.vimrc'
+alias vimnav='vim ~/.vim/config/nav'
 alias tmuxrc='vim ~/.tmux.conf'
 alias zshrc='vim ~/.zshrc'
 
