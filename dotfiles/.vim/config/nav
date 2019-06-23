@@ -1,0 +1,74 @@
+" Move lines up and down 
+nnoremap ,<Up>   :<C-u>silent! move-2<CR>==
+nnoremap ,<Down> :<C-u>silent! move+<CR>==
+xnoremap ,<Up>   :<C-u>silent! '<,'>move-2<CR>gv=gv
+xnoremap ,<Down> :<C-u>silent! '<,'>move'>+<CR>gv=gv
+
+nnoremap <Leader>k :call smooth_scroll#up(&scroll*2, 10, 4)<CR>
+noremap <Leader>j :call smooth_scroll#down(&scroll*2, 10, 4)<CR>
+
+
+" ------------------------------------------------------------------- FZF
+nnoremap <Leader>o :Files<CR>
+nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>[ :Buffers<CR>
+nnoremap <Leader>f :BLines<CR>
+nnoremap <Leader>F :Rg<CR>
+nnoremap <Leader>C :Commits!<CR>
+nnoremap <Leader>t :Tags!<CR>
+
+" Open files in horizontal split
+nnoremap <silent> <Leader>s :call fzf#run({'down': '40%', 'sink': 'botright split' })<CR>
+
+" Open files in vertical horizontal split
+nnoremap <silent> <Leader>v :call fzf#run({'right': winwidth('.') / 2, 'sink':  'vertical botright split' })<CR>
+
+" ------------------------------------------------------------------ BUFFERS
+nnoremap <Leader>x :bd<CR>
+" nnoremap <Leader>X :w | %bd | e#<CR>
+function! CloseAllBuffersButCurrent()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+
+  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+endfunction
+
+nmap <Leader>X :call CloseAllBuffersButCurrent()<CR>
+
+" Terminal
+tnoremap <Esc> <C-\><C-n>
+
+
+" ------------------------------------------------------------------- Splits
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <Leader>h <C-W><C-H>
+
+nnoremap <Leader>v :vsp<cr>
+nnoremap <Leader>b :sp<cr>
+
+set splitbelow 
+set splitright
+
+nnoremap <Leader>z :ZoomWindowToggle<CR>
+
+"Max out the height of the current split
+" ctrl + w _
+
+"Max out the width of the current split
+" ctrl + w |
+
+"Normalize all split sizes, which is very handy when resizing terminal
+" ctrl + w =
+
+"Swap top/bottom or left/right split
+" Ctrl+W R
+
+"Break out current window into a new tabview
+" Ctrl+W T
+
+"Close every window in the current tabview but the current one
+" Ctrl+W o
+
