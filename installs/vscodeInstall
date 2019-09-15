@@ -1,0 +1,21 @@
+sudo apt-get update
+sudo apt-get install zsh -y 
+
+sudo apt-get install tmux -y
+
+sudo dpkg -i bat@0.11.0.deb
+sudo dkpg -i fd@7.3.0.deb
+sudo dkpg -i ripgrep@11.0.1.deb
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
+  echo "Could not install Oh My Zsh" >/dev/stderr
+  exit 1
+}
+
+curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
+
+cp -rf ../dotfiles/.aliases ~/
+cp -rf ../dotfiles/.zshrc ~/
+cp -rf ../dotfiles/.gitconfig ~/
+
+./nodeInstalls
