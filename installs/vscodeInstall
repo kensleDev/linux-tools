@@ -18,4 +18,3 @@ cp -rf ../dotfiles/.aliases ~/
 cp -rf ../dotfiles/.zshrc ~/
 cp -rf ../dotfiles/.gitconfig ~/
 
-./nodeInstalls
