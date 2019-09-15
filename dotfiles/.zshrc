@@ -1,11 +1,14 @@
+HOME_DIR=/root
+
+
 export FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-source ~/.aliases/main
+source $HOME_DIR/.aliases/main
 
-source ~/.nvm/nvm.sh
+source $HOME_DIR/.nvm/nvm.sh
 
-source $HOME/.oh-my-zsh/plugins/antigen.zsh
+source $HOME_DIR/.oh-my-zsh/plugins/antigen.zsh
     
 # Load the oh-my-zsh's library
 antigen use oh-my-zsh
