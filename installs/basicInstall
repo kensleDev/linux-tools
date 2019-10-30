@@ -31,4 +31,4 @@ cp -rf ../dotfiles/.gitconfig ~/
 
 ./nodeInstalls
 ./vimInstalls
-
+./codeInstall
