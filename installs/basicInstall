@@ -21,7 +21,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/ba
 }
 
 
-
+sudo apt-get install curl
 curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
 
 cp -rf ../dotfiles/.aliases ~/
