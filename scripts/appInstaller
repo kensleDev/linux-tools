@@ -43,7 +43,7 @@ cd $CURRENT_DIR
         [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
     done
 
-  #  printf "You selected"; msg=" nothing"
+    # printf "You selected"; msg=" nothing"
     for i in ${!options[@]}; do
         [[ "${choices[i]}" ]] && { APP_INSTALLS "${options[i]}"; }
     done

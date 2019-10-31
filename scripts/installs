@@ -46,7 +46,7 @@
 
 
   function DISPLAY_ALERT() {
-  
+
     if [ ${#INSTALL_LOG[@]} -eq 0 ]; then
       echo ""
       echo "No Apps installed"
@@ -60,7 +60,7 @@
         echo "Installed: $file "
       done
 
-  
+
   }
 
   # -------------------------------------------------- APPS
@@ -119,7 +119,6 @@
 
     INSTALL_LOG+=("fonts")
   }
-
 
 
   function TMUX () {

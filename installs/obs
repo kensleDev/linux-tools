@@ -1,0 +1,12 @@
+sudo apt-get install -y ffmpeg
+
+sudo add-apt-repository ppa:obsproject/obs-studio
+
+sudo apt-get update
+
+sudo apt-get install -y obs-studio
+
+# linux browser
+tar -zxvf ./apps/linuxbrowser0.6.1-obs23.0.2-64bit.tgz
+mkdir -p $HOME/.config/obs-studio/plugins
+mv obs-linuxbrowser $HOME/.config/obs-studio/plugins

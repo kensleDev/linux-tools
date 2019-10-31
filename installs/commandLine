@@ -1,0 +1,31 @@
+sudo apt-get update
+sudo apt-get install zsh -y
+sudo apt-get install vim -y
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+sudo apt-get install exuberant-ctags -y
+
+sudo apt-get install tmux -y
+git clone https://github.com/samoshkin/tmux-config.git
+./tmux-config/install.sh
+rm -rf tmux-config
+
+sudo dpkg -i bat@0.11.0.deb
+sudo dkpg -i fd@7.3.0.deb
+sudo dkpg -i ripgrep@11.0.1.deb
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
+  echo "Could not install Oh My Zsh" >/dev/stderr
+  exit 1
+}
+
+sudo apt-get install curl
+curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
+
+cp -rf ../dotfiles/.aliases ~/
+cp -rf ../dotfiles/.zshrc ~/
+cp -rf ../dotfiles/.vimrc ~/
+cp -rf ../dotfiles/.gitconfig ~/
+
+echo "zsh" > ~/.bashrc
