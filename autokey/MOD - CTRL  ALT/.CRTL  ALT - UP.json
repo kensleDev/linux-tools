@@ -12,11 +12,10 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "i", 
+        "hotKey": "k", 
         "modifiers": [
             "<alt>", 
-            "<ctrl>", 
-            "<hyper>"
+            "<ctrl>"
         ]
     }, 
     "modes": [

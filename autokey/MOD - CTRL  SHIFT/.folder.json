@@ -1,8 +1,5 @@
 {
     "usageCount": 0, 
-    "omitTrigger": false, 
-    "prompt": false, 
-    "description": "SHIFT + ALT - DOWN", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -11,22 +8,16 @@
         "backspace": true, 
         "triggerInside": false
     }, 
+    "modes": [], 
+    "title": "MOD - CTRL + SHIFT", 
     "hotkey": {
-        "hotKey": "j", 
-        "modifiers": [
-            "<alt>", 
-            "<hyper>", 
-            "<shift>"
-        ]
+        "hotKey": null, 
+        "modifiers": []
     }, 
-    "modes": [
-        3
-    ], 
-    "showInTrayMenu": false, 
     "filter": {
         "regex": null, 
         "isRecursive": false
     }, 
-    "type": "script", 
-    "store": {}
+    "type": "folder", 
+    "showInTrayMenu": false
 }

@@ -1,5 +1,5 @@
 {
-    "usageCount": 14, 
+    "usageCount": 18, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "LEFT", 
@@ -12,7 +12,7 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "j", 
+        "hotKey": "h", 
         "modifiers": [
             "<hyper>"
         ]

@@ -1,6 +1,7 @@
-# ./commandLine
-# ./node
+./commandLine
+./linuxApps
+./node
 ./docker
-# ./vim
-# ./vscode
-# ./obs
+./vim
+./vscode
+./obs

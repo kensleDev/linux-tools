@@ -2,7 +2,7 @@
     "usageCount": 0, 
     "omitTrigger": false, 
     "prompt": false, 
-    "description": "SHIFT + ALT - DOWN", 
+    "description": "CRTL + SHIFT - RIGHT", 
     "abbreviation": {
         "wordChars": "[\\w]", 
         "abbreviations": [], 
@@ -12,9 +12,9 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "j", 
+        "hotKey": "l", 
         "modifiers": [
-            "<alt>", 
+            "<ctrl>", 
             "<hyper>", 
             "<shift>"
         ]

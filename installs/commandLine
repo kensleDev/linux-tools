@@ -1,4 +1,7 @@
 sudo apt-get update
+
+sudo apt-get install snapd
+
 sudo apt-get install zsh -y
 sudo apt-get install vim -y
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -11,9 +14,9 @@ git clone https://github.com/samoshkin/tmux-config.git
 ./tmux-config/install.sh
 rm -rf tmux-config
 
-sudo dpkg -i bat@0.11.0.deb
-sudo dkpg -i fd@7.3.0.deb
-sudo dkpg -i ripgrep@11.0.1.deb
+sudo dpkg -i ./apps/bat@0.11.0.deb
+sudo dkpg -i ./apps/fd@7.3.0.deb
+sudo dkpg -i ./apps/ripgrep@11.0.1.deb
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
   echo "Could not install Oh My Zsh" >/dev/stderr

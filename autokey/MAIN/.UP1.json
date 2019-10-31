@@ -1,5 +1,5 @@
 {
-    "usageCount": 0, 
+    "usageCount": 11, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "UP", 
@@ -12,7 +12,7 @@
         "triggerInside": false
     }, 
     "hotkey": {
-        "hotKey": "i", 
+        "hotKey": "k", 
         "modifiers": [
             "<hyper>"
         ]
