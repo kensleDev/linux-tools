@@ -2,23 +2,24 @@
 
 source ./lib/functions
 
-MAIN_MENU=("Git" "SSH_Tools" "Installer" )
+clear
+
+MAIN_MENU=("Git" "Installer" )
 PRINT_MENU  "MainMenu" "${MAIN_MENU[@]}"
 read -p "What will it be?: " MENU_CHOICE
 
 if  [ $MENU_CHOICE == "1" ]; then
 
 #	GIT_PUSH_PULL $DOTFILES
+  clear
   GI
 
 elif [ "$MENU_CHOICE" == "2" ]; then
 
-  SSH_MENU
+  bash ./installs/_installer.sh
 
-elif [ "$MENU_CHOICE" == "3" ]; then
-  sudo apt-get update
-
-  bash ./scripts/appInstaller
-
+else
+  echo Not a valid choice
+  ./linux_tools
 fi
 

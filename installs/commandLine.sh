@@ -1,4 +1,5 @@
 #!/bin/bash
+$DOTFILES=~/repos/linux-tools/dotfiles
 
 sudo apt-get update
 
@@ -12,13 +13,14 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 sudo apt-get install exuberant-ctags -y
 
 sudo apt-get install tmux -y
-git clone https://github.com/samoshkin/tmux-config.git
-./tmux-config/install.sh
-rm -rf tmux-config
+cp -f $DOTFILES/.tmux.conf $HOME
 
 sudo dpkg -i ./apps/bat@0.11.0.deb
 sudo dkpg -i ./apps/fd@7.3.0.deb
 sudo dkpg -i ./apps/ripgrep@11.0.1.deb
+
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh)" -s --batch || {
   echo "Could not install Oh My Zsh" >/dev/stderr
