@@ -30,25 +30,36 @@ function MULTI_MENU () {
   MENU_TITLE $1
   prompt="Check an option (again to uncheck, ENTER when done): "
   while menu && read -rp "$prompt" num && [[ "$num" ]]; do
-      clear
+    clear
 
-      MENU_TITLE $1
-      [[ "$num" != *[![:digit:]]* ]] &&
-      (( num > 0 && num <= ${#options[@]} )) ||
-      { msg="Invalid option: $num"; continue; }
-      ((num--)); msg="${options[num]} was ${choices[num]:+un}checked"
-      [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
+    MENU_TITLE $1
+    [[ "$num" != *[![:digit:]]* ]] &&
+    (( num > 0 && num <= ${#options[@]} )) ||
+    { msg="Invalid option: $num"; continue; }
+    ((num--)); msg="${options[num]} was ${choices[num]:+un}checked"
+    [[ "${choices[num]}" ]] && choices[num]="" || choices[num]="+"
   done
 
   sudo apt-get update
 
   #  printf "You selected"; msg=" nothing"
   for i in ${!options[@]}; do
-      [[ "${choices[i]}" ]] && { sh "./${options[i]}.sh"; }
+      [[ "${choices[i]}" ]] && { sh "./${options[i]}"; }
   done
   # echo "$msg"
 }
 
-MENU_OPTS=("commandLine" "linuxApps" "node" "docker" "vim" "vscode" "obs" "azure" )
+
+MENU_OPTS=()
+
+for file in ./scripts/*; do
+  # echo "$(basename "$file")"
+  MENU_OPTS+=("$(basename "$file")")
+done
+
+
+# MENU_OPTS=("commandLine" "linuxApps" "node" "docker" "vim" "vscode" "obs" "azure" )
 
 MULTI_MENU "Installer" "${MENU_OPTS[@]}"
+
+# GET_SCRIPTS
