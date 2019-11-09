@@ -44,7 +44,7 @@ function MULTI_MENU () {
 
   #  printf "You selected"; msg=" nothing"
   for i in ${!options[@]}; do
-      [[ "${choices[i]}" ]] && { sh "./${options[i]}"; }
+      [[ "${choices[i]}" ]] && { sh "./scripts/${options[i]}"; }
   done
   # echo "$msg"
 }
