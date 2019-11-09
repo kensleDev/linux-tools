@@ -34,5 +34,8 @@ cp -rf ../dotfiles/.aliases ~/
 cp -rf ../dotfiles/.zshrc ~/
 cp -rf ../dotfiles/.vimrc ~/
 cp -rf ../dotfiles/.gitconfig ~/
+cp -rf ../dotfiles/.xmodmap ~/
+cp -rf ../dotfiles/.xbindkeysrc ~/
+
 
 echo "zsh" > ~/.bashrc
