@@ -10,8 +10,6 @@ sudo apt-get install vim -y
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-sudo apt-get install exuberant-ctags -y
-
 sudo apt-get install tmux -y
 cp -f $DOTFILES/.tmux.conf $HOME
 
