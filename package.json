@@ -1,0 +1,38 @@
+{
+  "name": "linux-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "tsc": "./node_modules/.bin/tsc",
+    "tsc:watch": "./node_modules/.bin/tsc -w",
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm.cmd run compile",
+    "pretest": "npm.cmd run compile",
+    "posttest": "npm.cmd run check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kensleDev/linux-tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kensleDev/linux-tools/issues"
+  },
+  "homepage": "https://github.com/kensleDev/linux-tools#readme",
+  "devDependencies": {
+    "@types/node": "^10.0.3",
+    "gts": "^1.1.2",
+    "tslint": "^5.20.1",
+    "typescript": "~3.7.0",
+    "typescript-tslint-plugin": "^0.5.5"
+  }
+}

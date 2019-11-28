@@ -1,0 +1,16 @@
+{
+  "extends": "gts/tslint.json",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/*.json",
+      "node_modules"
+    ]
+  }
+}
