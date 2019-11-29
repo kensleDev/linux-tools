@@ -9,6 +9,7 @@
   "scripts": {
     "tsc": "./node_modules/.bin/tsc",
     "tsc:watch": "./node_modules/.bin/tsc -w",
+    "start": "ts-node ./src/index.ts",
     "check": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
@@ -30,6 +31,7 @@
   "homepage": "https://github.com/kensleDev/linux-tools#readme",
   "devDependencies": {
     "@types/node": "^10.0.3",
+    "@types/node-powershell": "^3.1.0",
     "gts": "^1.1.2",
     "tslint": "^5.20.1",
     "typescript": "~3.7.0",
@@ -37,6 +39,7 @@
   },
   "dependencies": {
     "@types/inquirer": "^6.5.0",
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "powershell": "^2.3.1"
   }
 }

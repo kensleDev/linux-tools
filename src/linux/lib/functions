@@ -19,15 +19,15 @@ source $REPO/lib/menuFuncs
     MENU_ARR=("Push" "Pull")
     PRINT_MENU "GitCommand" "${MENU_ARR[@]}"
 
-    if [ ! -z "$1" ]; then 
+    if [ ! -z "$1" ]; then
       read -p "Repo Dir: " DIR_CHOICE
     else
       DIR_CHOICE="$(pwd)"
-    fi 
-    
+    fi
+
     read -p "Choice: " MENU_CHOICE
-    GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE 
-   
+    GIT_WRAPPER "$MENU_CHOICE" $DIR_CHOICE
+
   }
 
   function GIT_WRAPPER () {
@@ -46,7 +46,7 @@ source $REPO/lib/menuFuncs
         GIT_PULL
       fi
 
-    else 
+    else
       echo "This is not a git repo"
     fi
 
@@ -55,7 +55,7 @@ source $REPO/lib/menuFuncs
   function GIT_PUSH () {
 
     read -p "Commit Message: " COMMIT_MESSAGE
-    
+
     git add -A
     git commit -m "$COMMIT_MESSAGE"
     git push
@@ -65,11 +65,9 @@ source $REPO/lib/menuFuncs
   }
 
   function GITPULL () {
-
-    git pull && 
+    git pull &&
     echo ""
     echo "|Pull|>--- Cloud ---> "$(pwd)" ---<||"
-
   }
 
 
@@ -84,9 +82,9 @@ source $REPO/lib/menuFuncs
   }
 
   function INSTALLER () {
- 
+
     clear
-    
+
     MENU_TITLE "Installer"
     MENU_ARR=( "$@" )
 
@@ -96,21 +94,21 @@ source $REPO/lib/menuFuncs
 
     echo "$npm"
 
-   
+
   }
 
 
 # --------------------------------------- SUB MENUS
 
   function SSH_MENU () {
-    
+
     MENU_ARR=("Generate ssh key" "link ssh dir")
     PRINT_MENU "SshMenu" "${MENU_ARR[@]}"
 
     read -p "Choice: " SSH_CHOICE
 
     if [ "$VPS_CHOICE" == "1" ]; then
-      GENERATE_SSH_KEY 
+      GENERATE_SSH_KEY
     elif [ "$VPS_CHOICE" == "2" ]; then
       bash $REPO/scripts/link_ssh
     fi

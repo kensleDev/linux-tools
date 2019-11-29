@@ -12,5 +12,8 @@
       "**/*.json",
       "node_modules"
     ]
+  },
+  "rules": {
+    "no-any": false
   }
 }
