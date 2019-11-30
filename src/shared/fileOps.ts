@@ -1,6 +1,5 @@
-import { readFileSync, access, promises, existsSync } from 'fs';
-import { Os } from './models';
-import { F_OK } from 'constants';
+import { existsSync, readFileSync } from 'fs';
+import { _OPTIONS } from '../settings';
 
 export async function checkFileExists(filePath: string) {
   try {
@@ -14,82 +13,6 @@ export async function checkFileExists(filePath: string) {
     // console.log(e)
   }
 }
-
-function fileExist(filePath: string ) {
-  return new Promise((resolve, reject) => {
-    access(filePath, F_OK, err => {
-      if (err) {
-        console.error(err);
-        return reject(err);
-      }
-      //file exists
-      resolve(true);
-    });
-  });
-}
-
-// export function findDotFile(os: Os, dotFileName: string) {
-
-//   const scriptExt = (os === 'linux') ? '.sh' : '.ps1'
-
-//   const dotFileLocations = require('./options.json');
-
-//   const currentDotFile = dotFileLocations[dotFileName];
-
-//   console.log(commonFilePaths);
-
-//   if (commonFilePaths !== undefined) {
-//     const existingFiles: any = [];
-
-//     commonFilePaths.forEach((path: string) => {
-//       if (checkFileExists(`${path}\\${dotFileName}${scriptExt}`)) {
-//         existingFiles.push({
-//           [dotFileName]: path,
-//         });
-//       }
-//     });
-
-//     return existingFiles[0];
-//   }
-
-
-//   // const locations = () => {
-//   //   let common, custom;
-
-//   //   if (os === 'windows') {
-//   //     common = require('./windows/dotfiles/common_locations.json');
-//   //     custom = require('./windows/dotfiles/custom_locations.json');
-//   //   } else if (os === 'linux') {
-//   //     common = require('./linux/dotfiles/common_locations.json');
-//   //     custom = require('./linux/dotfiles/custom_locations.json');
-//   //   } else {
-//   //     throw new Error('Unknown OS');
-//   //   }
-
-//   //   return {
-//   //     common,
-//   //     custom,
-//   //   };
-//   // };
-
-
-//   // const commonFilePaths = locations().common[dotFileName];
-
-//   // if (commonFilePaths !== undefined) {
-//   //   const existingFiles: any = [];
-
-//   //   commonFilePaths.forEach((path: string) => {
-//   //     if (checkFileExists(`${path}\\${dotFileName}${scriptExt}`)) {
-//   //       existingFiles.push({
-//   //         [dotFileName]: path,
-//   //       });
-//   //     }
-//   //   });
-
-//   //   return existingFiles[0];
-//   // }
-// }
-
 
 export async function checkDotFilesExist(dotfiles: any) {
 
@@ -122,7 +45,7 @@ export async function checkDotFilesExist(dotfiles: any) {
 
 
 export function getDotFiles() {
-  const options = require('../options.json');
+  const options = _OPTIONS;
 
   try {
     const dotfilePath = options.dotfilesFilePath;

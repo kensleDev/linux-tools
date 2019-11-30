@@ -1,15 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const scrtiptRunner_1 = require("./shared/scrtiptRunner");
+const scrtiptRunner_1 = require("./scrtiptRunner");
 const inquirer_1 = require("inquirer");
 const fs_1 = require("fs");
 const fileOps_1 = require("./shared/fileOps");
 const git_1 = require("./shared/git");
+exports._IS_WIN = process.platform === 'win32';
+exports._CURRENT_PLATFORM = exports._IS_WIN ? 'windows' : 'linux';
+exports._DEBUG = false;
+exports._OPTIONS = require('./options.json');
+exports.locations = {
+    scripts: `./src/assets/${exports._CURRENT_PLATFORM}/installs/scripts`,
+};
 async function initSettings(debug) {
     scrtiptRunner_1.clearScreen();
-    const options = require('./options.json');
     // console.log(options);
-    if (options.dotfilesFilePath === '') {
+    if (exports._OPTIONS.dotfilesFilePath === '') {
         const dotfileJsonPath = await inquirer_1.prompt([
             {
                 type: 'input',
@@ -19,10 +25,12 @@ async function initSettings(debug) {
         ]);
         const dotFilePath = dotfileJsonPath.selection + 'dotfiles.json';
         try {
-            const foundDotFilesJson = await JSON.parse(fs_1.readFileSync(dotFilePath).toString()) ? true : false;
+            const foundDotFilesJson = (await JSON.parse(fs_1.readFileSync(dotFilePath).toString()))
+                ? true
+                : false;
             if (foundDotFilesJson) {
-                options.dotfilesFilePath = dotFilePath;
-                fs_1.writeFileSync('./src/options.json', JSON.stringify(options));
+                exports._OPTIONS.dotfilesFilePath = dotFilePath;
+                fs_1.writeFileSync('./src/options.json', JSON.stringify(exports._OPTIONS));
                 console.log('-> Updated options.json');
             }
         }
@@ -35,6 +43,7 @@ async function initSettings(debug) {
         if (debug)
             console.log('-> Found dotfiles path');
     }
+    await checkDotFiles(exports._DEBUG);
 }
 exports.initSettings = initSettings;
 async function checkDotFiles(debug) {

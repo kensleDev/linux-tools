@@ -1,18 +1,27 @@
-import { clearScreen } from './shared/scrtiptRunner';
+import { clearScreen, scriptRunner } from './scrtiptRunner';
 import { prompt } from 'inquirer'
 import { readFileSync, writeFileSync } from 'fs';
 import { getDotFiles, checkDotFilesExist } from './shared/fileOps';
 import { git } from './shared/git';
+import { FileLocations } from './shared/models';
+
+export const _IS_WIN = process.platform === 'win32';
+export const _CURRENT_PLATFORM = _IS_WIN ? 'windows' : 'linux';
+export const _DEBUG = false;
+export const _OPTIONS = require('./options.json');
+
+
+export const locations: FileLocations = {
+  scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`,
+};
 
 
 export async function initSettings(debug: boolean) {
   clearScreen();
 
-  const options = require('./options.json');
-
   // console.log(options);
 
-  if (options.dotfilesFilePath === '') {
+  if (_OPTIONS.dotfilesFilePath === '') {
     const dotfileJsonPath: { selection: string } = await prompt([
       {
         type: 'input',
@@ -24,25 +33,26 @@ export async function initSettings(debug: boolean) {
     const dotFilePath = dotfileJsonPath.selection + 'dotfiles.json';
 
     try {
-      const foundDotFilesJson = await JSON.parse(
+      const foundDotFilesJson = (await JSON.parse(
         readFileSync(dotFilePath).toString()
-      ) ? true : false
+      ))
+        ? true
+        : false;
 
       if (foundDotFilesJson) {
-        options.dotfilesFilePath = dotFilePath;
-        writeFileSync('./src/options.json', JSON.stringify(options));
-        console.log('-> Updated options.json')
+        _OPTIONS.dotfilesFilePath = dotFilePath;
+        writeFileSync('./src/options.json', JSON.stringify(_OPTIONS));
+        console.log('-> Updated options.json');
       }
-
-    } catch(e) {
+    } catch (e) {
       // console.log(e)
       console.log(`Cannot find dotfiles.json in ${dotfileJsonPath.selection}`);
     }
-
-
   } else {
-    if(debug) console.log('-> Found dotfiles path')
+    if (debug) console.log('-> Found dotfiles path');
   }
+
+  await checkDotFiles(_DEBUG);
 
 }
 

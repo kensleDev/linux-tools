@@ -1,25 +1,11 @@
-import { readdirSync } from 'fs';
 import { prompt } from 'inquirer';
+import { checkDotFiles, initSettings, _DEBUG } from './settings';
 import { git } from './shared/git';
-import { FileLocations, Installs } from './shared/models';
-import { clearScreen, scriptRunner } from './shared/scrtiptRunner';
-import { initSettings, checkDotFiles } from './settings';
-import { getDotFiles, checkDotFilesExist } from './shared/fileOps';
-
-
-const isWin = process.platform === 'win32';
-const currentPlatform = isWin ? 'windows' : 'linux'
-const debug = false
-
-const locations: FileLocations = {
-  scripts: `./src/assets/${currentPlatform}/installs/scripts`
-}
+import { installer } from './installer';
 
 export async function cli(): Promise<void> {
 
-  initSettings(debug)
-
-  await checkDotFiles(debug);
+  await initSettings(_DEBUG);
 
   const mainMenu: { selection: string } = await prompt([
     {
@@ -40,33 +26,4 @@ export async function cli(): Promise<void> {
 
 }
 
-async function installer(): Promise<void> {
 
-  clearScreen();
-
-  const installScriptNames: string[] = readdirSync(locations.scripts);
-
-  const installs: Installs = await prompt([
-    {
-      type: 'checkbox',
-      message: 'Select what to install',
-      name: 'scriptNames',
-      choices: installScriptNames,
-    },
-  ]);
-
-  installs.scriptNames.forEach(script => {
-    if (isWin) {
-      scriptRunner(`${locations.scripts}/${script}`).powershell();
-    } else {
-      scriptRunner(`${locations.scripts}/${script}`).bash();
-    }
-  });
-
-}
-
-
-
-
-
-// CHECK PATH FUNC
