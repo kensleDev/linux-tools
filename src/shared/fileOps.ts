@@ -1,4 +1,4 @@
-import { readFileSync, access, promises } from 'fs';
+import { readFileSync, access, promises, existsSync } from 'fs';
 import { Os } from './models';
 import { F_OK } from 'constants';
 
@@ -15,7 +15,18 @@ export async function checkFileExists(filePath: string) {
   }
 }
 
-
+function fileExist(filePath: string ) {
+  return new Promise((resolve, reject) => {
+    access(filePath, F_OK, err => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      //file exists
+      resolve(true);
+    });
+  });
+}
 
 // export function findDotFile(os: Os, dotFileName: string) {
 
@@ -95,28 +106,17 @@ export async function checkDotFilesExist(dotfiles: any) {
   })
 
 
-  const results: any = []
-
-  locations.forEach(async (path) => {
-    try {
-      await promises.access(path);
-      results.push([true, path]);
-    }
-    catch (error) {
-      results.push([false, path]);
-      // console.log(results);
-      return results
-    }
-
+  const results = await locations.map((path) => {
+    const exists = existsSync(path);
+    return [exists, path];
   })
 
-  console.log(locations);
+  const missingFiles = results.map((result: any[]) =>
+    result[0] === false ? result : []
+  );
 
-
-  // const missingFiles = results.map((result: any[]) =>
-  //   result[0] === false ? result : []
-  // );
-
+  if (missingFiles[0].length === 0) return false
+  else return missingFiles
 
 }
 

@@ -5,7 +5,7 @@ import { getDotFiles, checkDotFilesExist } from './shared/fileOps';
 import { git } from './shared/git';
 
 
-export async function initSettings() {
+export async function initSettings(debug: boolean) {
   clearScreen();
 
   const options = require('./options.json');
@@ -41,40 +41,22 @@ export async function initSettings() {
 
 
   } else {
-    console.log('-> Found dotfiles path')
+    if(debug) console.log('-> Found dotfiles path')
   }
 
 }
 
-export async function checkDotFiles() {
+export async function checkDotFiles(debug: boolean) {
   const dotfiles = await getDotFiles();
   const missingDotfiles = await checkDotFilesExist(dotfiles);
 
-  console.log(missingDotfiles);
-
-  // if (missingDotfiles.length === 0) {
-  //   return missingDotfiles[0];
-  // } else {
-  //   return missingDotfiles;
-  // }
-  // console.log(missingDotfiles);
-
-
-  // if (missingDotfiles.length !== 0) {
-  //   console.log(missingDotfiles);
-  // } else {
-  //   console.log('no missing files');
-  // }
-
-
-  // if (missingDotfiles.length > 0) {
-  //   console.log('There are missing dotfiles');
-  //   const missingResult = await git().missingDotfiles(missingDotfiles);
-  //   console.log(missingResult);
-  //   return missingResult
-  // }
-
-  // return 'All dotfiles found and checked'
+  if (missingDotfiles !== false) {
+    console.log('There are missing dotfiles');
+    const missingResult = await git().missingDotfiles(missingDotfiles);
+    console.log(missingResult);
+  } else {
+    if (debug) console.log('-> No missing files');
+  }
 
 }
 

@@ -4,7 +4,8 @@ const scrtiptRunner_1 = require("./shared/scrtiptRunner");
 const inquirer_1 = require("inquirer");
 const fs_1 = require("fs");
 const fileOps_1 = require("./shared/fileOps");
-async function initSettings() {
+const git_1 = require("./shared/git");
+async function initSettings(debug) {
     scrtiptRunner_1.clearScreen();
     const options = require('./options.json');
     // console.log(options);
@@ -31,32 +32,23 @@ async function initSettings() {
         }
     }
     else {
-        console.log('-> Found dotfiles path');
+        if (debug)
+            console.log('-> Found dotfiles path');
     }
 }
 exports.initSettings = initSettings;
-async function checkDotFiles() {
+async function checkDotFiles(debug) {
     const dotfiles = await fileOps_1.getDotFiles();
     const missingDotfiles = await fileOps_1.checkDotFilesExist(dotfiles);
-    console.log(missingDotfiles);
-    // if (missingDotfiles.length === 0) {
-    //   return missingDotfiles[0];
-    // } else {
-    //   return missingDotfiles;
-    // }
-    // console.log(missingDotfiles);
-    // if (missingDotfiles.length !== 0) {
-    //   console.log(missingDotfiles);
-    // } else {
-    //   console.log('no missing files');
-    // }
-    // if (missingDotfiles.length > 0) {
-    //   console.log('There are missing dotfiles');
-    //   const missingResult = await git().missingDotfiles(missingDotfiles);
-    //   console.log(missingResult);
-    //   return missingResult
-    // }
-    // return 'All dotfiles found and checked'
+    if (missingDotfiles !== false) {
+        console.log('There are missing dotfiles');
+        const missingResult = await git_1.git().missingDotfiles(missingDotfiles);
+        console.log(missingResult);
+    }
+    else {
+        if (debug)
+            console.log('-> No missing files');
+    }
 }
 exports.checkDotFiles = checkDotFiles;
 //# sourceMappingURL=settings.js.map

@@ -9,33 +9,34 @@ import { getDotFiles, checkDotFilesExist } from './shared/fileOps';
 
 const isWin = process.platform === 'win32';
 const currentPlatform = isWin ? 'windows' : 'linux'
+const debug = false
 
 const locations: FileLocations = {
-  scripts: `./src/${currentPlatform}/installs/scripts`
+  scripts: `./src/assets/${currentPlatform}/installs/scripts`
 }
 
 export async function cli(): Promise<void> {
 
-  initSettings()
+  initSettings(debug)
 
-  await checkDotFiles()
+  await checkDotFiles(debug);
 
-  // const menuChoice: { selection: string } = await prompt([
-  //   {
-  //     type: 'list',
-  //     message: 'Main Menu',
-  //     name: 'selection',
-  //     choices: ['Installer', 'Push Dotfiles', 'Pull dotfiles'],
-  //   },
-  // ]);
+  const mainMenu: { selection: string } = await prompt([
+    {
+      type: 'list',
+      message: 'Main Menu',
+      name: 'selection',
+      choices: ['Installer', 'Push Dotfiles', 'Pull dotfiles'],
+    },
+  ]);
 
-  // if (menuChoice.selection === 'Installer') {
-  //   // installer()
-  // } else if (menuChoice.selection === 'Push Dotfiles') {
-  //   git().push();
-  // } else if (menuChoice.selection === 'Pull Dotfiles') {
-  //   git().pull();
-  // }
+  if (mainMenu.selection === 'Installer') {
+    installer()
+  } else if (mainMenu.selection === 'Push Dotfiles') {
+    git().push();
+  } else if (mainMenu.selection === 'Pull Dotfiles') {
+    git().pull();
+  }
 
 }
 
