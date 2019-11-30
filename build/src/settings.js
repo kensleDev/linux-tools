@@ -9,9 +9,11 @@ exports._IS_WIN = process.platform === 'win32';
 exports._CURRENT_PLATFORM = exports._IS_WIN ? 'windows' : 'linux';
 exports._DEBUG = false;
 exports._OPTIONS = require('./options.json');
+exports._DOTFILES = require(exports._OPTIONS.dotfilesFilePath);
 exports.locations = {
-    scripts: `./src/assets/${exports._CURRENT_PLATFORM}/installs/scripts`,
+    scripts: `./src/assets/${exports._CURRENT_PLATFORM}/installs/scripts`
 };
+console.log(exports.locations);
 async function initSettings(debug) {
     scrtiptRunner_1.clearScreen();
     // console.log(options);

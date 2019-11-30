@@ -41,6 +41,7 @@
   "dependencies": {
     "@types/inquirer": "^6.5.0",
     "inquirer": "^7.0.0",
+    "log-timestamp": "^0.3.0",
     "powershell": "^2.3.1"
   }
 }

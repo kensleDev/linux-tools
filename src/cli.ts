@@ -1,11 +1,13 @@
 import { prompt } from 'inquirer';
-import { checkDotFiles, initSettings, _DEBUG } from './settings';
+import { checkDotFiles, initSettings, _DEBUG, locations, _DOTFILES } from './settings';
 import { git } from './shared/git';
 import { installer } from './installer';
 
 export async function cli(): Promise<void> {
 
   await initSettings(_DEBUG);
+
+  console.log(_DOTFILES)
 
   const mainMenu: { selection: string } = await prompt([
     {

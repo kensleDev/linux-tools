@@ -9,12 +9,13 @@ export const _IS_WIN = process.platform === 'win32';
 export const _CURRENT_PLATFORM = _IS_WIN ? 'windows' : 'linux';
 export const _DEBUG = false;
 export const _OPTIONS = require('./options.json');
-
+export const _DOTFILES = require(_OPTIONS.dotfilesFilePath);
 
 export const locations: FileLocations = {
-  scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`,
+  scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`
 };
 
+console.log(locations);
 
 export async function initSettings(debug: boolean) {
   clearScreen();
@@ -69,4 +70,5 @@ export async function checkDotFiles(debug: boolean) {
   }
 
 }
+
 

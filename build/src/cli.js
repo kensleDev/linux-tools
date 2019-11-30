@@ -6,6 +6,7 @@ const git_1 = require("./shared/git");
 const installer_1 = require("./installer");
 async function cli() {
     await settings_1.initSettings(settings_1._DEBUG);
+    console.log(settings_1._DOTFILES);
     const mainMenu = await inquirer_1.prompt([
         {
             type: 'list',
