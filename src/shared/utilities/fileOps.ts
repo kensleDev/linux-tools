@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'fs';
-import { _OPTIONS } from '../../settings';
+import { _OPTIONS, _IS_WIN } from '../../settings';
 import { Dotfile, DotfileProcessing } from '../models';
 
 
@@ -15,12 +15,15 @@ export function getDotFiles(): Dotfile[] {
 
 export async function checkDotFilesExist(dotfiles: Dotfile[]) {
 
-  const locations: string[] = dotfiles.map(file => file.path + '\\' + file.name);
+  const seperator = _IS_WIN ? '\\' : '/';
+
+  const locations: string[] = dotfiles.map(file => file.path + seperator + file.name);
+
+  console.log(locations)
 
   const missingFiles: DotfileProcessing[] = await getMissingFiles(locations);
 
-  if (missingFiles.length === 0) return []
-  else return missingFiles
+  if (missingFiles.length > 0) return missingFiles;
 
 }
 

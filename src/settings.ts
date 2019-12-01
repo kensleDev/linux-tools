@@ -3,7 +3,7 @@ import { prompt } from 'inquirer'
 import { readFileSync, writeFileSync } from 'fs';
 import { getDotFiles, checkDotFilesExist } from './shared/utilities/fileOps';
 import { git } from './shared/utilities/git';
-import { FileLocations, Dotfile } from './shared/models';
+import { FileLocations, Dotfile, DotfileProcessing } from './shared/models';
 
 export const _IS_WIN = process.platform === 'win32';
 export const _CURRENT_PLATFORM = _IS_WIN ? 'windows' : 'linux';
@@ -58,9 +58,9 @@ export async function initSettings(debug: boolean) {
 
 export async function checkDotFiles(debug: boolean) {
   const dotfiles: Dotfile[] = await getDotFiles();
-  const missingDotfiles = await checkDotFilesExist(dotfiles);
+  const missingDotfiles: DotfileProcessing[] | undefined = await checkDotFilesExist(dotfiles);
 
-  if (missingDotfiles.length > 0) {
+  if (missingDotfiles && missingDotfiles.length > 0) {
     console.log('There are missing dotfiles');
     const missingResult = await git().missingDotfiles(missingDotfiles);
     console.log(missingResult);

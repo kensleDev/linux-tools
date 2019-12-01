@@ -11,6 +11,7 @@ export function git(): Git {
   };
 
   const missingDotfiles = async (files: any[]): Promise<string> => {
+    console.log(files)
     console.log('Missing Files');
     console.log('-----------------------------------------');
     console.log(files.join('\n'));
