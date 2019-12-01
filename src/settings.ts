@@ -1,7 +1,7 @@
 import { clearScreen, scriptRunner } from './scriptRunner/scrtiptRunner';
 import { prompt } from 'inquirer'
 import { readFileSync, writeFileSync } from 'fs';
-import { getDotFiles, checkDotFilesExist } from './shared/utilities/fileOps';
+import { getDotFiles, checkDotFilesExist, missingDotfilesResult } from './shared/utilities/fileOps';
 import { git } from './shared/utilities/git';
 import { FileLocations, Dotfile, DotfileProcessing } from './shared/models';
 
@@ -61,9 +61,8 @@ export async function checkDotFiles(debug: boolean) {
   const missingDotfiles: DotfileProcessing[] | undefined = await checkDotFilesExist(dotfiles);
 
   if (missingDotfiles && missingDotfiles.length > 0) {
-    console.log('There are missing dotfiles');
-    const missingResult = await git().missingDotfiles(missingDotfiles);
-    console.log(missingResult);
+    const missingResult = await missingDotfilesResult(missingDotfiles);
+    // console.log(missingResult);
   } else {
     if (debug) console.log('-> No missing files');
   }

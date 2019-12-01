@@ -4,6 +4,8 @@ import { initSettings, _DEBUG, _DOTFILES } from '../settings';
 import { git } from '../shared/utilities/git';
 import { fileWatcher } from '../fileWatcher/fileWatcher';
 
+console.log(process.argv)
+
 export async function cli(): Promise<void> {
 
   await initSettings(_DEBUG);

@@ -1,7 +1,8 @@
 import { existsSync, readFileSync } from 'fs';
 import { _OPTIONS, _IS_WIN } from '../../settings';
 import { Dotfile, DotfileProcessing } from '../models';
-
+import { prompt }  from 'inquirer'
+import { git } from './git';
 
 export function getDotFiles(): Dotfile[] {
   try {
@@ -13,15 +14,15 @@ export function getDotFiles(): Dotfile[] {
   }
 }
 
-export async function checkDotFilesExist(dotfiles: Dotfile[]) {
+export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfileProcessing[] | undefined> {
 
   const seperator = _IS_WIN ? '\\' : '/';
 
   const locations: string[] = dotfiles.map(file => file.path + seperator + file.name);
 
-  console.log(locations)
-
   const missingFiles: DotfileProcessing[] = await getMissingFiles(locations);
+
+  // console.log(missingFiles);
 
   if (missingFiles.length > 0) return missingFiles;
 
@@ -36,26 +37,40 @@ async function getMissingFiles(locations: string[]): Promise<DotfileProcessing[]
     return { exists, path };
   });
 
-  let missingFiles = [] as any;
+  const missingFiles = [] as any;
 
-  missingFiles = processedLocations.map((result: DotfileProcessing) =>
-    result.exists === false ? result : []
-  );
+  processedLocations.forEach((result: DotfileProcessing) => {
+    if(result.exists === false) missingFiles.push(result)
+  });
 
   return missingFiles;
 }
 
-// export function getDotfileLocations(dotfiles: Dotfile[]): string[] {
-//   const entries = Object.entries(dotfiles);
+export async function missingDotfilesResult(files: any[]): Promise<string> {
+  console.log(files);
+  console.log('Missing Files');
+  console.log('-----------------------------------------');
+  console.log(files.join('\n'));
+  console.log('');
 
-//   const locations = entries.map(el => {
-//     const name = el[0];
-//     const path = el[1];
+  const pullFiles = await prompt([
+    {
+      type: 'confirm',
+      message: 'There are missing dotfiles, would you to pull them from git?',
+      name: 'pullFiles',
+    },
+  ]);
 
-//     const fullPath = path + '\\' + name;
+  if (pullFiles) {
+    // PULL FILES FROM GIT INTO REPO
+    git().pull();
+    // CP FILES TO CORRECT LOCATIONS
+    return '';
+  } else {
+    console.log(
+      'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file'
+    );
 
-//     return fullPath;
-//   });
-
-//   return locations;
-// }
+    return 'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file';
+  }
+};

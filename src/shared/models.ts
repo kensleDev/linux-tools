@@ -1,7 +1,6 @@
 export interface Git {
   push: () => void;
   pull: () => void;
-  missingDotfiles: (files: any[]) => Promise<string>;
 }
 
 export interface ScriptRunner {
