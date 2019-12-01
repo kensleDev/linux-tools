@@ -16,7 +16,6 @@ export const locations: FileLocations = {
   scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`
 };
 
-
 export async function initSettings(debug: boolean) {
   clearScreen();
 
@@ -61,7 +60,7 @@ export async function checkDotFiles(debug: boolean) {
   const dotfiles: Dotfile[] = await getDotFiles();
   const missingDotfiles = await checkDotFilesExist(dotfiles);
 
-  if (missingDotfiles !== false) {
+  if (missingDotfiles.length > 0) {
     console.log('There are missing dotfiles');
     const missingResult = await git().missingDotfiles(missingDotfiles);
     console.log(missingResult);
