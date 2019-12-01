@@ -5,7 +5,12 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "noImplicitReturns": false
+    "noImplicitReturns": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [
+      "reflect-metadata"
+    ],
   },
   "include": [
     "src/**/*.ts",

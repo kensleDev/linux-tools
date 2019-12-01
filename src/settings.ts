@@ -1,8 +1,8 @@
-import { clearScreen, scriptRunner } from './scrtiptRunner';
+import { clearScreen, scriptRunner } from './scriptRunner/scrtiptRunner';
 import { prompt } from 'inquirer'
 import { readFileSync, writeFileSync } from 'fs';
-import { getDotFiles, checkDotFilesExist } from './shared/fileOps';
-import { git } from './shared/git';
+import { getDotFiles, checkDotFilesExist } from './shared/utilities/fileOps';
+import { git } from './shared/utilities/git';
 import { FileLocations } from './shared/models';
 
 export const _IS_WIN = process.platform === 'win32';
@@ -11,11 +11,11 @@ export const _DEBUG = false;
 export const _OPTIONS = require('./options.json');
 export const _DOTFILES = require(_OPTIONS.dotfilesFilePath);
 
+
 export const locations: FileLocations = {
   scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`
 };
 
-console.log(locations);
 
 export async function initSettings(debug: boolean) {
   clearScreen();

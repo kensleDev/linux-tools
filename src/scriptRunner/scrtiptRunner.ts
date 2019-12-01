@@ -1,4 +1,4 @@
-import { ScriptRunner } from './shared/models';
+import { ScriptRunner } from '../shared/models';
 
 export function scriptRunner(scriptLocation: string): ScriptRunner {
   const powershell = () => {

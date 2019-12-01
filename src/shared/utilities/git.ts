@@ -1,4 +1,4 @@
-import { Git } from './models';
+import { Git } from '../models';
 import { prompt } from 'inquirer';
 
 export function git(): Git {
@@ -26,6 +26,7 @@ export function git(): Git {
 
     if (pullFiles) {
       // PULL FILES FROM GIT INTO REPO
+      git().pull()
       // CP FILES TO CORRECT LOCATIONS
       return ''
     } else {

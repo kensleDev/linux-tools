@@ -30,9 +30,12 @@
   },
   "homepage": "https://github.com/kensleDev/linux-tools#readme",
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "@types/node": "^10.0.3",
     "@types/node-powershell": "^3.1.0",
     "gts": "^1.1.2",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
     "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "~3.7.0",
@@ -40,8 +43,11 @@
   },
   "dependencies": {
     "@types/inquirer": "^6.5.0",
+    "chokidar": "^3.3.0",
     "inquirer": "^7.0.0",
+    "inversify": "^5.0.1",
     "log-timestamp": "^0.3.0",
-    "powershell": "^2.3.1"
+    "powershell": "^2.3.1",
+    "reflect-metadata": "^0.1.13"
   }
 }

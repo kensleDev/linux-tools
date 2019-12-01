@@ -1,18 +1,6 @@
 import { existsSync, readFileSync } from 'fs';
-import { _OPTIONS } from '../settings';
+import { _OPTIONS } from '../../settings';
 
-export async function checkFileExists(filePath: string) {
-  try {
-    const file = await readFileSync(filePath);
-    if (file !== undefined) {
-      return filePath + ': true';
-    } else {
-      return filePath + ': false';
-    }
-  } catch (e) {
-    // console.log(e)
-  }
-}
 
 export async function checkDotFilesExist(dotfiles: any) {
 
@@ -27,7 +15,6 @@ export async function checkDotFilesExist(dotfiles: any) {
 
     return fullPath
   })
-
 
   const results = await locations.map((path) => {
     const exists = existsSync(path);
@@ -45,10 +32,9 @@ export async function checkDotFilesExist(dotfiles: any) {
 
 
 export function getDotFiles() {
-  const options = _OPTIONS;
 
   try {
-    const dotfilePath = options.dotfilesFilePath;
+    const dotfilePath = _OPTIONS.dotfilesFilePath;
     return JSON.parse(readFileSync(dotfilePath).toString());
 
   } catch(e) {

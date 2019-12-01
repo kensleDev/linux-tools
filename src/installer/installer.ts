@@ -1,7 +1,7 @@
-import { clearScreen, scriptRunner } from './scrtiptRunner';
+import { clearScreen, scriptRunner } from '../scriptRunner/scrtiptRunner';
 import { readdirSync } from 'fs';
-import { Installs } from './shared/models';
-import { _IS_WIN, locations } from './settings';
+import { Installs } from '../shared/models';
+import { _IS_WIN, locations } from '../settings';
 import { prompt } from 'inquirer';
 
 export async function installer(): Promise<void> {
