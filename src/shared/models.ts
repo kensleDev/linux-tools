@@ -18,3 +18,14 @@ export interface Installs {
 }
 
 export type Os = 'windows' | 'linux'
+
+
+export interface Dotfile {
+  name: string
+  path: string
+}
+
+export interface DotfileProcessing {
+  exists: boolean
+  path: string
+}
