@@ -30,9 +30,15 @@ export class Logger {
     const badge = (input: string) => `|-${input}-| `;
 
     const colored = chalk[color](badge(type.toUpperCase())) + text;
-    const plain = badge(type.toUpperCase() + ' | ' + dt) + text;
+    const plain = badge(type.toUpperCase() + '-|- ' + dt + ' ') + text;
 
     return { colored, plain };
+  }
+
+  static title(text: string) {
+    this.info(`-----------------------`);
+    this.info(`${text}`);
+    this.info(`-----------------------`);
   }
 
   static info(text: string) {

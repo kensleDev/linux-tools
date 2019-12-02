@@ -3,9 +3,12 @@ import { uploadDotfiles, downloadDotfiles } from '../dotfiles/upDownLoad';
 import { initSettings, _DEBUG } from '../settings';
 import { installer } from '../installer/installer';
 import { fileWatcher } from '../dotfiles/fileWatcher';
+import { Logger } from '../shared/logger';
 
 
 export async function cli(): Promise<void> {
+
+  Logger.title(`CLI APP STARTED`)
 
   await initSettings(_DEBUG);
 
