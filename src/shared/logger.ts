@@ -11,10 +11,14 @@ export class Logger {
 
   static addToHistory(input: string) {
     this.history.push(input)
-    appendFileSync(_LOCATIONS.logLocation, input);
+    appendFileSync(_LOCATIONS.logLocation, input + '\n');
   }
 
-  static assembleLog(text: string, type: LogType): string {
+  static assembleLog(text: string, type: LogType) {
+
+    const dt = new Date().toLocaleString('en-GB', {
+      timeZone: 'Europe/London',
+    });
 
     let color = ''
 
@@ -25,33 +29,34 @@ export class Logger {
 
     const badge = (input: string) => `|-${input}-| `;
 
-    const format = chalk[color](badge(type.toUpperCase())) + text;
+    const colored = chalk[color](badge(type.toUpperCase())) + text;
+    const plain = badge(type.toUpperCase() + ' | ' + dt) + text;
 
-    return format
+    return { colored, plain };
   }
 
   static info(text: string) {
     const data = this.assembleLog(text, 'info');
-    this.addToHistory(data);
-    if (_DEBUG) console.log(data)
+    this.addToHistory(data.plain);
+    if (_DEBUG) console.log(data.colored);
   }
 
   static warn(text: string) {
     const data = this.assembleLog(text, 'warn');
-    this.addToHistory(data);
-    if (_DEBUG) console.log(data);
+    this.addToHistory(data.plain);
+    if (_DEBUG) console.log(data.colored);
   }
 
   static err(text: string) {
     const data = this.assembleLog(text, 'err');
-    this.addToHistory(data);
-    if (_DEBUG) console.log(data);
+    this.addToHistory(data.plain);
+    if (_DEBUG) console.log(data.colored);
   }
 
   static log(text: string) {
     const data = this.assembleLog(text, 'info');
-    this.addToHistory(data);
-    if (_DEBUG) console.log(data);
+    this.addToHistory(data.plain);
+    if (_DEBUG) console.log(data.colored);
   }
 
 
