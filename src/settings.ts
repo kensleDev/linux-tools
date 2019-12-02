@@ -1,27 +1,35 @@
 import { clearScreen, scriptRunner } from './scriptRunner/scrtiptRunner';
 import { prompt } from 'inquirer'
 import { readFileSync, writeFileSync } from 'fs';
-import { getDotFiles, checkDotFilesExist, missingDotfilesResult } from './shared/utilities/fileOps';
+import { checkDotFilesExist, missingDotfilesResult } from './shared/utilities/fileOps';
 import { git } from './shared/utilities/git';
 import { FileLocations, Dotfile, DotfileProcessing } from './shared/models';
 
 export const _IS_WIN = process.platform === 'win32';
 export const _CURRENT_PLATFORM = _IS_WIN ? 'windows' : 'linux';
+export const _DELIMINATOR = _IS_WIN ? '\\' : '/';
 export const _DEBUG = false;
-export const _OPTIONS = require('./options.json');
-export const _DOTFILES = require(_OPTIONS.dotfilesFilePath);
 
 
-export const locations: FileLocations = {
-  scripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`
+export const _USER_CONFIG_PATH = _IS_WIN
+  ? 'C:\\Users\\kd\\Documents\\dotfiles.json'
+  : '/lib/dotfiles.json';
+
+export const _USER_CONFIG = require(_USER_CONFIG_PATH);
+
+export const _OPTIONS = _USER_CONFIG.options
+export const _DOTFILES = _USER_CONFIG.dotfiles
+
+export const _LOCATIONS: FileLocations = {
+  repoLocation: _OPTIONS.repoLocation,
+  installScripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`,
+  scripts: `./src/assets/${_CURRENT_PLATFORM}/scripts`
 };
 
 export async function initSettings(debug: boolean) {
   clearScreen();
 
-  // console.log(options);
-
-  if (_OPTIONS.dotfilesFilePath === '') {
+  if (_OPTIONS.dotfiledsFilePath === '') {
     const dotfileJsonPath: { selection: string } = await prompt([
       {
         type: 'input',
@@ -57,7 +65,7 @@ export async function initSettings(debug: boolean) {
 }
 
 export async function checkDotFiles(debug: boolean) {
-  const dotfiles: Dotfile[] = await getDotFiles();
+  const dotfiles: Dotfile[] = _DOTFILES;
   const missingDotfiles: DotfileProcessing[] | undefined = await checkDotFilesExist(dotfiles);
 
   if (missingDotfiles && missingDotfiles.length > 0) {

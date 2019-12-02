@@ -2,7 +2,8 @@ import { prompt } from 'inquirer';
 import { installer } from '../installer/installer';
 import { initSettings, _DEBUG, _DOTFILES } from '../settings';
 import { git } from '../shared/utilities/git';
-import { fileWatcher } from '../fileWatcher/fileWatcher';
+import { fileWatcher } from '../dotfiles/fileWatcher';
+import { uploadDotfiles } from '../dotfiles/upDownLoad';
 
 console.log(process.argv)
 
@@ -15,18 +16,18 @@ export async function cli(): Promise<void> {
       type: 'list',
       message: 'Main Menu',
       name: 'selection',
-      choices: ['Installer', 'File Watcher', 'Push Dotfiles', 'Pull dotfiles'],
+      choices: ['Installer', 'Upload Dotfiles', 'Download Dotfiles', 'File Watcher' ],
     },
   ]);
 
   if (mainMenu.selection === 'Installer') {
     installer()
-  } else if (mainMenu.selection === 'File Watcher') {
-    fileWatcher()
-  } else if (mainMenu.selection === 'Push Dotfiles') {
-    git().push();
-  } else if (mainMenu.selection === 'Pull Dotfiles') {
-    git().pull();
+  // } else if (mainMenu.selection === 'File Watcher') {
+  //   fileWatcher()
+  } else if (mainMenu.selection === 'Upload Dotfiles') {
+    uploadDotfiles()
+  } else if (mainMenu.selection === 'Download Dotfiles') {
+
   }
 
 }

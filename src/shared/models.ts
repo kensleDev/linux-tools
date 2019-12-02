@@ -1,14 +1,16 @@
 export interface Git {
-  push: () => void;
-  pull: () => void;
+  push: () => string;
+  pull: () => string;
 }
 
 export interface ScriptRunner {
-  powershell: () => void;
-  bash: () => void;
+  powershell: () => string;
+  bash: () => string;
 }
 
 export interface FileLocations {
+  repoLocation: string
+  installScripts: string;
   scripts: string;
 }
 

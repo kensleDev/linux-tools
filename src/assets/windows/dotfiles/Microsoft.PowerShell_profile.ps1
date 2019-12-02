@@ -35,7 +35,7 @@ function csearch() { choco search $args }
 function csearch() { choco install -y $args }
 
 
-# Gits
+# Git
 
 function clone() {
   clear
@@ -152,3 +152,6 @@ function U {
 #     Start-SshAgent
 # }
 
+
+
+tester

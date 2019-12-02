@@ -1,30 +1,41 @@
 // import { getDotfileLocations } from './fileOps'
-import { _OPTIONS } from '../../settings';
-import { Dotfile } from '../models';
-import { checkDotFilesExist } from './fileOps';
+import { _DOTFILES } from '../../../settings';
+import { Dotfile } from '../../models';
+import { checkDotFilesExist, missingDotfilesResult } from '../fileOps';
 
 
-const dotfiles: Dotfile[] = require(_OPTIONS.dotfilesFilePath)
+const dotfiles: Dotfile[] = _DOTFILES;
 const missingDotfiles = [ { name: "madeup", path: "nowhere" } ]
 
-const firstDotfileValue: string = Object.values(dotfiles)[0].path[0]
-console.log(dotfiles);
+const missingDotfilesProcessing = [{ exists: false, path: 'nowhere' }];
 
-// test('returns string[] of locations when given dotfiles JSON', () => {
-//   expect(getDotfileLocations(dotfiles)).toBeDefined()
-//   expect(getDotfileLocations(dotfiles)).toBeInstanceOf(Array);
-//   expect(getDotfileLocations(dotfiles).length).toBeGreaterThan(0)
-//   // expect(getDotfileLocations(dotfiles)[0]).toBeInstanceOf(Array);
-//   expect(getDotfileLocations(dotfiles)[0]).toMatch(firstDotfileValue);
+
+// const firstDotfileValue: string = Object.values(dotfiles)[0].path[0]
+// console.log(dotfiles);
+
+describe('checkDotFilesExist', () => {
+  test('P1 - returns empty array for success', async () => {
+    const files = await checkDotFilesExist(dotfiles);
+    expect(files).toBeDefined();
+    expect(files).toBeInstanceOf(Array);
+    expect(files.length).toBe(0);
+  });
+
+  test('P2 - returns array of missing files for failure', async () => {
+    const missingFiles = await checkDotFilesExist(missingDotfiles);
+    expect(missingFiles).toBeDefined();
+    expect(missingFiles).toBeInstanceOf(Array);
+    expect(missingFiles.length).toBeGreaterThan(0);
+  });
+})
+
+// describe('missingDotfilesResult', () => {
+//   test('P1 - pulling new files', async () => {
+//     const missingResult = await missingDotfilesResult(missingDotfilesProcessing)
+//     expect(missingResult).toBeDefined();
+//     expect(missingResult).toBeInstanceOf(String);
+//     expect(missingResult.substring(0, 5)).toBe("Pulled");
+//   }, 1000);
 
 // });
 
-test('checkDotFilesExist - P1 - returns empty array for success', () => {
-  expect(checkDotFilesExist(dotfiles)).toBeDefined();
-  expect(checkDotFilesExist(dotfiles)).resolves.toBeInstanceOf(Array);
-});
-
-test('checkDotFilesExist - P2 - returns array of missing files for failure', () => {
-  expect(checkDotFilesExist(missingDotfiles)).toBeDefined();
-  expect(checkDotFilesExist(missingDotfiles)).resolves.toBeInstanceOf(Array);
-});

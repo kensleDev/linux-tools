@@ -14,6 +14,7 @@ export function scriptRunner(scriptLocation: string): ScriptRunner {
     // Stdout
     ps.on('output', (data: any) => {
       console.log(data);
+      return data
     });
 
     // Stderr
@@ -26,6 +27,8 @@ export function scriptRunner(scriptLocation: string): ScriptRunner {
       // Do Something on end
       //  console.log(code);
     });
+
+    return ""
   };
 
   const bash = () => {
@@ -37,6 +40,7 @@ export function scriptRunner(scriptLocation: string): ScriptRunner {
     //     console.log(`exec error: ${error}`);
     //   }
     // });
+    return ""
   };
 
   return { powershell, bash };

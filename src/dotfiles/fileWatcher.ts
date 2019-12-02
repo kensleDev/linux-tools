@@ -5,7 +5,6 @@ import { _CURRENT_PLATFORM, _DOTFILES, _OPTIONS } from '../settings';
 
 export function fileWatcher() {
 
-
   const filePaths: string[] = Object.values(_DOTFILES)
   const repoDotfileLocation = (dotfileName: string) =>
     `${_OPTIONS.repoLocation}\\src\\assets\\${_CURRENT_PLATFORM}\\dotfiles\\${dotfileName}`;

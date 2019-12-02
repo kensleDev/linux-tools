@@ -1,20 +1,12 @@
-import { existsSync, readFileSync } from 'fs';
-import { _OPTIONS, _IS_WIN } from '../../settings';
+import { existsSync, readFileSync, copyFileSync } from 'fs';
+import { prompt } from 'inquirer';
+
+import { _OPTIONS, _IS_WIN, _CURRENT_PLATFORM, _DELIMINATOR, _LOCATIONS } from '../../settings';
 import { Dotfile, DotfileProcessing } from '../models';
-import { prompt }  from 'inquirer'
 import { git } from './git';
 
-export function getDotFiles(): Dotfile[] {
-  try {
-    const dotfilePath = _OPTIONS.dotfilesFilePath;
-    return JSON.parse(readFileSync(dotfilePath).toString());
-  } catch (e) {
-    console.log(e);
-    return [{} as Dotfile]
-  }
-}
 
-export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfileProcessing[] | undefined> {
+export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfileProcessing[]> {
 
   const seperator = _IS_WIN ? '\\' : '/';
 
@@ -25,10 +17,9 @@ export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfilePr
   // console.log(missingFiles);
 
   if (missingFiles.length > 0) return missingFiles;
+  else return []
 
 }
-
-
 
 async function getMissingFiles(locations: string[]): Promise<DotfileProcessing[]> {
 
@@ -47,7 +38,6 @@ async function getMissingFiles(locations: string[]): Promise<DotfileProcessing[]
 }
 
 export async function missingDotfilesResult(files: any[]): Promise<string> {
-  console.log(files);
   console.log('Missing Files');
   console.log('-----------------------------------------');
   console.log(files.join('\n'));
@@ -63,14 +53,32 @@ export async function missingDotfilesResult(files: any[]): Promise<string> {
 
   if (pullFiles) {
     // PULL FILES FROM GIT INTO REPO
-    git().pull();
+    const gitPullResult = git(_LOCATIONS.repoLocation).pull();
     // CP FILES TO CORRECT LOCATIONS
-    return '';
+    return gitPullResult;
   } else {
-    console.log(
-      'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file'
-    );
-
-    return 'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file';
+    const msg = 'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file'
+    console.log(msg);
+    return msg;
   }
 };
+
+export async function copyDotfilesToRepo(files: Dotfile[], repoLocation: string, currentPlatform: 'windows' | 'linux') {
+
+  const d = _DELIMINATOR
+
+  const results = files.map(dotfile => {
+    const name = dotfile.name;
+    const path = `${dotfile.path}${d}${dotfile.name}`;
+    const repoPath = `${repoLocation}${d}src${d}assets${d}${currentPlatform}${d}dotfiles${d}${dotfile.name}`;
+    // return copyFileSync(dotfile.path, repoPath);
+    return { name, path, repoPath };
+  })
+
+  results.forEach(file => {
+    copyFileSync(file.path, file.repoPath)
+    console.log(`-> Copied ${file.name} into repo`);
+  })
+
+
+}

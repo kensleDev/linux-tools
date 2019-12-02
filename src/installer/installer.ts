@@ -1,13 +1,13 @@
 import { clearScreen, scriptRunner } from '../scriptRunner/scrtiptRunner';
 import { readdirSync } from 'fs';
 import { Installs } from '../shared/models';
-import { _IS_WIN, locations } from '../settings';
+import { _IS_WIN, _LOCATIONS } from '../settings';
 import { prompt } from 'inquirer';
 
 export async function installer(): Promise<void> {
   clearScreen();
 
-  const installScriptNames: string[] = readdirSync(locations.scripts);
+  const installScriptNames: string[] = readdirSync(_LOCATIONS.installScripts);
 
   const installs: Installs = await prompt([
     {
@@ -20,9 +20,9 @@ export async function installer(): Promise<void> {
 
   installs.scriptNames.forEach(script => {
     if (_IS_WIN) {
-      scriptRunner(`${locations.scripts}/${script}`).powershell();
+      scriptRunner(`${_LOCATIONS.installScripts}/${script}`).powershell();
     } else {
-      scriptRunner(`${locations.scripts}/${script}`).bash();
+      scriptRunner(`${_LOCATIONS.installScripts}/${script}`).bash();
     }
   });
 }
