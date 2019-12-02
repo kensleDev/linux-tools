@@ -65,5 +65,4 @@ export class Logger {
     if (_DEBUG) console.log(data.colored);
   }
 
-
 }

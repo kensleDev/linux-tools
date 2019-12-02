@@ -6,7 +6,6 @@ export function git(repoPath: string): Git {
 
   const platformRunner = _IS_WIN ? 'powershell' : 'bash';
 
-
   const push = (): string => {
     const scriptOutput = scriptRunner(
       `${_LOCATIONS.scripts}/git.push.ps1 ${repoPath}`
@@ -20,10 +19,6 @@ export function git(repoPath: string): Git {
     );
     return scriptOutput[platformRunner]();
   };
-
-  const getGist = () => {
-
-  }
 
   return {
     push,

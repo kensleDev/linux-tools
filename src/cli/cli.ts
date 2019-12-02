@@ -17,7 +17,7 @@ export async function cli(): Promise<void> {
       type: 'list',
       message: 'Main Menu',
       name: 'selection',
-      choices: ['Upload Dotfiles', 'Download Dotfiles', 'Installer', 'File Watcher' ],
+      choices: ['Upload Dotfiles', 'Download Dotfiles', 'Installer'],
     },
   ]);
 
