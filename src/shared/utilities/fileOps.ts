@@ -1,9 +1,10 @@
 import { existsSync, readFileSync, copyFileSync } from 'fs';
 import { prompt } from 'inquirer';
 
-import { _OPTIONS, _IS_WIN, _CURRENT_PLATFORM, _DELIMINATOR, _LOCATIONS } from '../../settings';
-import { Dotfile, DotfileProcessing } from '../models';
+import { _OPTIONS, _IS_WIN, _CURRENT_PLATFORM, _LOCATIONS } from '../../settings';
+import { Dotfile, DotfileProcessing, Os } from '../models';
 import { git } from './git';
+import { Logger } from '../logger';
 
 
 export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfileProcessing[]> {
@@ -13,8 +14,6 @@ export async function checkDotFilesExist(dotfiles: Dotfile[]): Promise<DotfilePr
   const locations: string[] = dotfiles.map(file => file.path + seperator + file.name);
 
   const missingFiles: DotfileProcessing[] = await getMissingFiles(locations);
-
-  // console.log(missingFiles);
 
   if (missingFiles.length > 0) return missingFiles;
   else return []
@@ -38,10 +37,10 @@ async function getMissingFiles(locations: string[]): Promise<DotfileProcessing[]
 }
 
 export async function missingDotfilesResult(files: any[]): Promise<string> {
-  console.log('Missing Files');
-  console.log('-----------------------------------------');
-  console.log(files.join('\n'));
-  console.log('');
+  Logger.err('Missing Files');
+  Logger.err('-----------------------------------------');
+  Logger.err(files.join('\n'));
+  Logger.err('');
 
   const pullFiles = await prompt([
     {
@@ -58,14 +57,13 @@ export async function missingDotfilesResult(files: any[]): Promise<string> {
     return gitPullResult;
   } else {
     const msg = 'Please add the dotfiles to the correct locations and ensure that dotfiles.json has a correct refernce to that file'
-    console.log(msg);
     return msg;
   }
 };
 
-export async function copyDotfilesToRepo(files: Dotfile[], repoLocation: string, currentPlatform: 'windows' | 'linux') {
+export async function copyDotfiles(op: 'push' | 'pull', files: Dotfile[], repoLocation: string, currentPlatform: Os): Promise<void> {
 
-  const d = _DELIMINATOR
+  const d = currentPlatform === 'windows' ? '\\' : '/';
 
   const results = files.map(dotfile => {
     const name = dotfile.name;
@@ -76,9 +74,14 @@ export async function copyDotfilesToRepo(files: Dotfile[], repoLocation: string,
   })
 
   results.forEach(file => {
-    copyFileSync(file.path, file.repoPath)
-    console.log(`-> Copied ${file.name} into repo`);
+    if (op === 'pull') {
+      copyFileSync(file.path, file.repoPath);
+      Logger.info(`-> Copied ${file.name} to repo`);
+    } else {
+      copyFileSync(file.repoPath, file.path);
+      Logger.info(`-> Copied ${file.name} to local`);
+    }
   })
 
-
 }
+

@@ -4,12 +4,11 @@ import { readFileSync, writeFileSync } from 'fs';
 import { checkDotFilesExist, missingDotfilesResult } from './shared/utilities/fileOps';
 import { git } from './shared/utilities/git';
 import { FileLocations, Dotfile, DotfileProcessing } from './shared/models';
+import { Logger } from './shared/logger';
 
+export const _DEBUG = true;
 export const _IS_WIN = process.platform === 'win32';
 export const _CURRENT_PLATFORM = _IS_WIN ? 'windows' : 'linux';
-export const _DELIMINATOR = _IS_WIN ? '\\' : '/';
-export const _DEBUG = false;
-
 
 export const _USER_CONFIG_PATH = _IS_WIN
   ? 'C:\\Users\\kd\\Documents\\dotfiles.json'
@@ -23,7 +22,8 @@ export const _DOTFILES = _USER_CONFIG.dotfiles
 export const _LOCATIONS: FileLocations = {
   repoLocation: _OPTIONS.repoLocation,
   installScripts: `./src/assets/${_CURRENT_PLATFORM}/installs/scripts`,
-  scripts: `./src/assets/${_CURRENT_PLATFORM}/scripts`
+  scripts: `./src/assets/${_CURRENT_PLATFORM}/scripts`,
+  logLocation: _IS_WIN ? 'C:\\Users\\kd\\Documents\\dotfileLog.txt' : ''
 };
 
 export async function initSettings(debug: boolean) {
@@ -50,14 +50,13 @@ export async function initSettings(debug: boolean) {
       if (foundDotFilesJson) {
         _OPTIONS.dotfilesFilePath = dotFilePath;
         writeFileSync('./src/options.json', JSON.stringify(_OPTIONS));
-        console.log('-> Updated options.json');
+        Logger.log('Updated options.json');
       }
     } catch (e) {
-      // console.log(e)
-      console.log(`Cannot find dotfiles.json in ${dotfileJsonPath.selection}`);
+      Logger.err(`Cannot find dotfiles.json in ${dotfileJsonPath.selection}`);
     }
   } else {
-    if (debug) console.log('-> Found dotfiles path');
+    if (debug) Logger.info('Found dotfiles path');
   }
 
   await checkDotFiles(_DEBUG);
@@ -70,9 +69,8 @@ export async function checkDotFiles(debug: boolean) {
 
   if (missingDotfiles && missingDotfiles.length > 0) {
     const missingResult = await missingDotfilesResult(missingDotfiles);
-    // console.log(missingResult);
   } else {
-    if (debug) console.log('-> No missing files');
+    if (debug) Logger.info('No missing files');
   }
 
 }

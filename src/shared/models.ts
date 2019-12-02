@@ -9,9 +9,10 @@ export interface ScriptRunner {
 }
 
 export interface FileLocations {
-  repoLocation: string
+  repoLocation: string;
   installScripts: string;
   scripts: string;
+  logLocation: string;
 }
 
 export interface Installs {

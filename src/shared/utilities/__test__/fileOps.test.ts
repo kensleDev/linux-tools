@@ -11,7 +11,6 @@ const missingDotfilesProcessing = [{ exists: false, path: 'nowhere' }];
 
 
 // const firstDotfileValue: string = Object.values(dotfiles)[0].path[0]
-// console.log(dotfiles);
 
 describe('checkDotFilesExist', () => {
   test('P1 - returns empty array for success', async () => {

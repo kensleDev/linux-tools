@@ -1,6 +1,7 @@
 import * as chokidar from 'chokidar';
 import { copyFile } from 'fs';
 import { _CURRENT_PLATFORM, _DOTFILES, _OPTIONS } from '../settings';
+import { Logger } from '../shared/logger';
 
 
 export function fileWatcher() {
@@ -15,7 +16,7 @@ export function fileWatcher() {
     const currentDotfileName = path.substring(path.lastIndexOf('\\')+1)
 
     copyFile(path, repoDotfileLocation(currentDotfileName), (err) => {
-      if (err) console.log(err)
+      if (err) Logger.err(err.toString())
     });
 
   });

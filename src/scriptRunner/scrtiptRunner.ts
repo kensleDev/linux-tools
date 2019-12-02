@@ -1,4 +1,5 @@
 import { ScriptRunner } from '../shared/models';
+import { Logger } from '../shared/logger';
 
 export function scriptRunner(scriptLocation: string): ScriptRunner {
   const powershell = () => {
@@ -8,24 +9,23 @@ export function scriptRunner(scriptLocation: string): ScriptRunner {
 
     // Handle process errors (e.g. powershell not found)
     ps.on('error', (err: any) => {
-      console.error(err);
+      Logger.err(err);
     });
 
     // Stdout
     ps.on('output', (data: any) => {
-      console.log(data);
+      Logger.info(data);
       return data
     });
 
     // Stderr
     ps.on('error-output', (data: any) => {
-      console.error(data);
+      // Logger.err(data);
     });
 
     // End
     ps.on('end', (code: any) => {
       // Do Something on end
-      //  console.log(code);
     });
 
     return ""
@@ -34,10 +34,8 @@ export function scriptRunner(scriptLocation: string): ScriptRunner {
   const bash = () => {
     // const exec = require('child_process').exec;
     // var yourscript = exec('sh hi.sh', (error, stdout, stderr) => {
-    //   console.log(stdout);
-    //   console.log(stderr);
     //   if (error !== null) {
-    //     console.log(`exec error: ${error}`);
+    //     Logger.err(`exec error: ${error}`);
     //   }
     // });
     return ""
