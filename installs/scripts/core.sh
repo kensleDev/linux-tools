@@ -1,5 +1,5 @@
 #!/bin/bash
 
-sudo apt-get install software-properties-common
-sudo apt-get install xbindkeys
-sudo apt-get install xvkbd
+sudo apt-get install -y software-properties-common
+sudo apt-get install -y xbindkeys
+sudo apt-get install -y xvkbd
