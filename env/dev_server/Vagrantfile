@@ -22,6 +22,8 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
     vb.memory = "3024"
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
   end
 
   config.vm.provision "file", source: "./dotfiles/.aliases", destination: ".aliases"
@@ -34,5 +36,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, :privileged => false, :path => "bootstrap_dev_server.sh"
 
   config.vm.provision "file", source: "./dotfiles/.zshrc", destination: ".zshrc"
+  config.vm.provision "file", source: "C:\\Users\\kensl\\.ssh\\id_rsa.pub", destination: "~/.ssh/me.pub"
 
 end
