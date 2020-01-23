@@ -1,0 +1,22 @@
+  
+[user]
+	email = julianiaquinandi@gmail.com
+	name = kensleDev
+[diff]
+	tool = vscode
+[difftool "vscode"]
+	cmd = "code --wait --diff  "
+[core]
+	editor = code --wait
+
+[alias]
+	acp = "!f() { git add -A; git commit -m $1; git push }; f }"
+	# Repo URL | name
+	sba = "!f() { git subtree add --prefix $2 $1 master --squash; }; f }"
+	sbp = "!f() { git subtree pull --prefix $2 $1 master --squash; }; f }"
+	# UNTESTED {location to make new repo} | {branch to store it on} | {location of extracted feautre} | { new repo URL}
+	sbs = "!f() { git subtree split --prefix $1 --$2l git rm -rf $3; cd $1 && git init && git pull $1 extracted; git remote add origin $5; git push origin -u master  }; f }"
+# git subtree split --prefix {location to make new repo} --{branch to store it on}
+# git rm -rf {location of extracted feautre}
+# cd {location to make new repo} && git init && git pull {location to make new repo} extracted
+# git remote add origin { new repo URL} ** git push origin -u master
