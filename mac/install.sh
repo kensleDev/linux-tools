@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILE_LOCATION=~/repos/linux-tools/mac/dotfiles
+
 FRESH_INSTALL() {
   INIT_HOMEBREW
   INSTALL_BREW_PACKAGES
@@ -10,6 +12,11 @@ FRESH_INSTALL() {
   SYNC_DOTFILES
 }
 
+TITLE() {
+  echo "echo "------------------------""
+  echo "-> $1" 
+  echo "echo "------------------------""
+}
 
 INIT_HOMEBREW() {
   # echo Install Mac App Store apps first.
@@ -82,22 +89,12 @@ CLEANUP() {
   brew cask alfred links
 }
 
-SYNC_DOTFILES() {
-  # rsync ~/repos/linux-tools/mac/dotfiles/ ~
-  yes | cp -f ~/repos/linux-tools/mac/dotfiles/.zshrc ~/
-  yes | cp -f ~/repos/linux-tools/mac/dotfiles/.aliases ~/
-  yes | cp -f ~/repos/linux-tools/mac/dotfiles/.gitconfig ~/
-  yes | cp -f ~/repos/linux-tools/mac/dotfiles/HYPER_LAYER.bttpreset ~/
 
-  zsh
-}
-
+# Git funcs
 
 function CLONE() {
   clear
-  echo "Enter repo name || url"
-  echo "------------------------"
-  read repo
+  TITLE "Enter repo name || url"
   clear
 
   start=$(echo $repo | cut -c 1-4)
@@ -111,15 +108,11 @@ function CLONE() {
 
 function AC() {
   clear
-  echo "---------------------------"
-  echo "Enter emoji (without :'s)"
-  echo "---------------------------"
+  TITLE "Enter emoji (without :'s)"
   read emoji
   
   clear
-  echo "---------------------------"
-  echo "Enter commit message"
-  echo "---------------------------"
+  TITLE "Enter commit message"
   read msg
   clear
   
@@ -127,27 +120,32 @@ function AC() {
   git commit -m ":$emoji: $msg"
 }
 
-# function pullDot() {
-#   VAR=${2: ~/}    
-#   cp -rf $1 $2  
-# } 
+GIT_PULL() {
+  TITLE "Pulling lastest dotfiles"
+  git pull
+}
 
-# function pushDot() { 
-#   cp -rf $1 ~/repos/linux-tools/dotfiles
-# }
+GIT_PUSH() {
+  TITLE "Pushing dotfiles to Github"
+  git push
+}
 
-# function updateDot() {
-  
-#   cwd=$(pwd)
+PULL_DOTFILES() {
+  GIT_PULL
+  # rsync ~/repos/linux-tools/mac/dotfiles/ ~
+  yes | cp -f $DOTFILE_LOCATION/.zshrc ~/
+  yes | cp -f $DOTFILE_LOCATION/.aliases ~/
+  yes | cp -f $DOTFILE_LOCATION/.gitconfig ~/
+  yes | cp -f $DOTFILE_LOCATION/HYPER_LAYER.bttpreset ~/
+  zsh
+}
 
-#   cd ~/repos/linux-tools
+PUSH_DOTFILES() {
+  # rsync $DOTFILE_LOCATION/ ~
+  yes | cp -f ~/.zshrc $DOTFILE_LOCATION
+  yes | cp -f ~/.aliases $DOTFILE_LOCATION
+  yes | cp -f ~/.gitconfig $DOTFILE_LOCATION
+  yes | cp -f ~/HYPER_LAYER.bttpreset $DOTFILE_LOCATION
+  GIT_PUSH
+}
 
-#   git add -A
-
-#   git commit -m "$1"
-
-#   git push
-
-#   cd $dir
-
-# }
