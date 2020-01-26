@@ -18,6 +18,8 @@ TITLE() {
   echo "echo "------------------------""
 }
 
+# Installs 
+
 INIT_HOMEBREW() {
   # echo Install Mac App Store apps first.
 
@@ -91,7 +93,7 @@ CLEANUP() {
 
 # Git funcs
 
-function CLONE() {
+CLONE() {
   clear
   TITLE "Enter repo name || url"
   clear
@@ -105,7 +107,7 @@ function CLONE() {
   fi
 }
 
-function AC() {
+AC() {
   clear
   TITLE "Enter emoji (without :'s)"
   read emoji
@@ -119,34 +121,7 @@ function AC() {
   git commit -m ":$emoji: $msg"
 }
 
-GIT_PULL() {
-  TITLE "-> Pulling lastest dotfiles"
-  git pull
-}
-
-GIT_PUSH() {
-  TITLE "-> Pushing dotfiles to Github"
-  git push
-}
-
-PULL_DOTFILES() {
-  GIT_PULL
-  # rsync ~/repos/linux-tools/mac/dotfiles/ ~
-  yes | cp -f $DOTFILE_LOCATION/.zshrc ~/
-  yes | cp -f $DOTFILE_LOCATION/.aliases ~/
-  yes | cp -f $DOTFILE_LOCATION/.gitconfig ~/
-  yes | cp -f $DOTFILE_LOCATION/HYPER_LAYER.bttpreset ~/
-  zsh
-}
-
-PUSH_DOTFILES() {
-  # rsync $DOTFILE_LOCATION/ ~
-  yes | cp -f ~/.zshrc $DOTFILE_LOCATION
-  yes | cp -f ~/.aliases $DOTFILE_LOCATION
-  yes | cp -f ~/.gitconfig $DOTFILE_LOCATION
-  yes | cp -f ~/HYPER_LAYER.bttpreset $DOTFILE_LOCATION
-  GIT_PUSH
-}
+# Dotfiles 
 
 DF() {
   node ./df.js $1
