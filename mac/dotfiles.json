@@ -1,5 +1,9 @@
 {
     "zshrc" : ["HOME/.zshrc"],
     "gitrc": ["HOME/.gitconfig"],
-    "aliases": ["HOME/.aliases"]
+    "aliases": ["HOME/.aliases"],
+    "karabiner": [
+        "HOME/.config/karabiner/karabiner.json",
+        "HOME/.config/karabiner/assets/complex_modifications/1580054002.json"
+    ]
 }
