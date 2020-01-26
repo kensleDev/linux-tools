@@ -9,7 +9,7 @@ FRESH_INSTALL() {
   INSTALL_FONTS
   CLEANUP
 
-  SYNC_DOTFILES
+  PULL_DOTFILES
 }
 
 TITLE() {
@@ -43,19 +43,15 @@ INIT_HOMEBREW() {
 }
 
 INSTALL_BREW_PACKAGES() {
-  # Install my brew packages
   brew install wget
-  brew install mpv
+  brew install nvm
+  brew install neovim
 
   # Install Oh-my-zsh
   brew install zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/antigen.git ~/antigen
 
-  # Install NVM
-  mkdir ~/.nvm
-  brew install nvm
-  brew install neovim
 }
 
 
@@ -66,6 +62,9 @@ INSTALL_APPLICATIONS() {
   brew cask install bettertouchtool
   brew cask install hyperswitch
   brew cask install brave-browser
+  brew cask install visual-studio-code
+  brew cask install rambox
+  brew cask install karabiner-elements
 }
 
 INSTALL_FONTS() {
@@ -86,7 +85,7 @@ CLEANUP() {
   brew cask cleanup
 
   # Link alfred to apps
-  brew cask alfred links
+  # brew cask alfred links
 }
 
 
@@ -121,12 +120,12 @@ function AC() {
 }
 
 GIT_PULL() {
-  TITLE "Pulling lastest dotfiles"
+  TITLE "-> Pulling lastest dotfiles"
   git pull
 }
 
 GIT_PUSH() {
-  TITLE "Pushing dotfiles to Github"
+  TITLE "-> Pushing dotfiles to Github"
   git push
 }
 
@@ -149,3 +148,6 @@ PUSH_DOTFILES() {
   GIT_PUSH
 }
 
+DF() {
+  node ./df.js $1
+}

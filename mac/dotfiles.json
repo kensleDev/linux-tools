@@ -1,0 +1,5 @@
+{
+    "zshrc" : ["HOME/.zshrc"],
+    "gitrc": ["HOME/.gitconfig"],
+    "aliases": ["HOME/.aliases"]
+}

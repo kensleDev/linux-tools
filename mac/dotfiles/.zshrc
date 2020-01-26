@@ -1,5 +1,5 @@
 source ~/.aliases
-source ~/antigen/antigen.zsh
+source ~/antigen.zsh
 source ~/repos/linux-tools/mac/install.sh
 
 # Load the oh-my-zsh's library
@@ -15,3 +15,6 @@ antigen theme robbyrussell
 
 # Tell antigen that you're done
 antigen apply
+
+export NVM_DIR="$HOME/.nvm"
+. "$(brew --prefix nvm)/nvm.sh"
