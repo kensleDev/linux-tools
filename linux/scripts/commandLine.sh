@@ -3,7 +3,7 @@ $DOTFILES=~/repos/linux-tools/dotfiles
 
 sudo apt-get update
 
-sudo apt-get install snapd
+sudo apt-get install snapd -y
 
 sudo apt-get install zsh -y
 
@@ -14,10 +14,6 @@ sudo dpkg -i ./apps/bat@0.11.0.deb
 sudo dkpg -i ./apps/fd@7.3.0.deb
 sudo dkpg -i ./apps/ripgrep@11.0.1.deb
 
-sudo apt-get install software-properties-common
-sudo apt-get install xbindkeys
-sudo apt-get install xvkbd
-
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
@@ -26,14 +22,16 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/ba
   exit 1
 }
 
-sudo apt-get install curl
+sudo apt-get install curl -y
 curl -L git.io/antigen > ~/.oh-my-zsh/plugins/antigen.zsh
 
-cp -rf ../dotfiles/.aliases ~/
-cp -rf ../dotfiles/.zshrc ~/
-cp -rf ../dotfiles/.gitconfig ~/
-cp -rf ../dotfiles/.xmodmap ~/
-cp -rf ../dotfiles/.xbindkeysrc ~/
+cp -rf $DOTFILES/.aliases ~/
+cp -rf $DOTFILES.zshrc ~/
+cp -rf $DOTFILES/.gitconfig ~/
+# cp -rf $DOTFILES/.xmodmap ~/
+# cp -rf $DOTFILES/dotfiles/.xbindkeysrc ~/
 
+sudo chown -R kd:root ~/.antigen
+sudo chmod -R 755 ~/.antigen
 
 echo "zsh" > ~/.bashrc
